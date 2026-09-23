@@ -2,7 +2,7 @@
 
 A system for searching, exploring, and asking questions over scientific papers. It combines a **Knowledge Graph**, **hybrid search** (keyword + vector), **Retrieval-Augmented Generation (RAG)**, and a **chatbot** to return relevant papers and answer questions with citations to the source papers.
 
-> 🚧 **Status:** Under active development (Phase 1: requirements analysis, system design, and foundational research).
+> 🚧 **Status:** Under active development. Phase 1 (Sep – Dec 2026): requirements, architecture, data collection, KG v1, and search baseline. Phase 2 (next semester): RAG, chatbot, UI, and evaluation.
 
 ---
 
@@ -131,25 +131,27 @@ LLM_API_KEY=
 
 ## Roadmap
 
-| Week | Phase | Tasks |
-|---|---|---|
-| 1–2 | Analysis & design | Requirements, architecture, foundational research |
-| 3–4 | Data & Knowledge Graph | Data collection, PDF extraction, NER, Neo4j schema and loading |
-| 5–6 | Search & RAG | Embeddings + FAISS, BM25, hybrid retrieval, RAG |
-| 7 | Integration & UI | Connect modules, build the chatbot interface |
-| 8 | Testing & finalization | Evaluation, optimization, final report |
+The project runs over two semesters. See [ROADMAP.md](ROADMAP.md) for the full task list.
 
+| Phase | Time | Focus |
+|---|---|---|
+| **Phase 1** (current) | Sep – Dec 2026 | Requirements, architecture, KG model, data collection, KG v1, BM25 + vector search baseline |
+| **Phase 2** | Next semester | Hybrid retrieval, RAG with citations, chatbot, API and demo UI, evaluation, final thesis |
+
+**Phase 1**
 - [ ] Requirements analysis and architecture design
+- [ ] Knowledge Graph schema
 - [ ] Data collection from Semantic Scholar and arXiv
 - [ ] PDF text extraction and section splitting
-- [ ] Entity extraction and KG schema
-- [ ] Neo4j data loading
-- [ ] Embedding and FAISS index
-- [ ] BM25 index
-- [ ] Hybrid retriever
+- [ ] Entity extraction and KG v1 in Neo4j
+- [ ] BM25 and FAISS search baseline
+- [ ] Baseline evaluation and Phase 1 report
+
+**Phase 2**
+- [ ] Hybrid retriever (keyword + vector + KG)
 - [ ] RAG answer generation with citations
-- [ ] Chatbot UI
-- [ ] Evaluation and final report
+- [ ] Chatbot, API, and demo UI
+- [ ] Evaluation, ablation, error analysis, and final thesis
 
 ## Team
 
