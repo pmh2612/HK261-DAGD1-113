@@ -1,0 +1,341 @@
+# Decision Record
+
+Scientific Paper Search System (Knowledge Graph + RAG)
+
+Open decisions raised in [`requirements.md`](requirements.md) §8. Each one is written so
+that both members can read the tradeoff, disagree with the recommendation, and record what
+was actually chosen. Roadmap 1.3 requires design decisions and their reasons to be
+recorded — this file is that record.
+
+**How to use:** read the decision, discuss, then fill in the *Decision* box at the end of
+the section. Do not delete the options that were rejected; why something was *not* chosen
+is the part that is useful in six months and in the Phase 1 report.
+
+| ID | Decision | Blocks | Status |
+|---|---|---|---|
+| [DECIDE-1](#decide-1--reference-snowballing) | Snowball one hop of references? | Roadmap 2.2 (October) | ☐ open |
+| [DECIDE-2](#decide-2--chunking-strategy) | Chunking strategy | Roadmap 3.3 (November) | ☐ open |
+| [DECIDE-3](#decide-3--faithfulness-review-protocol) | Faithfulness review protocol | Roadmap 5.5 (Phase 2) | ☐ open |
+| [DECIDE-4](#decide-4--which-llm) | Which LLM, hosted or local | Roadmap 3.1 (November) | ☐ open |
+| [DECIDE-5](#decide-5--embedding-model) | Embedding model | Roadmap 3.3 (November) | ☐ open |
+| [DECIDE-6](#decide-6--team-conventions) | Team conventions | Any shared code | ☐ open |
+
+**Also blocking, and not really a decision:** apply for a Semantic Scholar API key now.
+See [§7](#7-not-a-decision-but-do-it-this-week).
+
+---
+
+## DECIDE-1 — Reference snowballing
+
+**Blocks:** Roadmap 2.2 · **Affects:** `FR-3`, `FR-17`, `UC-3`, `NFR-8`
+
+### Context
+
+`requirements.md` §2.1 `S3` predicted a sparse citation graph. It has now been measured
+([`notebooks/spike_data_availability.py`](../notebooks/spike_data_availability.py) and a
+follow-up batch query, 2026-09-23):
+
+| Measurement | Value |
+|---|---|
+| References per seed paper (mean / median) | 29.3 / 25.0 |
+| Seed papers with zero references recorded | 166 of 1,000 |
+| Unique referenced papers, from a 100-paper sample | 2,022 |
+| **References landing back inside the seed set** | **12 of 2,319 edges (0.5%)** |
+
+That last row is the whole problem. Scaling the hit rate to a 1,000-paper seed set gives
+roughly **1.2 internal `CITES` edges per paper** — a graph of 1,000 nodes with around 1,100
+citation edges. Technically not empty; practically useless for `UC-3` ("what cites this
+paper?") because most papers will have zero in-corpus citations.
+
+**Important framing:** fetching the reference lists is needed *either way* — that is how
+the 1,100 internal edges get created at all, and it costs about 20 batch API calls. The
+actual decision is narrower: **do we also add the referenced papers as new nodes?**
+
+### Options
+
+| | A — Seeds only | B — Add frequently-cited references | C — Add everything |
+|---|---|---|---|
+| **New nodes** | 0 | ~1,500–3,000 (estimate; papers cited by ≥3 seeds) | ~15,000–18,000 |
+| **`CITES` edges** | ~1,100 | ~1,100 internal + ~10,000 to the added papers | ~29,000 |
+| **Extra PDF / extraction / embedding cost** | none | **none** — added papers are metadata-only | none, same reason |
+| **Extra API cost** | none | ~20 batch calls, same as A | same |
+| **What it buys** | nothing | Seeds with no direct link connect through a shared foundational paper — exactly what `FR-17` needs | marginally more, mostly one-off references nobody cites twice |
+| **What it costs** | `FR-17` and `UC-3` stay weak | graph is ~3x bigger; needs an "is this paper searchable?" flag | graph is ~16x bigger, mostly noise |
+
+The cost column is the surprise. Snowballed papers exist **only to be citation targets** —
+they never need a PDF, LLM extraction (`FR-9`) or an embedding (`FR-13`). The expensive
+stages still run over the 1,000 seed papers only. Snowballing is therefore almost free.
+
+### Recommendation — **Option B**
+
+Keep referenced papers cited by **≥3 seed papers**. That threshold picks out the
+foundational work of the field (the papers everyone cites) and discards the long tail of
+one-off references. The exact threshold should be re-tuned once the real distribution over
+1,000 seeds is known — the 100-paper sample gives 52 papers at ≥3, but that number does not
+scale linearly.
+
+### Consequence if B is chosen
+
+`kg-schema.md` must distinguish the two kinds of `Paper` node, because a snowballed paper
+can appear in graph results but cannot be retrieved from the search index — returning one
+without saying so would look like a bug.
+
+Proposal: a boolean property `in_corpus` on `Paper` (`true` = seed, searchable;
+`false` = snowballed, graph-only), or a second label `:External`. Retrieval filters on it;
+`UC-3` shows both but marks them differently.
+
+> **Decision:** ☐ A ☐ B ☐ C — threshold: ______
+> **Chosen by:** ______ **Date:** ______
+> **Reason (if not the recommendation):** ______
+
+---
+
+## DECIDE-2 — Chunking strategy
+
+**Blocks:** Roadmap 3.3 · **Affects:** `FR-13`, `FR-14`, `FR-20`, `NFR-6`
+
+### Context
+
+Chunk size sets two things at once, and they pull in opposite directions: how precisely a
+citation can point at a source, and how well the embedding represents the text. Embedding
+models have a hard input limit (commonly 512 tokens); anything longer is silently
+truncated, so an over-long chunk quietly loses its tail.
+
+Remember `S1`: ~360 of the 1,000 papers have no full text at all. For those, the only
+chunk is the abstract.
+
+### Options
+
+| | A — Whole sections | B — Fixed windows | C — Section-aware windows |
+|---|---|---|---|
+| **Unit** | one chunk per section | e.g. 512 tokens, 64 overlap, ignoring structure | split by section, then window any section that is too long |
+| **Citation reads as** | "Method section of [12]" | "chunk 47 of [12]" | "Method section of [12]" |
+| **Embedding quality** | bad for long sections — truncated | even | even |
+| **Risk** | a 3,000-word Experiments section is mostly invisible to retrieval | windows cut across section boundaries, mixing two topics in one vector | slightly more code |
+| **Metadata-only papers** | abstract = 1 chunk | abstract = 1 chunk | abstract = 1 chunk, `source="abstract"` |
+
+### Recommendation — **Option C**
+
+It is the only option that satisfies both `NFR-6` (provenance good enough to cite) and the
+embedding model's input limit. The extra work over B is small: split on section first, then
+apply the same windowing inside each section, and carry the section name in the chunk
+metadata.
+
+Chunk provenance should therefore be, at minimum:
+
+```
+paper_id · source ("abstract" | section name) · window index within that source · char offsets
+```
+
+Window size and overlap are tuning parameters, not part of this decision — set them once
+`DECIDE-5` fixes the embedding model's input limit.
+
+> **Decision:** ☐ A ☐ B ☐ C — window size: ______ overlap: ______
+> **Chosen by:** ______ **Date:** ______
+
+---
+
+## DECIDE-3 — Faithfulness review protocol
+
+**Blocks:** Roadmap 5.5 · **Affects:** `NFR-3`, `NFR-4`
+
+### Context
+
+`NFR-3` says "≥90% of claims supported by the retrieved context". That number means
+nothing until four things are pinned down: what counts as one claim, how many are graded,
+who grades them, and what happens when the two graders disagree. Deciding this *after*
+seeing the results is how evaluations become unconvincing.
+
+### Recommendation
+
+| Parameter | Proposal | Why |
+|---|---|---|
+| **Unit** | One atomic claim — a single assertion that can be checked against one source | Grading whole answers hides partial failures |
+| **Sample** | 50 answers drawn from the test query set (Roadmap 4.1), ~4 claims each ≈ 200 claims | Enough for a ±7 pp confidence interval at the 90% level; small enough that two people can grade it in an evening |
+| **Scale** | supported / partially supported / unsupported | Binary hides the interesting middle case |
+| **Graders** | Both members grade the **same** sample independently, blind to each other | One grader's number is an opinion |
+| **Agreement** | Report Cohen's kappa alongside the score | Turns "we checked it" into a defensible measurement; also a good line in the thesis |
+| **Disagreements** | Discussed and resolved together; resolved labels are the ones reported | |
+| **Timing** | Write the rubric **before** Phase 2 generation works | Writing it afterwards invites fitting the rubric to the results |
+
+Same protocol covers `NFR-4` (citation accuracy): for each cited claim, check that the
+cited paper exists and that the cited section actually contains the claim.
+
+> **Decision:** sample size ______ scale ______ graders ______
+> **Chosen by:** ______ **Date:** ______
+
+---
+
+## DECIDE-4 — Which LLM
+
+**Blocks:** Roadmap 3.1 · **Affects:** `FR-9`, `FR-19`, `NFR-8`, `NFR-12`
+
+### Context
+
+This was written as one decision but it is two, with different answers:
+
+- **Extraction (`FR-9`)** — batch job, runs once over 1,000 papers, no latency requirement,
+  needs reliable structured JSON output.
+- **Generation (`FR-19`, Phase 2)** — per query, latency matters, runs many times during
+  development and evaluation.
+
+The budget ceiling is `NFR-8` (≤50 USD). Estimating against Claude API list prices
+(2026-06 pricing — **re-check before committing**, prices move):
+
+**Extraction**, 1,000 papers × ~900 input tokens (prompt + title + abstract) and ~300
+output tokens ⇒ ~0.9M input, ~0.3M output:
+
+| Model | Model ID | Input / output per 1M | One-time cost | With Batch API (−50%) |
+|---|---|---|---|---|
+| Claude Haiku 4.5 | `claude-haiku-4-5` | $1 / $5 | ~$2.40 | **~$1.20** |
+| Claude Sonnet 5 | `claude-sonnet-5` | $2 / $10 | ~$4.80 | ~$2.40 |
+| Claude Opus 5 | `claude-opus-5` | $5 / $25 | ~$12.00 | ~$6.00 |
+
+**The cost argument for a local model does not survive these numbers.** Extraction is a
+one-time job costing somewhere between one and six dollars. A local 7–8B model would save
+that, at the price of worse structured-output reliability and several hours of laptop CPU
+time — and `FR-10` (entity normalization) gets harder when extraction is noisier.
+
+**Generation** is the real budget item, because it runs repeatedly. At ~4,000 input and
+~500 output tokens per query, roughly 2,000 development and evaluation queries cost about
+$13 on Haiku 4.5 and about $26 on Sonnet 5 — most of the ceiling in the second case.
+
+### Recommendation
+
+1. **Extraction: hosted, `claude-haiku-4-5`, through the Batch API** (~$1.20). Extraction
+   is a narrow, well-specified task, which is where the cheapest tier does best.
+2. **Validate before spending.** Run the extraction prompt on 20 papers first and check the
+   JSON by hand. If Haiku's output is unreliable, step up to `claude-sonnet-5` — the
+   difference is about two dollars, not a budget decision.
+3. **Generation: decide at the start of Phase 2**, against whatever budget is left. Two
+   cost levers apply there and should be used from the first day: **prompt caching** (the
+   system prompt and instructions are identical across queries) and **the Batch API** for
+   evaluation runs, which are not latency-sensitive.
+4. **Track spend from the first call.** A shared note with the running total; `NFR-8` is
+   easy to blow through without noticing.
+
+`NFR-12` (no GPU) does not constrain this — hosted inference runs nowhere near the laptop.
+It constrains `DECIDE-5` instead.
+
+> **Decision — extraction:** model ______ batch API ☐ · **Generation:** deferred to Phase 2 ☐
+> **Chosen by:** ______ **Date:** ______
+
+---
+
+## DECIDE-5 — Embedding model
+
+**Blocks:** Roadmap 3.3 · **Affects:** `FR-13`, `FR-15`, `NFR-1`, `NFR-12`
+
+### Context
+
+Rough corpus size: ~640 full-text papers at maybe 30 chunks each, plus ~1,000 abstracts
+≈ **20,000 chunks** to embed on a laptop CPU (`NFR-12`).
+
+Three properties matter, in this order:
+
+1. **Retrieval quality** on scientific English.
+2. **CPU throughput** — this is a one-time cost, so even an hour is acceptable; it only
+   becomes painful when chunking is re-tuned and everything must be re-embedded.
+3. **Vector dimension** — drives FAISS index size and search latency (`NFR-1`).
+
+### Candidates
+
+All available through `sentence-transformers`, which is already in `requirements.txt`.
+
+| Model | Dim | Size | Notes |
+|---|---|---|---|
+| `all-MiniLM-L6-v2` | 384 | ~22M | The fast baseline. Weakest quality, but embeds 20k chunks in minutes |
+| `BAAI/bge-small-en-v1.5` | 384 | ~33M | Noticeably better retrieval than MiniLM at nearly the same speed. Requires a query prefix ("Represent this sentence for searching relevant passages:") — **forgetting it silently degrades results** |
+| `all-mpnet-base-v2` | 768 | ~110M | Strong general-purpose baseline, ~4× slower, 2× the index size |
+| `BAAI/bge-base-en-v1.5` | 768 | ~109M | Best quality of the four, same speed and size cost as mpnet |
+
+### Recommendation — `BAAI/bge-small-en-v1.5`
+
+Best quality per CPU-second of the four, and 384 dimensions keeps the FAISS index small and
+`NFR-1` comfortable. Two conditions:
+
+- **Measure, do not assume.** Once the test query set from Roadmap 4.1 exists, run
+  `bge-small` against `all-MiniLM-L6-v2` and one 768-dim model on the same queries. That
+  comparison is a Phase 1 report result, not wasted work — Roadmap 4.1 asks for exactly
+  this kind of baseline number.
+- **Pin the model name in `config.py`.** Query-time and index-time embeddings must come
+  from the same model; changing it means re-embedding everything. Treat it as part of the
+  index's identity, and record which model built which index file.
+
+Also note the asymmetry: `bge-*` models expect the *query* to carry a prefix that the
+*documents* do not. Wire this into the search function from the start.
+
+> **Decision:** model ______ dim ______ pinned in `config.py` ☐
+> **Chosen by:** ______ **Date:** ______
+
+---
+
+## DECIDE-6 — Team conventions
+
+**Blocks:** any shared code · **Affects:** Roadmap 1.1 (last open item)
+
+### Context
+
+Two people, one repository, no convention agreed yet. Cheapest decision here and the one
+with the shortest deadline: everything pushed before it is settled has to be tidied up
+afterwards.
+
+### Proposal
+
+**Branches** — `<type>/<short-kebab-description>`, matching the commit types:
+
+```
+feat/semantic-scholar-client      fix/pdf-hyphenation
+docs/kg-schema                    chore/pin-embedding-model
+```
+
+**Commits** — imperative subject, ≤72 characters, no trailing period. Body explains *why*,
+not *what* (the diff already says what). This matches the existing history, so nothing
+needs rewriting.
+
+**Pull requests** — no direct pushes to `main` from here on. Every PR reviewed by the other
+member; one approval to merge. Roadmap 1.1 lists "pull request review between members" as
+a deliverable, so this is graded, not optional. Reviewing code you did not write is also
+how each of you stays able to work on the other's half of the system.
+
+**Ownership** — from the README team table, to avoid two people editing the same file:
+
+| Area | Lead | Directories |
+|---|---|---|
+| Collection, PDF, Knowledge Graph | Tran Ha My | `src/paper_search/collection/`, `extraction/`, `graph/` |
+| Search, RAG, chatbot, UI | Pham Minh Hieu | `src/paper_search/indexing/`, `retrieval/`, `rag/`, `app/` |
+| Shared | Both | `config.py`, `docs/`, `tests/`, `pyproject.toml` |
+
+Lead means "reviews every change here", not "only person allowed to touch it".
+
+**Before pushing** — `make lint && make test`. Optionally install the hooks so this is
+automatic:
+
+```bash
+.venv/bin/pre-commit install
+```
+
+**Data files are never committed.** `.gitignore` already covers `data/`, `.env` and index
+files. If a dataset has to be shared, share the collection script and its data version, not
+the output.
+
+> **Decision:** ☐ adopt as proposed ☐ adopt with changes: ______
+> **Chosen by:** ______ **Date:** ______
+
+---
+
+## 7. Not a decision, but do it this week
+
+**Apply for a Semantic Scholar API key** — <https://www.semanticscholar.org/product/api>
+
+The spike hit the shared unauthenticated quota hard. The bulk search endpoint was fine
+(1,000 papers in one call), but `/paper/batch`, which is what reference snowballing needs,
+returned HTTP 429 on nine consecutive attempts with 25-second backoff before succeeding
+once. Roadmap 2.2 needs many such calls in October.
+
+Approval is not instant, so applying is on the critical path for `DECIDE-1` even though it
+is not itself a decision. The key goes in `.env` as `SEMANTIC_SCHOLAR_API_KEY`, which
+`config.py` already reads.
+
+Whatever is decided above, `NFR-11` stands: back off on 429, respect the published limits,
+and do not work around bot protection.

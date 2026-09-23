@@ -236,7 +236,9 @@ Recorded so the boundary is deliberate rather than accidental.
 
 ## 8. Open decisions
 
-Both members must agree on these before the affected task starts.
+Both members must agree on these before the affected task starts. Each one is worked
+through — options, tradeoffs, a recommendation and a place to record what was chosen —
+in [`decisions.md`](decisions.md).
 
 | ID | Decision | Why it matters | Deadline |
 |---|---|---|---|
