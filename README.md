@@ -1,2 +1,161 @@
-# HK261-DAGD1-113
-A system for searching, exploring, and asking questions over scientific papers. It combines a Knowledge Graph (Neo4j), hybrid search (BM25 + FAISS), and RAG to answer queries with citations to source papers. Data is collected from Semantic Scholar and arXiv, and a chatbot supports summaries, method comparisons, and related-work discovery.
+# Scientific Paper Search System (Knowledge Graph + RAG)
+
+A system for searching, exploring, and asking questions over scientific papers. It combines a **Knowledge Graph**, **hybrid search** (keyword + vector), **Retrieval-Augmented Generation (RAG)**, and a **chatbot** to return relevant papers and answer questions with citations to the source papers.
+
+> 🚧 **Status:** Under active development (Phase 1: requirements analysis, system design, and foundational research).
+
+---
+
+## Table of Contents
+
+- [Motivation](#motivation)
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Roadmap](#roadmap)
+- [Team](#team)
+
+---
+
+## Motivation
+
+The number of scientific papers published each year is growing rapidly, and they are scattered across many databases, preprint servers, journals, and open-access archives. Finding the right paper takes more than keyword matching. Researchers also need to understand how papers, authors, topics, methods, datasets, and citations relate to one another.
+
+This project aims to make that easier by representing academic knowledge as a graph, indexing paper content for semantic retrieval, and using an LLM to generate grounded answers that point back to their sources.
+
+## Features
+
+- **Multi-source data collection:** gathers paper metadata from Semantic Scholar and arXiv, extracts full text from PDFs, then normalizes and deduplicates records.
+- **Knowledge Graph:** models papers, authors, topics, methods, datasets, and citations as entities and relationships in Neo4j.
+- **Hybrid retrieval:** combines BM25 keyword search, FAISS vector search, and Cypher queries on the KG to find the most relevant papers and passages.
+- **RAG answering:** generates answers grounded in retrieved content, with citations to the source papers.
+- **Conversational chatbot:** supports follow-up questions, paper summaries, method comparisons, related-work discovery, and topic exploration.
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    A[Semantic Scholar API] --> C[Data Collection & Normalization]
+    B[arXiv API + PDFs] --> C
+    C --> D[Information Extraction<br/>NER + LLM]
+    C --> E[Text Chunking]
+    D --> F[(Neo4j<br/>Knowledge Graph)]
+    E --> G[(FAISS<br/>Vector Index)]
+    E --> H[(BM25<br/>Keyword Index)]
+    Q[User Query] --> R[Hybrid Retriever]
+    F --> R
+    G --> R
+    H --> R
+    R --> S[RAG Generator<br/>LLM]
+    S --> T[Chatbot UI<br/>Answer + Citations]
+```
+
+**Pipeline overview**
+
+1. **Collection:** fetch metadata and PDFs from Semantic Scholar and arXiv; extract text with PyMuPDF.
+2. **Extraction:** identify entities (methods, datasets, topics) using spaCy NER and LLM-based structured extraction.
+3. **Graph construction:** load entities and relationships (authorship, citations, uses-method, uses-dataset) into Neo4j.
+4. **Indexing:** split papers into sections and passages, embed them with Sentence-Transformers, and index them in FAISS and BM25.
+5. **Retrieval:** merge results from keyword search, vector search, and KG queries.
+6. **Generation:** pass retrieved context to an LLM to produce a cited answer.
+
+## Tech Stack
+
+| Component | Technology |
+|---|---|
+| Language | Python |
+| Data sources | Semantic Scholar API, arXiv API |
+| PDF processing | PyMuPDF |
+| Information extraction | spaCy, LLM prompting |
+| Graph database | Neo4j (Cypher) |
+| Embeddings | Sentence-Transformers |
+| Vector search | FAISS |
+| Keyword search | rank_bm25 |
+| Generation | LLM-based RAG pipeline |
+
+## Project Structure
+
+Planned layout (subject to change as development progresses):
+
+```
+.
+├── data/                 # Raw and processed data (not committed)
+├── docs/                 # Requirements, architecture, and design notes
+├── src/
+│   ├── collection/       # Semantic Scholar & arXiv clients, PDF extraction
+│   ├── extraction/       # NER and LLM-based entity extraction
+│   ├── graph/            # Neo4j schema and loaders
+│   ├── indexing/         # Chunking, embeddings, FAISS & BM25 indexes
+│   ├── retrieval/        # Hybrid retriever
+│   ├── rag/              # Prompting and answer generation
+│   └── app/              # API and chatbot UI
+├── tests/
+├── .env.example
+├── requirements.txt
+└── README.md
+```
+
+## Getting Started
+
+> Setup instructions will be finalized once the first modules are implemented.
+
+### Prerequisites
+
+- Python 3.10+
+- Neo4j (Desktop, Docker, or AuraDB)
+- A Semantic Scholar API key (optional, but recommended for higher rate limits)
+- An LLM API key or a local LLM
+
+### Installation
+
+```bash
+git clone <repository-url>
+cd <repository-name>
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env           # then fill in your credentials
+```
+
+### Environment variables
+
+```env
+SEMANTIC_SCHOLAR_API_KEY=
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=
+LLM_API_KEY=
+```
+
+## Roadmap
+
+| Week | Phase | Tasks |
+|---|---|---|
+| 1–2 | Analysis & design | Requirements, architecture, foundational research |
+| 3–4 | Data & Knowledge Graph | Data collection, PDF extraction, NER, Neo4j schema and loading |
+| 5–6 | Search & RAG | Embeddings + FAISS, BM25, hybrid retrieval, RAG |
+| 7 | Integration & UI | Connect modules, build the chatbot interface |
+| 8 | Testing & finalization | Evaluation, optimization, final report |
+
+- [ ] Requirements analysis and architecture design
+- [ ] Data collection from Semantic Scholar and arXiv
+- [ ] PDF text extraction and section splitting
+- [ ] Entity extraction and KG schema
+- [ ] Neo4j data loading
+- [ ] Embedding and FAISS index
+- [ ] BM25 index
+- [ ] Hybrid retriever
+- [ ] RAG answer generation with citations
+- [ ] Chatbot UI
+- [ ] Evaluation and final report
+
+## Team
+
+| Member | Responsibilities |
+|---|---|
+| **Tran Ha My** | Data collection and processing (APIs, PDFs), Knowledge Graph (NER, schema, Neo4j), integration support |
+| **Pham Minh Hieu** | Search module (embeddings, FAISS, BM25), RAG module, user interface |
+
+Shared: requirements analysis, architecture design, testing, evaluation, and the final report.
