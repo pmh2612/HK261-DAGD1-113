@@ -77,34 +77,43 @@ flowchart TD
 
 ## Project Structure
 
-Planned layout (subject to change as development progresses):
-
 ```
 .
-├── data/                 # Raw and processed data (not committed)
-├── docs/                 # Requirements, architecture, and design notes
+├── data/
+│   ├── raw/                      # As downloaded from the sources (git-ignored)
+│   └── processed/                # Normalized, deduplicated, chunked (git-ignored)
+├── docs/                         # Requirements, architecture, KG schema, learning path
+├── notebooks/                    # Exploration and analysis notebooks
+├── scripts/
+│   └── check_neo4j.py            # Smoke test: connect to Neo4j and print its version
 ├── src/
-│   ├── collection/       # Semantic Scholar & arXiv clients, PDF extraction
-│   ├── extraction/       # NER and LLM-based entity extraction
-│   ├── graph/            # Neo4j schema and loaders
-│   ├── indexing/         # Chunking, embeddings, FAISS & BM25 indexes
-│   ├── retrieval/        # Hybrid retriever
-│   ├── rag/              # Prompting and answer generation
-│   └── app/              # API and chatbot UI
+│   └── paper_search/
+│       ├── config.py             # Settings loaded from .env (single `settings` object)
+│       ├── collection/           # Semantic Scholar & arXiv clients, normalization
+│       │   └── pdf/              # PyMuPDF text extraction and section splitting
+│       ├── extraction/           # spaCy NER and LLM-based entity extraction
+│       ├── graph/                # Neo4j schema and loaders
+│       ├── indexing/             # Chunking, embeddings, FAISS & BM25 indexes
+│       ├── retrieval/            # Search functions
+│       ├── rag/                  # Phase 2: prompting and answer generation
+│       └── app/                  # Phase 2: API and chatbot UI
 ├── tests/
 ├── .env.example
-├── requirements.txt
-└── README.md
+├── docker-compose.yml            # Neo4j 5 Community + APOC
+├── Makefile                      # install, neo4j-up, lint, format, test, check-neo4j
+├── pyproject.toml                # Package metadata and ruff config
+├── requirements.txt              # Runtime dependencies
+└── requirements-dev.txt          # pytest, ruff, pre-commit, jupyter
 ```
+
+The packages currently hold only their docstrings — Phase 1 fills them in.
 
 ## Getting Started
 
-> Setup instructions will be finalized once the first modules are implemented.
-
 ### Prerequisites
 
-- Python 3.10+
-- Neo4j (Desktop, Docker, or AuraDB)
+- Python 3.11+
+- Docker (to run Neo4j via `docker-compose.yml`) — or your own Neo4j 5 instance
 - A Semantic Scholar API key (optional, but recommended for higher rate limits)
 - An LLM API key or a local LLM
 
@@ -113,21 +122,56 @@ Planned layout (subject to change as development progresses):
 ```bash
 git clone <repository-url>
 cd <repository-name>
-python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env           # then fill in your credentials
+
+cp .env.example .env    # then fill in NEO4J_PASSWORD and your API keys
+make install            # creates .venv and installs everything (editable install)
+```
+
+`make install` builds a `.venv`, installs `requirements-dev.txt`, and installs the
+project itself with `pip install -e .` so `import paper_search` works anywhere.
+
+### Running Neo4j
+
+`NEO4J_PASSWORD` must be set in `.env` before starting the container — Docker
+Compose reads the same file the application does.
+
+```bash
+make neo4j-up       # start Neo4j 5 Community with APOC in the background
+make check-neo4j    # verify the connection and print the server version
+make neo4j-down     # stop it (the named volumes keep your data)
+```
+
+The Neo4j browser is then at <http://localhost:7474> and Bolt at `bolt://localhost:7687`.
+
+### Everyday commands
+
+| Command | What it does |
+|---|---|
+| `make install` | Create the venv and install runtime + dev dependencies |
+| `make neo4j-up` / `make neo4j-down` | Start / stop the Neo4j container |
+| `make check-neo4j` | Connect to Neo4j and print its version |
+| `make lint` | `ruff check` over the repo |
+| `make format` | `ruff format` plus `ruff check --fix` |
+| `make test` | Run the pytest suite |
+
+Optionally install the git hooks so linting runs on every commit:
+
+```bash
+.venv/bin/pre-commit install
 ```
 
 ### Environment variables
 
-```env
-SEMANTIC_SCHOLAR_API_KEY=
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USER=neo4j
-NEO4J_PASSWORD=
-LLM_API_KEY=
-```
+See `.env.example` for the full list with defaults.
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `NEO4J_URI` | Bolt URI of the graph database | `bolt://localhost:7687` |
+| `NEO4J_USER` | Neo4j username | `neo4j` |
+| `NEO4J_PASSWORD` | Neo4j password (required to start the container) | *(empty)* |
+| `SEMANTIC_SCHOLAR_API_KEY` | Higher rate limits on the Semantic Scholar API | *(empty)* |
+| `LLM_API_KEY` | Key for the LLM used in extraction and RAG | *(empty)* |
+| `DATA_DIR` | Where `raw/` and `processed/` live | `data` |
 
 ## Roadmap
 
