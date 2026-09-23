@@ -338,3 +338,16 @@ Nhắn trực tiếp, hoặc sửa thẳng vào file này rồi tạo pull reque
 
 Chốt xong cái nào mình ghi vào [`decisions.md`](decisions.md), file đó là bản ghi chính
 thức để nộp kèm báo cáo Phase 1.
+
+---
+
+## My phản hồi tổng hợp 
+
+- **Quyết định 1:** Chọn **Cách B** (thêm các bài được $\ge 3$ bài trích dẫn). Đánh dấu bằng nhãn thứ hai `:External` trên node `Paper`.
+- **Quyết định 2:** Đồng ý **Cách C**. Bộ section chuẩn gồm: `Abstract`, `Introduction`, `Related Work`, `Method`, `Experiments`, `Results`, `Conclusion`, `Other`.
+- **Quyết định 3:** **Đồng ý** cách chấm chéo 50 câu độc lập. Bổ sung dùng *Weighted Cohen's Kappa* và tính điểm: Đúng = 1, Đúng một phần = 0.5, Sai = 0.
+- **Quyết định 4:** **Đồng ý** dùng `claude-haiku-4-5` qua Batch API. Sau khi My kiểm tra 20 bài đầu, nếu tên thực thể bị phân mảnh thì nâng lên `claude-sonnet-5`.
+- **Quyết định 5:** **Đồng ý** chọn `BAAI/bge-small-en-v1.5`. Lưu ý nhớ thêm instruction khi embed query tìm kiếm.
+- **Quyết định 6:** **Đồng ý** toàn bộ quy ước Git, phân chia thư mục và pre-commit.
+- **Việc cần làm ngay:** My đang đăng ký API key Semantic Scholar và sẽ thêm vào file `.env` sớm.
+
