@@ -341,6 +341,10 @@ thức để nộp kèm báo cáo Phase 1.
 
 ---
 
+> **Đã ghi vào bản chính thức.** Cả 6 quyết định dưới đây đã được chép sang
+> [`decisions.md`](decisions.md) và cập nhật vào [`requirements.md`](requirements.md)
+> ngày 24/09/2026. Phần trả lời gốc giữ nguyên bên dưới làm bằng chứng.
+
 ## My phản hồi tổng hợp 
 
 - **Quyết định 1:** Chọn **Cách B** (thêm các bài được $\ge 3$ bài trích dẫn). Đánh dấu bằng nhãn thứ hai `:External` trên node `Paper`.

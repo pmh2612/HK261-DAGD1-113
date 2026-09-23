@@ -7,6 +7,21 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
+#: Canonical section names, agreed in `docs/decisions.md` DECIDE-2. PDF splitting emits
+#: these and chunk provenance records them, so both sides have to use this one list.
+#: "Other" is the catch-all: a heading that maps to nothing else keeps valid provenance
+#: instead of having its text dropped.
+SECTION_NAMES = (
+    "Abstract",
+    "Introduction",
+    "Related Work",
+    "Method",
+    "Experiments",
+    "Results",
+    "Conclusion",
+    "Other",
+)
+
 
 class Settings(BaseSettings):
     """Settings for the paper search system.
@@ -27,6 +42,15 @@ class Settings(BaseSettings):
 
     semantic_scholar_api_key: str = ""
     llm_api_key: str = ""
+
+    #: Pinned by `docs/decisions.md` DECIDE-5. Index-time and query-time embeddings must
+    #: come from the same model, so changing this invalidates every built index.
+    embedding_model: str = "BAAI/bge-small-en-v1.5"
+
+    #: The bge-* models expect this prefix on the QUERY only, never on the documents.
+    #: Leaving it off degrades retrieval silently, which is why it is pinned next to the
+    #: model instead of living as a literal in the search function.
+    embedding_query_prefix: str = "Represent this sentence for searching relevant passages: "
 
     data_dir: Path = Field(default=PROJECT_ROOT / "data")
 

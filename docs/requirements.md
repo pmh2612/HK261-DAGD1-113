@@ -9,8 +9,9 @@ Phase 1 design does not have to be reworked later. Requirements carry stable IDs
 (`FR-*`, `NFR-*`, `UC-*`) so `architecture.md`, `kg-schema.md` and the tests can point
 back at them.
 
-Items marked **[DECIDE]** still need both members to agree. They are collected in
-[§8](#8-open-decisions).
+The six decisions that were open in the first draft were all resolved on 2026-09-24; the
+requirements below state the chosen values. The reasoning and the rejected options are in
+[`decisions.md`](decisions.md), and [§8](#8-resolved-decisions) summarizes the outcomes.
 
 ---
 
@@ -64,7 +65,7 @@ No scanned PDFs appeared in the sample, so OCR is out of scope.
 **S3 — The internal citation graph will be sparse.** With ~80% of the corpus published in
 the last two years, most citations point *outside* the collected set, and recent papers
 have few incoming citations. This weakens `FR-17` (citation-based expansion). Mitigation
-in `FR-3`: one hop of reference snowballing during collection. **[DECIDE-1]**
+in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-1`).
 
 ---
 
@@ -76,17 +77,17 @@ in `FR-3`: one hop of reference snowballing during collection. **[DECIDE-1]**
 |---|---|
 | **FR-1** | Collect paper metadata from the Semantic Scholar API: title, abstract, authors, year, venue, citation count, reference count, external IDs (DOI, arXiv, S2). |
 | **FR-2** | Collect paper metadata and PDFs from the arXiv API. |
-| **FR-3** | Expand the corpus by one hop of references from the seed papers, so the internal citation graph is dense enough to be useful. **[DECIDE-1]** |
+| **FR-3** | Expand the corpus by one hop of references from the seed papers, keeping those cited by at least 3 seed papers. These carry the `:External` label, are graph-only, and are excluded from the search index. |
 | **FR-4** | Download full-text PDFs using the resolution order in `S2`; log every failure with its reason; keep the paper as metadata-only rather than dropping it. |
 | **FR-5** | Normalize records from both sources into one common paper schema. |
 | **FR-6** | Deduplicate papers appearing in both sources, keyed on DOI, then arXiv ID, then Semantic Scholar ID, then normalized title. |
-| **FR-7** | Extract text from PDFs and split it into sections (Abstract, Introduction, Related Work, Method, Experiments, Results, Conclusion). |
+| **FR-7** | Extract text from PDFs and split it into the canonical sections: Abstract, Introduction, Related Work, Method, Experiments, Results, Conclusion, Other. Headings that do not map to one of the first seven go to `Other` rather than being dropped. |
 | **FR-8** | Clean extracted text: strip running headers and footers, repair hyphenation across line breaks, and separate the references section from the body. |
 | **FR-9** | Extract entities — methods, datasets, tasks, topics — from each paper using spaCy NER and LLM-based structured extraction. |
 | **FR-10** | Normalize entity names so surface variants collapse to one entity (e.g. "BERT-base" and "BERT"). |
 | **FR-11** | Build a Neo4j Knowledge Graph with node types `Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset` and relationships `AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`. Detailed in `kg-schema.md`. |
 | **FR-12** | Make graph loading idempotent (`MERGE`, plus uniqueness constraints), so re-running a load never duplicates nodes. |
-| **FR-13** | Split paper text into retrieval chunks. **[DECIDE-2]** |
+| **FR-13** | Split paper text into retrieval chunks: by section first, then into overlapping windows within any section that exceeds the embedding model's input limit. Canonical sections are Abstract, Introduction, Related Work, Method, Experiments, Results, Conclusion, Other. |
 | **FR-14** | Attach provenance to every chunk: paper ID, source (`abstract` or section name), and position within that source. Nothing may enter an index without it. |
 | **FR-15** | Build a BM25 keyword index and a FAISS vector index over the chunks, and expose a top-k search function for each. |
 
@@ -114,16 +115,16 @@ in `FR-3`: one hop of reference snowballing during collection. **[DECIDE-1]**
 |---|---|---|---|
 | **NFR-1** | Search latency (BM25 or FAISS, top-10) | < 1 s, p95, on a 1,000-paper corpus | Interactive search stops feeling interactive past ~1 s |
 | **NFR-2** | End-to-end answer latency (retrieval + generation) | < 10 s, p95 | Dominated by the LLM call; anything slower needs streaming to stay usable |
-| **NFR-3** | Faithfulness | ≥ 90% of generated claims supported by the retrieved context | Measured by manual review of a 50-answer sample **[DECIDE-3]** |
+| **NFR-3** | Faithfulness | ≥ 90% of generated claims supported by the retrieved context | Manual review of a 50-answer sample (~200 claims), both members grading independently; scored 1 / 0.5 / 0 with weighted Cohen's kappa reported |
 | **NFR-4** | Citation accuracy | ≥ 95% of citations resolve to a real paper that actually contains the cited content | A wrong citation is worse than no citation for an academic tool |
 | **NFR-5** | Refusal behaviour | The system says it does not know rather than guessing, whenever retrieval returns nothing above the relevance threshold | Follows from `FR-19` |
 | **NFR-6** | Provenance completeness | 100% of indexed chunks carry paper ID, source and position | `FR-20` is impossible without this; cheap to enforce, expensive to retrofit |
 | **NFR-7** | Corpus scale | 1,000 papers, ~640 with full text (§2) | Measured, not assumed |
-| **NFR-8** | LLM cost | ≤ 50 USD total across both phases **[DECIDE-4]** | Student project, no funding. Extraction (`FR-9`) runs once over the corpus and is the larger share; answer generation is per-query |
+| **NFR-8** | LLM cost | ≤ 50 USD total across both phases | Student project, no funding. Extraction (`FR-9`) runs once over the corpus and is the larger share; answer generation is per-query |
 | **NFR-9** | Reproducibility | A clean clone reaches a running Neo4j and a green test suite with `make install && make neo4j-up && make test` | Both members must get identical environments; already in place |
 | **NFR-10** | Idempotent pipeline | Every stage can be re-run without corrupting or duplicating its output | Follows from `FR-12`; a pipeline that cannot be re-run cannot be debugged |
 | **NFR-11** | Rate-limit compliance | Respect the published rate limits of Semantic Scholar and arXiv; back off on HTTP 429; never work around bot protection | `S2`; also a condition of using these APIs at all |
-| **NFR-12** | Hardware | Runs on a developer laptop with no GPU | Embedding the corpus must stay feasible on CPU, which bounds the model choice in **[DECIDE-5]** |
+| **NFR-12** | Hardware | Runs on a developer laptop with no GPU | Embedding the corpus must stay feasible on CPU, which bounded the model choice to `BAAI/bge-small-en-v1.5` (384 dim) |
 
 ---
 
@@ -234,20 +235,22 @@ Recorded so the boundary is deliberate rather than accidental.
 
 ---
 
-## 8. Open decisions
+## 8. Resolved decisions
 
-Both members must agree on these before the affected task starts. Each one is worked
-through — options, tradeoffs, a recommendation and a place to record what was chosen —
-in [`decisions.md`](decisions.md).
+All six were resolved on 2026-09-24. Full reasoning, the rejected options and the
+amendments made to each recommendation are in [`decisions.md`](decisions.md).
 
-| ID | Decision | Why it matters | Deadline |
-|---|---|---|---|
-| **DECIDE-1** | Snowball one hop of references (`FR-3`), or accept a sparse citation graph? | Snowballing grows the corpus several times over, raising collection time, extraction cost (`NFR-8`) and embedding time. Not snowballing weakens `FR-17` and `UC-3`, which is a large part of the argument for using a graph at all. | Before 2.2 |
-| **DECIDE-2** | Chunking strategy (`FR-13`): whole sections, or fixed-size windows with overlap? | Determines retrieval granularity and citation precision. Sections cite cleanly but vary hugely in length; fixed windows embed evenly but can cut mid-argument. | Before 3.3 |
-| **DECIDE-3** | Sample size and rubric for the faithfulness review (`NFR-3`). | Both members must grade a shared sample, or the number means nothing. | Before 5.5 |
-| **DECIDE-4** | LLM: hosted API or a local model (`NFR-8`, `NFR-12`)? | Sets the cost ceiling and the extraction quality in `FR-9`. A local model is free but slower and weaker at structured extraction. | Before 3.1 |
-| **DECIDE-5** | Embedding model (`NFR-12`). | Must embed ~640 full-text papers on a laptop CPU in reasonable time. | Before 3.3 |
-| **DECIDE-6** | Team conventions: branch naming, commit message format, PR review between members (Roadmap 1.1). | The last open item in repository setup. | Before any shared code |
+| ID | Outcome | Affects |
+|---|---|---|
+| **DECIDE-1** | Snowball one hop, keeping references cited by ≥3 seeds; marked with the `:External` label | `FR-3`, `FR-17`, `UC-3` |
+| **DECIDE-2** | Section-aware windows, over the eight canonical section names | `FR-13`, `FR-14` |
+| **DECIDE-3** | 50 answers, both members grading independently, scored 1 / 0.5 / 0, weighted Cohen's kappa | `NFR-3`, `NFR-4` |
+| **DECIDE-4** | Extraction on `claude-haiku-4-5` via the Batch API; escalate to `claude-sonnet-5` if entity names come back fragmented. Generation deferred to Phase 2 | `FR-9`, `NFR-8` |
+| **DECIDE-5** | `BAAI/bge-small-en-v1.5`, 384 dim, pinned in `config.py` together with its query prefix | `FR-13`, `FR-15`, `NFR-1` |
+| **DECIDE-6** | Conventions adopted as proposed; in effect from 2026-09-24 | Roadmap 1.1 |
+
+Still outstanding, though not a decision: the Semantic Scholar API key, being applied for
+as of 2026-09-24. The unauthenticated quota is not sufficient for `FR-3`.
 
 ---
 

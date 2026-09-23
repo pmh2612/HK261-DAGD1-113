@@ -13,15 +13,19 @@ is the part that is useful in six months and in the Phase 1 report.
 
 | ID | Decision | Blocks | Status |
 |---|---|---|---|
-| [DECIDE-1](#decide-1--reference-snowballing) | Snowball one hop of references? | Roadmap 2.2 (October) | ☐ open |
-| [DECIDE-2](#decide-2--chunking-strategy) | Chunking strategy | Roadmap 3.3 (November) | ☐ open |
-| [DECIDE-3](#decide-3--faithfulness-review-protocol) | Faithfulness review protocol | Roadmap 5.5 (Phase 2) | ☐ open |
-| [DECIDE-4](#decide-4--which-llm) | Which LLM, hosted or local | Roadmap 3.1 (November) | ☐ open |
-| [DECIDE-5](#decide-5--embedding-model) | Embedding model | Roadmap 3.3 (November) | ☐ open |
-| [DECIDE-6](#decide-6--team-conventions) | Team conventions | Any shared code | ☐ open |
+| [DECIDE-1](#decide-1--reference-snowballing) | Snowball one hop of references? | Roadmap 2.2 (October) | ☑ **B**, `:External` |
+| [DECIDE-2](#decide-2--chunking-strategy) | Chunking strategy | Roadmap 3.3 (November) | ☑ **C** |
+| [DECIDE-3](#decide-3--faithfulness-review-protocol) | Faithfulness review protocol | Roadmap 5.5 (Phase 2) | ☑ agreed + weighted kappa |
+| [DECIDE-4](#decide-4--which-llm) | Which LLM, hosted or local | Roadmap 3.1 (November) | ☑ Haiku 4.5, Batch API |
+| [DECIDE-5](#decide-5--embedding-model) | Embedding model | Roadmap 3.3 (November) | ☑ `bge-small-en-v1.5` |
+| [DECIDE-6](#decide-6--team-conventions) | Team conventions | Any shared code | ☑ adopted |
 
-**Also blocking, and not really a decision:** apply for a Semantic Scholar API key now.
-See [§7](#7-not-a-decision-but-do-it-this-week).
+All six were resolved on 2026-09-24 (Tran Ha My, via pull request #1; the reply is kept
+verbatim at the end of [`decisions-vi.md`](decisions-vi.md)). Each section below records
+the outcome and any amendment made to the recommendation.
+
+**Also blocking, and not really a decision:** the Semantic Scholar API key. Being applied
+for by Tran Ha My as of 2026-09-24. See [§7](#7-not-a-decision-but-do-it-this-week).
 
 ---
 
@@ -84,9 +88,16 @@ Proposal: a boolean property `in_corpus` on `Paper` (`true` = seed, searchable;
 `false` = snowballed, graph-only), or a second label `:External`. Retrieval filters on it;
 `UC-3` shows both but marks them differently.
 
-> **Decision:** ☐ A ☐ B ☐ C — threshold: ______
-> **Chosen by:** ______ **Date:** ______
-> **Reason (if not the recommendation):** ______
+> **Decision: Option B**, threshold ≥3 seed papers. Snowballed papers are marked with a
+> second label **`:External`** on the `Paper` node, not with an `in_corpus` property.
+> **Chosen by:** Tran Ha My · **Date:** 2026-09-24
+>
+> **Amendment to the recommendation:** the recommendation left the marker open between a
+> property and a label; a label was chosen. Retrieval must therefore filter on
+> `(:Paper)` without `:External` rather than on a property value, and `kg-schema.md` needs
+> a constraint that holds across both labels so a paper cannot be duplicated by being
+> collected as a reference first and as a seed later. Re-tune the threshold once the real
+> distribution over 1,000 seeds is known.
 
 ---
 
@@ -130,8 +141,19 @@ paper_id · source ("abstract" | section name) · window index within that sourc
 Window size and overlap are tuning parameters, not part of this decision — set them once
 `DECIDE-5` fixes the embedding model's input limit.
 
-> **Decision:** ☐ A ☐ B ☐ C — window size: ______ overlap: ______
-> **Chosen by:** ______ **Date:** ______
+> **Decision: Option C** — section-aware windows.
+> Canonical section names, agreed as the shared contract between PDF splitting
+> (`FR-7`) and chunk provenance (`FR-14`):
+>
+> ```
+> Abstract · Introduction · Related Work · Method · Experiments · Results · Conclusion · Other
+> ```
+>
+> `Other` is the catch-all for headings that do not map to the seven — it exists so that
+> unmapped text keeps valid provenance instead of being dropped.
+> Window size and overlap still to be set once `DECIDE-5` fixed the input limit; 512 tokens
+> with 64 overlap is the starting point.
+> **Chosen by:** Tran Ha My (section list), Pham Minh Hieu (strategy) · **Date:** 2026-09-24
 
 ---
 
@@ -161,8 +183,17 @@ seeing the results is how evaluations become unconvincing.
 Same protocol covers `NFR-4` (citation accuracy): for each cited claim, check that the
 cited paper exists and that the cited section actually contains the claim.
 
-> **Decision:** sample size ______ scale ______ graders ______
-> **Chosen by:** ______ **Date:** ______
+> **Decision: as proposed** — 50 answers, ~200 claims, both members grading the same
+> sample independently.
+> **Amended:** the three-point scale is scored **supported = 1 · partially supported = 0.5
+> · unsupported = 0**, and agreement is reported as **weighted** Cohen's kappa rather than
+> plain kappa.
+> **Chosen by:** Tran Ha My · **Date:** 2026-09-24
+>
+> The amendment is the right call: the scale is ordinal, so "supported vs partially
+> supported" is a smaller disagreement than "supported vs unsupported". Plain kappa treats
+> both as equally wrong and understates agreement. Use quadratic weights unless there is a
+> reason to prefer linear.
 
 ---
 
@@ -217,8 +248,15 @@ $13 on Haiku 4.5 and about $26 on Sonnet 5 — most of the ceiling in the second
 `NFR-12` (no GPU) does not constrain this — hosted inference runs nowhere near the laptop.
 It constrains `DECIDE-5` instead.
 
-> **Decision — extraction:** model ______ batch API ☐ · **Generation:** deferred to Phase 2 ☐
-> **Chosen by:** ______ **Date:** ______
+> **Decision: `claude-haiku-4-5` through the Batch API** for extraction (`FR-9`).
+> Generation (`FR-19`) deferred to the start of Phase 2, as recommended.
+> **Escalation trigger, added:** after the 20-paper manual check, step up to
+> `claude-sonnet-5` **if entity names come back fragmented** — i.e. the same method or
+> dataset extracted under several surface forms that `FR-10` then has to merge.
+> **Chosen by:** Tran Ha My · **Date:** 2026-09-24
+>
+> A sharper trigger than "if the output is unreliable": fragmentation is the failure mode
+> that makes extra work downstream, and it is visible in a 20-paper sample.
 
 ---
 
@@ -265,8 +303,15 @@ Best quality per CPU-second of the four, and 384 dimensions keeps the FAISS inde
 Also note the asymmetry: `bge-*` models expect the *query* to carry a prefix that the
 *documents* do not. Wire this into the search function from the start.
 
-> **Decision:** model ______ dim ______ pinned in `config.py` ☐
-> **Chosen by:** ______ **Date:** ______
+> **Decision: `BAAI/bge-small-en-v1.5`**, 384 dimensions. Pinned in `config.py` as
+> `settings.embedding_model`.
+> **Flagged by Tran Ha My:** the query-side instruction prefix must not be forgotten. It is
+> therefore pinned next to the model as `settings.embedding_query_prefix` rather than left
+> as a literal in the search function — the failure mode is silent, so it needs to live
+> somewhere visible.
+> **Chosen by:** Pham Minh Hieu, confirmed by Tran Ha My · **Date:** 2026-09-24
+>
+> Still to do: the three-model comparison on the test query set (Roadmap 4.1).
 
 ---
 
@@ -319,8 +364,11 @@ automatic:
 files. If a dataset has to be shared, share the collection script and its data version, not
 the output.
 
-> **Decision:** ☐ adopt as proposed ☐ adopt with changes: ______
-> **Chosen by:** ______ **Date:** ______
+> **Decision: adopted as proposed** — branch naming, commit format, pull-request review,
+> directory ownership, and the pre-commit hooks.
+> **Chosen by:** Tran Ha My · **Date:** 2026-09-24
+>
+> In effect from 2026-09-24. Pull request #1 was itself the first use of it.
 
 ---
 
