@@ -10,4 +10,5 @@ is a Phase 1 deliverable listed in [../Roadmap.md](../Roadmap.md).
 | `kg-schema.md` | The Knowledge Graph model: node types (`Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset`), relationships (`AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`), their properties, the unique keys used for deduplication (DOI, arXiv ID, Semantic Scholar ID), a schema diagram, and the example Cypher queries the system must answer. | 2.1 |
 | `learning-path.md` | Self-study resources for the stack: arc42 documentation, the Semantic Scholar and arXiv APIs, PyMuPDF, Knowledge Graph concepts (Stanford CS520), Neo4j and Cypher (GraphAcademy), spaCy NER and LLM-based extraction, Sentence-Transformers and FAISS, and BM25 (`rank_bm25`). | 1.4 |
 
-None of these exist yet — they are written during September and October 2026.
+`requirements.md` is drafted (2026-09-23); the rest are written during the
+remainder of September and October 2026.
