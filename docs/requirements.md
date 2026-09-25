@@ -83,7 +83,7 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | **FR-6** | Deduplicate papers appearing in both sources, keyed on DOI, then arXiv ID, then Semantic Scholar ID, then normalized title. |
 | **FR-7** | Extract text from PDFs and split it into the canonical sections: Abstract, Introduction, Related Work, Method, Experiments, Results, Conclusion, Other. Headings that do not map to one of the first seven go to `Other` rather than being dropped. |
 | **FR-8** | Clean extracted text: strip running headers and footers, repair hyphenation across line breaks, and separate the references section from the body. |
-| **FR-9** | Extract entities — methods, datasets, tasks, topics — from each paper using spaCy NER and a **locally run open-weights LLM**. Extraction output is constrained to a JSON schema at decode time, not requested in the prompt and repaired afterwards. |
+| **FR-9** | Extract entities — methods, datasets, tasks, topics — from each paper using spaCy NER and an **open-weights LLM loaded in-process**. Extraction output is constrained to a JSON schema at decode time, not requested in the prompt and repaired afterwards. |
 | **FR-10** | Normalize entity names so surface variants collapse to one entity (e.g. "BERT-base" and "BERT"). |
 | **FR-11** | Build a Neo4j Knowledge Graph with node types `Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset` and relationships `AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`. Detailed in `kg-schema.md`. |
 | **FR-12** | Make graph loading idempotent (`MERGE`, plus uniqueness constraints), so re-running a load never duplicates nodes. |
@@ -98,7 +98,7 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | **FR-16** | Fuse BM25 and vector rankings into one result list (Reciprocal Rank Fusion or a weighted sum). |
 | **FR-17** | Expand results through the graph: papers sharing a method, dataset, topic, author, or citation link with a strong hit. Effectiveness is bounded by `S3`. |
 | **FR-18** | Filter results by year, venue, topic, method, and dataset. |
-| **FR-19** | Generate answers from the retrieved context only, using the same locally run model, and refuse to answer — explicitly — when the retrieved context does not support one. |
+| **FR-19** | Generate answers from the retrieved context only, using the same in-process model, and refuse to answer — explicitly — when the retrieved context does not support one. |
 | **FR-20** | Attach inline citations to every claim, resolving to a paper ID and the specific section the text came from. |
 | **FR-21** | Summarize a single paper on request. |
 | **FR-22** | Compare how two or more papers approach the same problem. |
@@ -120,7 +120,7 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | **NFR-5** | Refusal behaviour | The system says it does not know rather than guessing, whenever retrieval returns nothing above the relevance threshold | Follows from `FR-19` |
 | **NFR-6** | Provenance completeness | 100% of indexed chunks carry paper ID, source and position | `FR-20` is impossible without this; cheap to enforce, expensive to retrofit |
 | **NFR-7** | Corpus scale | 1,000 papers, ~640 with full text (§2) | Measured, not assumed |
-| **NFR-8** | External services | **No LLM API at all — paid or free.** Open-weights models, downloaded and run on hardware the team controls | Required by the course. A free hosted tier (Gemini, Groq, HuggingFace Inference, an OpenRouter free model) is still an API call and is excluded: "free" refers to the model weights being freely available, not to the price of somebody else's endpoint |
+| **NFR-8** | External services | **No LLM API call of any kind.** Open weights are loaded into the application process; generation is a function call | Required by the course. Excludes paid APIs, free hosted tiers (Gemini, Groq, HuggingFace Inference, OpenRouter free models) **and local inference servers** — `localhost:11434` is still HTTP. "Free" refers to the weights being freely downloadable, not to somebody else's endpoint being free of charge |
 | **NFR-9** | Reproducibility | A clean clone reaches a running Neo4j and a green test suite with `make install && make neo4j-up && make test`; the LLM runtime is installed the same way on both machines | Both members must get identical environments. A self-hosted model makes this harder than an API key did, so the model name and runtime version are pinned, not left to whatever each machine happens to have |
 | **NFR-10** | Idempotent pipeline | Every stage can be re-run without corrupting or duplicating its output | Follows from `FR-12`; a pipeline that cannot be re-run cannot be debugged |
 | **NFR-11** | Rate-limit compliance | Respect the published rate limits of Semantic Scholar and arXiv; back off on HTTP 429; never work around bot protection | `S2`; also a condition of using these APIs at all |

@@ -29,7 +29,7 @@ The constraints that actually shaped the design, all measured rather than assume
 | C1 | ~36% of papers have **no full text** | measured, `requirements.md` §2 | Every stage must work on title + abstract alone. Not an edge case — a third of the corpus |
 | C2 | The internal citation graph is **sparse** | measured, `S3` | Papers are connected mainly through shared methods, datasets and topics, not through `CITES` |
 | C3 | **One GPU, self-hosted inference** | `NFR-12`, `NFR-8` | LLM size bounded by VRAM (`DECIDE-7`). Embedding stays on CPU so indexing never waits on the GPU; exact FAISS index rather than a trained one |
-| C4 | **No LLM API, free or paid** | `NFR-8`, course requirement | Open weights, run on the team's own hardware. A free hosted tier is still an API and does not satisfy this. No external LLM dependency and no per-query cost — but also no elastic capacity, so batch work is scheduled rather than parallelized |
+| C4 | **No API call of any kind** | `NFR-8`, course requirement | The model is loaded into the application process. Not a hosted API, not a free tier, and not a local inference server either — `localhost:11434` is still an HTTP call. No elastic capacity, so batch work is scheduled rather than parallelized |
 | C5 | **Citations must be checkable** | `NFR-4`, `NFR-6` | Provenance is a hard invariant, not a logging nicety — see §5 |
 | C6 | Two people, parallel work | `DECIDE-6` | Stage boundaries are contracts (§4), and the shared vocabulary lives in `config.py` |
 
@@ -59,10 +59,11 @@ flowchart LR
 Everything outside the box is somebody else's system and can fail, rate-limit or change
 shape. Those boundaries are where validation and retry live (`NFR-11`, §8).
 
-**The LLM is inside the box.** It runs on the team's own GPU from open weights, so it is not
-a boundary that can rate-limit, change behaviour between runs, or bill anything. That also
-means its capacity is fixed: a slow extraction run cannot be solved by paying for more
-throughput, only by a smaller model or more time.
+**The LLM is not a boundary at all — it is a library call.** Open weights are loaded into
+the Python process with `transformers`; generation is a function call, not a request. There
+is no endpoint, no client, and nothing to rate-limit or bill. That also means capacity is
+fixed: a slow extraction run cannot be solved by paying for more throughput, only by a
+smaller model or more time.
 
 **Trust boundary:** paper text is untrusted input. It reaches an LLM prompt in `FR-9` and
 `FR-19`, so prompts must treat retrieved text as data, never as instructions.
@@ -93,7 +94,7 @@ flowchart TD
 |---|---|---|---|---|
 | `collection` | Fetch, normalize and deduplicate paper metadata; resolve and download PDFs | topic query | `Paper` records, PDF files, reference lists | My |
 | `collection.pdf` | Extract text, split into canonical sections, clean | PDF file | `Section` records | My |
-| `extraction` | Identify methods, datasets, tasks, topics; normalize their names. Local LLM with schema-constrained decoding | `Paper` + `Section` | `PaperEntities` | My |
+| `extraction` | Identify methods, datasets, tasks, topics; normalize their names. In-process LLM with schema-constrained decoding | `Paper` + `Section` | `PaperEntities` | My |
 | `graph` | Schema, constraints, idempotent loaders | `Paper`, `PaperEntities`, references | populated Neo4j | My |
 | `indexing` | Chunk with provenance, embed, build FAISS and BM25 | `Paper` + `Section` | chunk table, index files | Hiếu |
 | `retrieval` | Top-k search over each index | query string | `SearchHit` list | Hiếu |
@@ -393,21 +394,35 @@ retrieval miss is the embedding model's fault, not the index's.
 
 Vectors are normalized so inner product equals cosine similarity.
 
-### Why a self-hosted model, and what it costs us
+### Why the model is loaded in-process rather than behind a local server
 
-Required by the course: no hosted LLM API. The system therefore runs an open-weights model
-on the team's own GPU for both `FR-9` (extraction) and `FR-19` (generation).
+The course requires the AI to be integrated into the system, not called. Read strictly —
+which is how it should be read — that rules out three things, not one:
+
+1. A paid hosted API.
+2. A free hosted tier. Free of charge is not the same as not-an-API.
+3. **A local inference server.** Ollama or a `llama.cpp` server is convenient, but the
+   application code still reads `requests.post("http://localhost:11434/...")`. That is an
+   API call. It happens to terminate on the same machine, which changes the privacy and
+   cost story but not what the code is doing.
+
+So the model is loaded into the application process with `transformers` and generation is a
+method call. Nothing in the codebase opens a socket to reach a model.
 
 What this buys: no per-query cost, no rate limit, no dependency that can change behaviour
-between the evaluation run and the defence, and a system that still works with the network
+between the evaluation run and the defence, and a system that runs with the network
 unplugged. For a project whose deliverable is a reproducible measurement, a model that
-cannot silently change under us is genuinely worth something.
+cannot silently change under us is worth something.
 
-What it costs: capacity is fixed. A hosted API absorbs a slow batch job by running it in
-parallel; a single GPU cannot. Extraction over 1,000 papers is therefore scheduled as an
-overnight run rather than treated as interactive. Answer latency also lands an order of
-magnitude above a hosted API, which is why `NFR-2` is written as *first token* plus a
-streamed completion rather than a single wall-clock number.
+What it costs: capacity is fixed, and the process now owns the model's memory for its whole
+lifetime. A hosted API absorbs a slow batch job by running it in parallel; one GPU cannot.
+Extraction over 1,000 papers is therefore an overnight run, not an interactive one. Answer
+latency lands an order of magnitude above a hosted API, which is why `NFR-2` is written as
+*first token* plus a streamed completion rather than one wall-clock number.
+
+A practical consequence worth planning for: loading a multi-billion-parameter model takes
+tens of seconds. The extraction script loads once and processes all 1,000 papers; the demo
+loads at startup, not per query.
 
 ### Why schema-constrained decoding rather than prompting for JSON
 
@@ -420,11 +435,16 @@ malformed output is not rejected after the fact — it is never generated. This 
 model usable for `FR-9` in a way that prompt engineering alone does not, and it removes the
 retry-and-repair path from §8 entirely.
 
-### Why no new dependency for the LLM client
+### Why in-process inference adds almost no dependencies
 
-The local runtime speaks HTTP. `requests` is already a dependency, and a schema-constrained
-completion is one POST, so no client library is added. Both members can read the request
-shape without learning another API.
+`torch` and `transformers` are already installed — `sentence-transformers` (`FR-15`) depends
+on both. Loading a generative model needs the same two libraries the embedding model already
+uses, plus `accelerate` for device placement. They are now declared as direct dependencies
+rather than relied on transitively, because `extraction` and `rag` import them directly.
+
+Schema-constrained decoding is the one thing that does need a library of its own; which one
+is part of `DECIDE-7`. It is not something to hand-roll — it is a logits-processing problem,
+not a few lines.
 
 ### Why file-based stages rather than one pipeline object
 

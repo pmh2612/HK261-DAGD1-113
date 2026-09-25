@@ -42,14 +42,15 @@ class Settings(BaseSettings):
 
     semantic_scholar_api_key: str = ""
 
-    #: Local inference endpoint (Ollama's default). No hosted API is used - see
-    #: `docs/decisions.md` DECIDE-7 and `NFR-8`. Nothing leaves this machine.
-    llm_base_url: str = "http://localhost:11434"
-
-    #: Open-weights model tag, e.g. "qwen2.5:7b-instruct". Empty until DECIDE-7 picks
-    #: one. Re-running extraction under a different model silently produces a different
-    #: graph, so this is pinned and recorded in the run manifest.
+    #: Open-weights model, loaded into this process with `transformers` - a Hugging Face
+    #: repo id or a path to downloaded weights. There is no inference server and no HTTP
+    #: call, local or remote (`NFR-8`). Empty until DECIDE-7 picks one; re-running
+    #: extraction under a different model silently produces a different graph, so it is
+    #: pinned here and recorded in the run manifest.
     llm_model: str = ""
+
+    #: Where the model runs: "auto" lets torch pick, or force "cuda", "mps" or "cpu".
+    llm_device: str = "auto"
 
     #: Pinned by `docs/decisions.md` DECIDE-5. Index-time and query-time embeddings must
     #: come from the same model, so changing this invalidates every built index.

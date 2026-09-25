@@ -14,6 +14,13 @@ neo4j>=5.20
 # --- Information extraction ---
 spacy>=3.7
 
+# --- Local LLM (loaded in-process, no inference server) ---
+# torch and transformers already arrive with sentence-transformers, but the
+# extraction and RAG modules use them directly, so they are declared here too.
+torch>=2.2
+transformers>=4.44
+accelerate>=0.30
+
 # --- Indexing & search ---
 sentence-transformers>=3.0
 faiss-cpu>=1.8

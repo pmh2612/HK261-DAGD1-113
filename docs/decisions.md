@@ -433,15 +433,30 @@ is the first thing to find out.
 Mistral, Gemma — is a reasonable starting point at these sizes. Pick by measurement, not by
 reputation: the test is this corpus, not a leaderboard.
 
-**3. Runtime.** The practical options are Ollama (one install, HTTP API, handles GPU
-placement and quantized weights, identical setup on both machines — which `NFR-9` asks for)
-or llama.cpp directly (more control, more setup). Both support schema-constrained decoding,
-which is the feature that matters most here.
+**3. How it is loaded — and this is the part the requirement decides for us.** The AI has to
+be *integrated into the system*, which rules out an inference server as well as a hosted API:
+
+| | Ollama / llama.cpp server | **In-process `transformers`** |
+|---|---|---|
+| What the code does | `requests.post("http://localhost:11434/...")` | `model.generate(...)` |
+| Is it an API call? | **Yes** — local, but still HTTP | No |
+| Meets the requirement? | ❌ | ✅ |
+| Setup | separate service to install and run | `pip install -e .`, already covered |
+| Dependencies | a service outside the venv | `torch` + `transformers`, already installed |
+
+So: `transformers`, loaded in-process. `torch` and `transformers` already arrive with
+`sentence-transformers`, so this costs no new inference dependency — only `accelerate` for
+device placement.
+
+**4. Schema-constrained decoding needs one library.** `outlines` and `lm-format-enforcer`
+both plug into `transformers` generation. Pick one and pin it. Do not hand-roll it: it is a
+logits-processing problem, not a few lines of parsing.
 
 ### Recommendation
 
 1. **Check the GPU's VRAM first.** It determines everything above.
-2. **Ollama**, for `NFR-9`: both members run the same two commands and get the same model.
+2. **In-process `transformers`**, per the table above — it is what the requirement asks for,
+   and it needs nothing installed outside the venv, which also serves `NFR-9`.
 3. **One model for both workloads to start.** Splitting them is a real option — a small fast
    model for extraction, a larger one for generation — but only adopt it once there is a
    measurement showing one model cannot do both. Two models is two sets of weights, two
@@ -462,7 +477,7 @@ Whether "self-hosted" means running open weights (assumed here) or training or f
 a model. Those are very different amounts of work, and the second would need its own phase
 in the roadmap. Worth confirming before November rather than during it.
 
-> **Decision:** GPU VRAM: ______ · model: ______ · runtime: ______
+> **Decision:** GPU VRAM: ______ · model: ______ · constrained-decoding library: ______
 > **One model or two:** ______
 > **Chosen by:** ______ **Date:** ______
 
