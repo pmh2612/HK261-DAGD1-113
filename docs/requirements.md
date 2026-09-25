@@ -83,7 +83,7 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | **FR-6** | Deduplicate papers appearing in both sources, keyed on DOI, then arXiv ID, then Semantic Scholar ID, then normalized title. |
 | **FR-7** | Extract text from PDFs and split it into the canonical sections: Abstract, Introduction, Related Work, Method, Experiments, Results, Conclusion, Other. Headings that do not map to one of the first seven go to `Other` rather than being dropped. |
 | **FR-8** | Clean extracted text: strip running headers and footers, repair hyphenation across line breaks, and separate the references section from the body. |
-| **FR-9** | Extract entities — methods, datasets, tasks, topics — from each paper using spaCy NER and LLM-based structured extraction. |
+| **FR-9** | Extract entities — methods, datasets, tasks, topics — from each paper using spaCy NER and a **locally run open-weights LLM**. Extraction output is constrained to a JSON schema at decode time, not requested in the prompt and repaired afterwards. |
 | **FR-10** | Normalize entity names so surface variants collapse to one entity (e.g. "BERT-base" and "BERT"). |
 | **FR-11** | Build a Neo4j Knowledge Graph with node types `Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset` and relationships `AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`. Detailed in `kg-schema.md`. |
 | **FR-12** | Make graph loading idempotent (`MERGE`, plus uniqueness constraints), so re-running a load never duplicates nodes. |
@@ -98,7 +98,7 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | **FR-16** | Fuse BM25 and vector rankings into one result list (Reciprocal Rank Fusion or a weighted sum). |
 | **FR-17** | Expand results through the graph: papers sharing a method, dataset, topic, author, or citation link with a strong hit. Effectiveness is bounded by `S3`. |
 | **FR-18** | Filter results by year, venue, topic, method, and dataset. |
-| **FR-19** | Generate answers from the retrieved context only, and refuse to answer — explicitly — when the retrieved context does not support one. |
+| **FR-19** | Generate answers from the retrieved context only, using the same locally run model, and refuse to answer — explicitly — when the retrieved context does not support one. |
 | **FR-20** | Attach inline citations to every claim, resolving to a paper ID and the specific section the text came from. |
 | **FR-21** | Summarize a single paper on request. |
 | **FR-22** | Compare how two or more papers approach the same problem. |
@@ -114,17 +114,17 @@ in `FR-3`: one hop of reference snowballing during collection (adopted, `DECIDE-
 | ID | Attribute | Target | Why this number |
 |---|---|---|---|
 | **NFR-1** | Search latency (BM25 or FAISS, top-10) | < 1 s, p95, on a 1,000-paper corpus | Interactive search stops feeling interactive past ~1 s |
-| **NFR-2** | End-to-end answer latency (retrieval + generation) | < 10 s, p95 | Dominated by the LLM call; anything slower needs streaming to stay usable |
+| **NFR-2** | End-to-end answer latency | First token < 3 s; complete answer < 20 s, p95 | Local GPU inference, answer streamed. Perceived latency is the first token, not the last. The old < 10 s target assumed a hosted API and is not reachable for a 500-token answer on a single GPU |
 | **NFR-3** | Faithfulness | ≥ 90% of generated claims supported by the retrieved context | Manual review of a 50-answer sample (~200 claims), both members grading independently; scored 1 / 0.5 / 0 with weighted Cohen's kappa reported |
 | **NFR-4** | Citation accuracy | ≥ 95% of citations resolve to a real paper that actually contains the cited content | A wrong citation is worse than no citation for an academic tool |
 | **NFR-5** | Refusal behaviour | The system says it does not know rather than guessing, whenever retrieval returns nothing above the relevance threshold | Follows from `FR-19` |
 | **NFR-6** | Provenance completeness | 100% of indexed chunks carry paper ID, source and position | `FR-20` is impossible without this; cheap to enforce, expensive to retrofit |
 | **NFR-7** | Corpus scale | 1,000 papers, ~640 with full text (§2) | Measured, not assumed |
-| **NFR-8** | LLM cost | ≤ 50 USD total across both phases | Student project, no funding. Extraction (`FR-9`) runs once over the corpus and is the larger share; answer generation is per-query |
-| **NFR-9** | Reproducibility | A clean clone reaches a running Neo4j and a green test suite with `make install && make neo4j-up && make test` | Both members must get identical environments; already in place |
+| **NFR-8** | External services | **No paid or hosted LLM API.** All inference runs on hardware the team controls | Required by the course. Removes the running-cost question entirely and replaces it with a compute budget (`NFR-12`) |
+| **NFR-9** | Reproducibility | A clean clone reaches a running Neo4j and a green test suite with `make install && make neo4j-up && make test`; the LLM runtime is installed the same way on both machines | Both members must get identical environments. A self-hosted model makes this harder than an API key did, so the model name and runtime version are pinned, not left to whatever each machine happens to have |
 | **NFR-10** | Idempotent pipeline | Every stage can be re-run without corrupting or duplicating its output | Follows from `FR-12`; a pipeline that cannot be re-run cannot be debugged |
 | **NFR-11** | Rate-limit compliance | Respect the published rate limits of Semantic Scholar and arXiv; back off on HTTP 429; never work around bot protection | `S2`; also a condition of using these APIs at all |
-| **NFR-12** | Hardware | Runs on a developer laptop with no GPU | Embedding the corpus must stay feasible on CPU, which bounded the model choice to `BAAI/bge-small-en-v1.5` (384 dim) |
+| **NFR-12** | Hardware | One GPU for LLM inference; embedding and indexing stay CPU-feasible | The GPU bounds the LLM size (`DECIDE-7`). Embedding deliberately stays on CPU with `BAAI/bge-small-en-v1.5` (384 dim) so indexing is not blocked when the GPU is busy or unavailable |
 
 ---
 
@@ -245,9 +245,12 @@ amendments made to each recommendation are in [`decisions.md`](decisions.md).
 | **DECIDE-1** | Snowball one hop, keeping references cited by ≥3 seeds; marked with the `:External` label | `FR-3`, `FR-17`, `UC-3` |
 | **DECIDE-2** | Section-aware windows, over the eight canonical section names | `FR-13`, `FR-14` |
 | **DECIDE-3** | 50 answers, both members grading independently, scored 1 / 0.5 / 0, weighted Cohen's kappa | `NFR-3`, `NFR-4` |
-| **DECIDE-4** | Extraction on `claude-haiku-4-5` via the Batch API; escalate to `claude-sonnet-5` if entity names come back fragmented. Generation deferred to Phase 2 | `FR-9`, `NFR-8` |
+| **DECIDE-4** | ~~Extraction on a hosted API~~ — **superseded 2026-09-25**: the course requires self-hosted inference. Reopened as `DECIDE-7` | `FR-9`, `NFR-8` |
 | **DECIDE-5** | `BAAI/bge-small-en-v1.5`, 384 dim, pinned in `config.py` together with its query prefix | `FR-13`, `FR-15`, `NFR-1` |
 | **DECIDE-6** | Conventions adopted as proposed; in effect from 2026-09-24 | Roadmap 1.1 |
+
+**DECIDE-7 is open**: which open-weights model, at which size, on which local runtime. See
+[`decisions.md`](decisions.md). It replaces `DECIDE-4`, which assumed a hosted API.
 
 Still outstanding, though not a decision: the Semantic Scholar API key, being applied for
 as of 2026-09-24. The unauthenticated quota is not sufficient for `FR-3`.

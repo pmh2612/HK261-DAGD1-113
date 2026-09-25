@@ -115,7 +115,7 @@ The packages currently hold only their docstrings — Phase 1 fills them in.
 - Python 3.11+
 - Docker (to run Neo4j via `docker-compose.yml`) — or your own Neo4j 5 instance
 - A Semantic Scholar API key (optional, but recommended for higher rate limits)
-- An LLM API key or a local LLM
+- A local LLM runtime (Ollama or llama.cpp) and a GPU — the project runs its own model and calls no hosted API
 
 ### Installation
 
@@ -170,7 +170,8 @@ See `.env.example` for the full list with defaults.
 | `NEO4J_USER` | Neo4j username | `neo4j` |
 | `NEO4J_PASSWORD` | Neo4j password (required to start the container) | *(empty)* |
 | `SEMANTIC_SCHOLAR_API_KEY` | Higher rate limits on the Semantic Scholar API | *(empty)* |
-| `LLM_API_KEY` | Key for the LLM used in extraction and RAG | *(empty)* |
+| `LLM_BASE_URL` | Local inference endpoint; no hosted API is used | `http://localhost:11434` |
+| `LLM_MODEL` | Open-weights model tag, pinned once `DECIDE-7` is settled | *(empty)* |
 | `DATA_DIR` | Where `raw/` and `processed/` live | `data` |
 
 ## Roadmap

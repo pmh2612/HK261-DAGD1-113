@@ -28,8 +28,8 @@ The constraints that actually shaped the design, all measured rather than assume
 |---|---|---|---|
 | C1 | ~36% of papers have **no full text** | measured, `requirements.md` §2 | Every stage must work on title + abstract alone. Not an edge case — a third of the corpus |
 | C2 | The internal citation graph is **sparse** | measured, `S3` | Papers are connected mainly through shared methods, datasets and topics, not through `CITES` |
-| C3 | **No GPU** | `NFR-12` | Embedding model bounded to a small CPU model; exact FAISS index rather than a trained one |
-| C4 | **≤ 50 USD** total | `NFR-8` | LLM used for batch extraction and generation only, never in a loop over the corpus |
+| C3 | **One GPU, self-hosted inference** | `NFR-12`, `NFR-8` | LLM size bounded by VRAM (`DECIDE-7`). Embedding stays on CPU so indexing never waits on the GPU; exact FAISS index rather than a trained one |
+| C4 | **No hosted LLM API** | `NFR-8`, course requirement | Every model runs on the team's own hardware. There is no external LLM dependency and no per-query cost — but also no elastic capacity, so batch work is scheduled rather than parallelized |
 | C5 | **Citations must be checkable** | `NFR-4`, `NFR-6` | Provenance is a hard invariant, not a logging nicety — see §5 |
 | C6 | Two people, parallel work | `DECIDE-6` | Stage boundaries are contracts (§4), and the shared vocabulary lives in `config.py` |
 
@@ -41,24 +41,28 @@ The constraints that actually shaped the design, all measured rather than assume
 flowchart LR
     SS[Semantic Scholar API]
     AX[arXiv API + PDFs]
-    LLM[LLM API]
     U[User]
 
     SS -->|metadata, references| SYS
     AX -->|metadata, PDFs| SYS
-    SYS <-->|extraction, generation| LLM
     U -->|query| SYS
     SYS -->|papers, cited answers| U
 
-    subgraph SYS[Paper Search System]
+    subgraph SYS[Paper Search System - all local]
         direction TB
         NEO[(Neo4j)]
         IDX[(FAISS + BM25)]
+        LLM[Local LLM<br/>open weights, GPU]
     end
 ```
 
 Everything outside the box is somebody else's system and can fail, rate-limit or change
 shape. Those boundaries are where validation and retry live (`NFR-11`, §8).
+
+**The LLM is inside the box.** It runs on the team's own GPU from open weights, so it is not
+a boundary that can rate-limit, change behaviour between runs, or bill anything. That also
+means its capacity is fixed: a slow extraction run cannot be solved by paying for more
+throughput, only by a smaller model or more time.
 
 **Trust boundary:** paper text is untrusted input. It reaches an LLM prompt in `FR-9` and
 `FR-19`, so prompts must treat retrieved text as data, never as instructions.
@@ -89,7 +93,7 @@ flowchart TD
 |---|---|---|---|---|
 | `collection` | Fetch, normalize and deduplicate paper metadata; resolve and download PDFs | topic query | `Paper` records, PDF files, reference lists | My |
 | `collection.pdf` | Extract text, split into canonical sections, clean | PDF file | `Section` records | My |
-| `extraction` | Identify methods, datasets, tasks, topics; normalize their names | `Paper` + `Section` | `PaperEntities` | My |
+| `extraction` | Identify methods, datasets, tasks, topics; normalize their names. Local LLM with schema-constrained decoding | `Paper` + `Section` | `PaperEntities` | My |
 | `graph` | Schema, constraints, idempotent loaders | `Paper`, `PaperEntities`, references | populated Neo4j | My |
 | `indexing` | Chunk with provenance, embed, build FAISS and BM25 | `Paper` + `Section` | chunk table, index files | Hiếu |
 | `retrieval` | Top-k search over each index | query string | `SearchHit` list | Hiếu |
@@ -339,7 +343,7 @@ rather than swallowed, and that one bad paper never stops the run.
 | Collection | PDF returns 403 / 404 | Log with reason, keep the paper as metadata-only (`FR-4`) |
 | PDF | Text extraction fails or yields almost nothing | Log paper ID and reason, fall back to abstract-only |
 | PDF | No heading maps to a canonical section | Assign `"Other"` — never drop the text (`DECIDE-2`) |
-| Extraction | LLM returns invalid JSON | Retry once, then log and skip that paper; a partial corpus beats a corrupt one |
+| Extraction | Model output does not match the schema | Cannot happen — decoding is schema-constrained. A model that fails to load or times out is logged and the paper skipped |
 | Graph | Node already exists | Not a failure — `MERGE` plus uniqueness constraints (`FR-12`) |
 | Indexing | A chunk violates P1–P4 | **Abort the build.** A silently wrong index is worse than no index |
 
@@ -388,6 +392,39 @@ here is a decision, not an omission, and it removes a confound from the evaluati
 retrieval miss is the embedding model's fault, not the index's.
 
 Vectors are normalized so inner product equals cosine similarity.
+
+### Why a self-hosted model, and what it costs us
+
+Required by the course: no hosted LLM API. The system therefore runs an open-weights model
+on the team's own GPU for both `FR-9` (extraction) and `FR-19` (generation).
+
+What this buys: no per-query cost, no rate limit, no dependency that can change behaviour
+between the evaluation run and the defence, and a system that still works with the network
+unplugged. For a project whose deliverable is a reproducible measurement, a model that
+cannot silently change under us is genuinely worth something.
+
+What it costs: capacity is fixed. A hosted API absorbs a slow batch job by running it in
+parallel; a single GPU cannot. Extraction over 1,000 papers is therefore scheduled as an
+overnight run rather than treated as interactive. Answer latency also lands an order of
+magnitude above a hosted API, which is why `NFR-2` is written as *first token* plus a
+streamed completion rather than a single wall-clock number.
+
+### Why schema-constrained decoding rather than prompting for JSON
+
+Small local models are much less reliable than frontier hosted models at producing valid
+JSON on request, and `FR-10` (entity normalization) is where that unreliability lands —
+exactly the entity-fragmentation failure Tran Ha My named in `DECIDE-4`.
+
+The fix is not a better prompt. Local runtimes can constrain decoding to a JSON schema, so
+malformed output is not rejected after the fact — it is never generated. This makes a small
+model usable for `FR-9` in a way that prompt engineering alone does not, and it removes the
+retry-and-repair path from §8 entirely.
+
+### Why no new dependency for the LLM client
+
+The local runtime speaks HTTP. `requests` is already a dependency, and a schema-constrained
+completion is one POST, so no client library is added. Both members can read the request
+shape without learning another API.
 
 ### Why file-based stages rather than one pipeline object
 

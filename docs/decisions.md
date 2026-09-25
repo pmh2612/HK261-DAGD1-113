@@ -16,13 +16,18 @@ is the part that is useful in six months and in the Phase 1 report.
 | [DECIDE-1](#decide-1--reference-snowballing) | Snowball one hop of references? | Roadmap 2.2 (October) | ☑ **B**, `:External` |
 | [DECIDE-2](#decide-2--chunking-strategy) | Chunking strategy | Roadmap 3.3 (November) | ☑ **C** |
 | [DECIDE-3](#decide-3--faithfulness-review-protocol) | Faithfulness review protocol | Roadmap 5.5 (Phase 2) | ☑ agreed + weighted kappa |
-| [DECIDE-4](#decide-4--which-llm) | Which LLM, hosted or local | Roadmap 3.1 (November) | ☑ Haiku 4.5, Batch API |
+| [DECIDE-4](#decide-4--which-llm) | Which LLM, hosted or local | Roadmap 3.1 (November) | ⊘ **superseded by DECIDE-7** |
 | [DECIDE-5](#decide-5--embedding-model) | Embedding model | Roadmap 3.3 (November) | ☑ `bge-small-en-v1.5` |
 | [DECIDE-6](#decide-6--team-conventions) | Team conventions | Any shared code | ☑ adopted |
+| [DECIDE-7](#decide-7--which-open-weights-model-and-runtime) | Which open-weights model and local runtime | Roadmap 3.1 (November) | ☐ **open** |
 
-All six were resolved on 2026-09-24 (Tran Ha My, via pull request #1; the reply is kept
+Six were resolved on 2026-09-24 (Tran Ha My, via pull request #1; the reply is kept
 verbatim at the end of [`decisions-vi.md`](decisions-vi.md)). Each section below records
 the outcome and any amendment made to the recommendation.
+
+**`DECIDE-4` was superseded on 2026-09-25.** The course requires the team to run the model
+itself rather than call a hosted API, which removes the option that decision chose. It is
+reopened as `DECIDE-7`.
 
 **Also blocking, and not really a decision:** the Semantic Scholar API key. Being applied
 for by Tran Ha My as of 2026-09-24. See [§7](#7-not-a-decision-but-do-it-this-week).
@@ -199,6 +204,24 @@ cited paper exists and that the cited section actually contains the claim.
 
 ## DECIDE-4 — Which LLM
 
+> ## ⊘ SUPERSEDED — 2026-09-25
+>
+> The course requires the team to run the AI themselves rather than call a hosted API.
+> Everything below assumed a hosted API and a dollar budget, so the conclusion no longer
+> holds: the cost table that made hosted inference obviously right has become irrelevant,
+> because the option it compared against is now the only one available.
+>
+> Kept rather than deleted, because the *reasoning* still transfers. Two points survive
+> the change and carry straight into `DECIDE-7`:
+>
+> - **It is still two decisions, not one.** Extraction is a batch job with no latency
+>   requirement; generation is interactive. They can use different models.
+> - **Tran Ha My's escalation trigger still applies.** "Step up if entity names come back
+>   fragmented" was the right test, and it matters *more* now: fragmentation is the
+>   characteristic failure of a small local model, which is what `DECIDE-7` is choosing.
+>
+> Reopened as [`DECIDE-7`](#decide-7--which-open-weights-model-and-runtime).
+
 **Blocks:** Roadmap 3.1 · **Affects:** `FR-9`, `FR-19`, `NFR-8`, `NFR-12`
 
 ### Context
@@ -369,6 +392,76 @@ the output.
 > **Chosen by:** Tran Ha My · **Date:** 2026-09-24
 >
 > In effect from 2026-09-24. Pull request #1 was itself the first use of it.
+
+---
+
+## DECIDE-7 — Which open-weights model, and runtime
+
+**Blocks:** Roadmap 3.1 · **Affects:** `FR-9`, `FR-19`, `NFR-2`, `NFR-9`, `NFR-12`
+**Replaces:** `DECIDE-4`
+
+### Context
+
+The course requires self-hosted inference — no hosted LLM API. A GPU is available. Two
+workloads, as in `DECIDE-4`:
+
+| | Extraction (`FR-9`) | Generation (`FR-19`, Phase 2) |
+|---|---|---|
+| Shape | batch, 1,000 papers, once | interactive, per query |
+| Input | ~400 tokens (title + abstract) | ~4,000 tokens (retrieved context) |
+| Output | ~300 tokens of JSON | ~500 tokens of prose |
+| Latency | irrelevant — run it overnight | `NFR-2`: first token < 3 s |
+| What it needs | schema adherence, not eloquence | grounding and refusal discipline |
+
+### What actually needs deciding
+
+**1. Model size, which VRAM decides.** Roughly, for a 4-bit quantized model:
+
+| VRAM | Feasible size | Note |
+|---|---|---|
+| 8 GB | 7–8B | Enough for extraction; adequate for generation with a short context |
+| 12–16 GB | 13–14B | Comfortable for both |
+| 24 GB+ | 30B+ | More than this project needs |
+
+**Unknown: how much VRAM the available GPU has.** Everything else follows from it, so this
+is the first thing to find out.
+
+**2. Which model family.** Any current instruction-tuned open-weights family — Qwen, Llama,
+Mistral, Gemma — is a reasonable starting point at these sizes. Pick by measurement, not by
+reputation: the test is this corpus, not a leaderboard.
+
+**3. Runtime.** The practical options are Ollama (one install, HTTP API, handles GPU
+placement and quantized weights, identical setup on both machines — which `NFR-9` asks for)
+or llama.cpp directly (more control, more setup). Both support schema-constrained decoding,
+which is the feature that matters most here.
+
+### Recommendation
+
+1. **Check the GPU's VRAM first.** It determines everything above.
+2. **Ollama**, for `NFR-9`: both members run the same two commands and get the same model.
+3. **One model for both workloads to start.** Splitting them is a real option — a small fast
+   model for extraction, a larger one for generation — but only adopt it once there is a
+   measurement showing one model cannot do both. Two models is two sets of weights, two
+   configurations and two things to describe in the report.
+4. **Always use schema-constrained decoding for `FR-9`.** Not a preference: it is what makes
+   a small model reliable enough for extraction, and it removes the JSON-repair path
+   entirely.
+5. **Benchmark on 20 papers before the full run**, exactly as Tran Ha My specified in
+   `DECIDE-4`. The test is entity fragmentation. If the model returns the same method under
+   three surface forms, `FR-10` inherits the mess.
+6. **Pin the model name and runtime version in `config.py` and the manifest**, the same way
+   `DECIDE-5` pinned the embedding model. Re-running extraction with a different model
+   silently produces a different graph.
+
+### Open question worth asking the advisor
+
+Whether "self-hosted" means running open weights (assumed here) or training or fine-tuning
+a model. Those are very different amounts of work, and the second would need its own phase
+in the roadmap. Worth confirming before November rather than during it.
+
+> **Decision:** GPU VRAM: ______ · model: ______ · runtime: ______
+> **One model or two:** ______
+> **Chosen by:** ______ **Date:** ______
 
 ---
 

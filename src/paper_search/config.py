@@ -41,7 +41,15 @@ class Settings(BaseSettings):
     neo4j_password: str = ""
 
     semantic_scholar_api_key: str = ""
-    llm_api_key: str = ""
+
+    #: Local inference endpoint (Ollama's default). No hosted API is used - see
+    #: `docs/decisions.md` DECIDE-7 and `NFR-8`. Nothing leaves this machine.
+    llm_base_url: str = "http://localhost:11434"
+
+    #: Open-weights model tag, e.g. "qwen2.5:7b-instruct". Empty until DECIDE-7 picks
+    #: one. Re-running extraction under a different model silently produces a different
+    #: graph, so this is pinned and recorded in the run manifest.
+    llm_model: str = ""
 
     #: Pinned by `docs/decisions.md` DECIDE-5. Index-time and query-time embeddings must
     #: come from the same model, so changing this invalidates every built index.

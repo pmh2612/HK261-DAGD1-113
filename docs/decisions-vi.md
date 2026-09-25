@@ -180,6 +180,23 @@ dẫn, kiểm tra bài đó có thật không và section được trích có th
 
 ---
 
+> ## ⊘ MỤC NÀY ĐÃ HẾT HIỆU LỰC — 25/09/2026
+>
+> Cô yêu cầu nhóm **tự chạy AI**, không gọi API thương mại. Toàn bộ phân tích bên dưới giả
+> định dùng API trả phí nên không còn dùng được — bảng chi phí so sánh với phương án chạy
+> tại chỗ, mà giờ chạy tại chỗ là lựa chọn duy nhất.
+>
+> Giữ lại chứ không xoá, vì **hai điểm My chốt vẫn còn nguyên giá trị**:
+>
+> - Vẫn là **hai quyết định** chứ không phải một: trích xuất chạy theo lô, không cần nhanh;
+>   sinh câu trả lời thì tương tác, cần nhanh. Có thể dùng hai model khác nhau.
+> - **Điều kiện nâng model của My vẫn đúng, và giờ càng quan trọng hơn.** "Nếu tên thực thể
+>   bị phân mảnh thì nâng" — phân mảnh chính là kiểu lỗi đặc trưng của model nhỏ chạy tại
+>   chỗ, đúng thứ đang phải chọn.
+>
+> Mở lại thành **DECIDE-7** trong [`decisions.md`](decisions.md). Cần My cho ý kiến tiếp,
+> và **việc đầu tiên là xem GPU có bao nhiêu VRAM** — mọi thứ khác phụ thuộc con số đó.
+
 ## 4. Dùng LLM nào để trích xuất thực thể?
 
 **Phần của My · chặn bước trích xuất tháng 11**
