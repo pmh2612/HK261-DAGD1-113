@@ -402,7 +402,10 @@ the output.
 
 ### Context
 
-The course requires self-hosted inference — no hosted LLM API. A GPU is available. Two
+The course requires the AI to be integrated into the system itself rather than called over
+the network. **This excludes free hosted tiers too** — Gemini, Groq, HuggingFace Inference
+and "free" OpenRouter models are all API calls. What is free here is the *weights*: models
+whose parameters can be downloaded and run locally at no cost. A GPU is available. Two
 workloads, as in `DECIDE-4`:
 
 | | Extraction (`FR-9`) | Generation (`FR-19`, Phase 2) |

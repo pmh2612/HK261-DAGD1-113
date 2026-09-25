@@ -29,7 +29,7 @@ The constraints that actually shaped the design, all measured rather than assume
 | C1 | ~36% of papers have **no full text** | measured, `requirements.md` §2 | Every stage must work on title + abstract alone. Not an edge case — a third of the corpus |
 | C2 | The internal citation graph is **sparse** | measured, `S3` | Papers are connected mainly through shared methods, datasets and topics, not through `CITES` |
 | C3 | **One GPU, self-hosted inference** | `NFR-12`, `NFR-8` | LLM size bounded by VRAM (`DECIDE-7`). Embedding stays on CPU so indexing never waits on the GPU; exact FAISS index rather than a trained one |
-| C4 | **No hosted LLM API** | `NFR-8`, course requirement | Every model runs on the team's own hardware. There is no external LLM dependency and no per-query cost — but also no elastic capacity, so batch work is scheduled rather than parallelized |
+| C4 | **No LLM API, free or paid** | `NFR-8`, course requirement | Open weights, run on the team's own hardware. A free hosted tier is still an API and does not satisfy this. No external LLM dependency and no per-query cost — but also no elastic capacity, so batch work is scheduled rather than parallelized |
 | C5 | **Citations must be checkable** | `NFR-4`, `NFR-6` | Provenance is a hard invariant, not a logging nicety — see §5 |
 | C6 | Two people, parallel work | `DECIDE-6` | Stage boundaries are contracts (§4), and the shared vocabulary lives in `config.py` |
 
