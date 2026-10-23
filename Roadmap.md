@@ -29,30 +29,30 @@ This document lists everything that needs to be done to build the **Scientific P
 ### September: Requirements, Architecture & Self-Study
 
 #### 1.1 Repository setup
-- [ ] Create the folder structure (`src/`, `docs/`, `data/`, `tests/`, `notebooks/`)
-- [ ] Add `requirements.txt`, `.env.example`, `.gitignore` (ignore `data/`, `.env`, index files, model caches)
-- [ ] Add `docker-compose.yml` to run Neo4j locally with the same config for both members
-- [ ] Agree on conventions: branch naming, commit messages, pull request review between members
-- [ ] Set up a code formatter/linter (e.g. `ruff`, `black`)
+- [x] Create the folder structure (`src/`, `docs/`, `data/`, `tests/`, `notebooks/`)
+- [x] Add `requirements.txt`, `.env.example`, `.gitignore` (ignore `data/`, `.env`, index files, model caches)
+- [x] Add `docker-compose.yml` to run Neo4j locally with the same config for both members
+- [x] Agree on conventions: branch naming, commit messages, pull request review between members
+- [x] Set up a code formatter/linter (e.g. `ruff`, `black`)
 
 **Deliverable:** a repo both members can clone and run Neo4j from with one command.
 
 #### 1.2 Requirements analysis (`docs/requirements.md`)
 Covers the **whole system**, including Phase 2 features, so the design supports them from the start.
-- [ ] Define the target users (students, researchers) and their main goals
-- [ ] Write functional requirements: search, filter, explore graph, Q&A, summarize, compare methods, recommend related work
-- [ ] Write non-functional requirements: response time, answer faithfulness, citation accuracy, dataset size, cost limits
-- [ ] Write 5–8 use cases with example queries and expected results
-- [ ] Define the scope limits (which fields/topics, how many papers, which languages)
+- [x] Define the target users (students, researchers) and their main goals
+- [x] Write functional requirements: search, filter, explore graph, Q&A, summarize, compare methods, recommend related work
+- [x] Write non-functional requirements: response time, answer faithfulness, citation accuracy, dataset size, cost limits
+- [x] Write 5–8 use cases with example queries and expected results
+- [x] Define the scope limits (which fields/topics, how many papers, which languages)
 
 **Deliverable:** a requirements document agreed on by both members.
 
 #### 1.3 Architecture design (`docs/architecture.md`)
-- [ ] Draw the end-to-end pipeline: collection → extraction → KG → indexing → retrieval → RAG → chatbot
-- [ ] Define each module's responsibility, inputs, and outputs
-- [ ] Define internal APIs/interfaces between modules (function signatures or REST endpoints)
-- [ ] Design **provenance tracking**: every text chunk must link back to paper ID, section, and position, so answers can cite sources
-- [ ] Record key design decisions and why (e.g. why Neo4j, why hybrid search, which embedding model)
+- [x] Draw the end-to-end pipeline: collection → extraction → KG → indexing → retrieval → RAG → chatbot
+- [x] Define each module's responsibility, inputs, and outputs
+- [x] Define internal APIs/interfaces between modules (function signatures or REST endpoints)
+- [x] Design **provenance tracking**: every text chunk must link back to paper ID, section, and position, so answers can cite sources
+- [x] Record key design decisions and why (e.g. why Neo4j, why hybrid search, which embedding model)
 
 **Deliverable:** an architecture document with diagrams.
 
@@ -72,26 +72,26 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 ### October: KG Schema, Data Collection & PDF Processing
 
 #### 2.1 Knowledge Graph model (`docs/kg-schema.md`)
-- [ ] Define node types: `Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset`
-- [ ] Define relationships: `AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`
-- [ ] Define properties for each node and relationship
-- [ ] Choose unique keys for deduplication (DOI, arXiv ID, Semantic Scholar ID)
-- [ ] Write example Cypher queries the system must support (e.g. "papers using dataset X with method Y")
+- [x] Define node types: `Paper`, `Author`, `Venue`, `Topic`, `Method`, `Dataset`
+- [x] Define relationships: `AUTHORED`, `CITES`, `PUBLISHED_IN`, `HAS_TOPIC`, `USES_METHOD`, `USES_DATASET`
+- [x] Define properties for each node and relationship
+- [x] Choose unique keys for deduplication (DOI, arXiv ID, Semantic Scholar ID)
+- [x] Write example Cypher queries the system must support (e.g. "papers using dataset X with method Y")
 
 **Deliverable:** a schema diagram and a list of target queries.
 
-#### 2.2 Data collection (`src/collection/`)
-- [ ] Choose a narrow topic for the prototype dataset (e.g. "retrieval-augmented generation")
-- [ ] Write a Semantic Scholar client: search, pagination, rate-limit handling, retries
-- [ ] Write an arXiv client for metadata and PDF download
+#### 2.2 Data collection (`src/paper_search/collection/`, `scripts/collect.py`)
+- [x] Choose a narrow topic for the prototype dataset (e.g. "retrieval-augmented generation")
+- [x] Write a Semantic Scholar client: search, pagination, rate-limit handling, retries
+- [ ] Write an arXiv client for metadata and PDF download — *metadata not needed: Semantic Scholar already returns the arXiv ID; the PDF part moves with 2.3*
 - [ ] Collect **500–1,000 papers** with metadata (title, abstract, authors, year, venue, citations, references)
-- [ ] Normalize fields into one common format
-- [ ] Deduplicate papers that appear in both sources
+- [x] Normalize fields into one common format
+- [x] Deduplicate papers that appear in both sources
 - [ ] Save raw and processed data (JSON/Parquet) with a data version
 
 **Deliverable:** a clean prototype metadata set.
 
-#### 2.3 PDF processing (`src/collection/pdf/`)
+#### 2.3 PDF processing (`src/paper_search/collection/pdf/`) — *deferred: Phase 1 runs on metadata and abstracts*
 - [ ] Extract text from PDFs with PyMuPDF
 - [ ] Split text into sections (Abstract, Introduction, Method, Experiments, Conclusion…)
 - [ ] Clean text: remove headers/footers, fix hyphenation, drop references section if needed
@@ -103,17 +103,17 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 
 ### November: Information Extraction, KG v1 & Search Baseline
 
-#### 3.1 Information extraction (`src/extraction/`)
-- [ ] Try spaCy NER on sample abstracts and review the quality
-- [ ] Write LLM prompts to extract methods, datasets, and tasks as structured JSON
-- [ ] Normalize entity names (e.g. "BERT-base" and "BERT" → one entity)
-- [ ] Manually check a sample of ~50 papers to estimate extraction accuracy
+#### 3.1 Information extraction (`src/paper_search/extraction/`, `scripts/extract_entities.py`)
+- [x] Try NER on sample abstracts — *GLiNER instead of spaCy, compared against rules and an LLM in [`docs/evaluation.md`](docs/evaluation.md)*
+- [x] Write LLM prompts to extract methods, datasets, and tasks as structured JSON
+- [x] Normalize entity names (e.g. "BERT-base" and "BERT" → one entity)
+- [ ] Manually check a sample of ~50 papers — *50 abstracts sampled into `data/eval/entities.jsonl`, annotation pending* to estimate extraction accuracy
 
 **Deliverable:** extracted entities for the prototype set with an accuracy estimate.
 
-#### 3.2 Knowledge Graph v1 (`src/graph/`)
-- [ ] Create constraints and indexes in Neo4j
-- [ ] Write loaders using `MERGE` so re-running does not create duplicates
+#### 3.2 Knowledge Graph v1 (`src/paper_search/graph/`, `scripts/build_graph.py`)
+- [x] Create constraints and indexes in Neo4j
+- [x] Write loaders using `MERGE` so re-running does not create duplicates
 - [ ] Load papers, authors, venues, and citations
 - [ ] Load extracted methods, datasets, and topics
 - [ ] Test the target Cypher queries from 2.1
@@ -121,11 +121,11 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 
 **Deliverable:** a populated KG v1 that answers the target queries.
 
-#### 3.3 Search baseline (`src/indexing/`, `src/retrieval/`)
-- [ ] Split text into chunks and keep the provenance metadata
+#### 3.3 Search baseline (`src/paper_search/indexing/`, `src/paper_search/retrieval/`, `scripts/build_index.py`)
+- [x] Split text into chunks and keep the provenance metadata
 - [ ] Build a BM25 index on titles and abstracts (then full-text chunks)
 - [ ] Generate embeddings with Sentence-Transformers and build a FAISS index
-- [ ] Write a simple search function for each method returning top-k results
+- [x] Write a simple search function for each method returning top-k results
 
 **Deliverable:** working keyword and vector search.
 
@@ -134,7 +134,7 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 ### December: Baseline Evaluation & Phase 1 Report
 
 #### 4.1 Baseline evaluation
-- [ ] Create a **test query set** (20–30 queries with the relevant papers marked by hand)
+- [ ] Create a **test query set** (20–30 queries with the relevant papers marked by hand) — *tooling and 5 seed queries in `data/eval/`, judging pending*
 - [ ] Measure BM25 and vector search results (Recall@k, MRR, nDCG)
 - [ ] Note weaknesses of each method to motivate hybrid search and RAG in Phase 2
 
