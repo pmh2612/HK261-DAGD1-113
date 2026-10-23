@@ -1,11 +1,12 @@
-.PHONY: help install neo4j-up neo4j-down lint format test check-neo4j
+.PHONY: help install neo4j-up neo4j-down lint format test check-neo4j \
+        collect extract graph index pipeline
 
 VENV := .venv
 PY := $(VENV)/bin/python
 PIP := $(VENV)/bin/pip
 
 help:  ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
 
 install:  ## Create the venv and install runtime + dev dependencies
 	test -d $(VENV) || python3.11 -m venv $(VENV)
@@ -31,3 +32,17 @@ test:  ## Run the test suite
 
 check-neo4j:  ## Verify the app can connect to Neo4j
 	$(PY) scripts/check_neo4j.py
+
+collect:  ## Stage 1: collect the corpus from Semantic Scholar
+	$(PY) scripts/collect.py
+
+extract:  ## Stage 2: extract methods, datasets and topics
+	$(PY) scripts/extract_entities.py
+
+graph:  ## Stage 3: load KG v1 into Neo4j (needs `make neo4j-up`)
+	$(PY) scripts/build_graph.py
+
+index:  ## Stage 4: chunk and build the BM25 and FAISS indexes
+	$(PY) scripts/build_index.py
+
+pipeline: collect extract graph index  ## All four stages in order
