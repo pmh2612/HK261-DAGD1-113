@@ -103,6 +103,20 @@ Proposal: a boolean property `in_corpus` on `Paper` (`true` = seed, searchable;
 > a constraint that holds across both labels so a paper cannot be duplicated by being
 > collected as a reference first and as a seed later. Re-tune the threshold once the real
 > distribution over 1,000 seeds is known.
+>
+> **Measured, 2026-10-23 — threshold still to re-tune.** Over the 996 seeds of data version
+> `2026-10-23` (most-cited first), 18,341 distinct references fall outside the seed set.
+> Kept at each threshold:
+>
+> | Cited by ≥ | 3 | 5 | 10 | 20 |
+> |---|---:|---:|---:|---:|
+> | `:External` papers | 2,100 | 979 | 379 | 152 |
+>
+> At ≥3 the graph holds twice as many external papers as seeds, with 18,271 seed →
+> external `CITES` edges against the ~10,000 estimated above. Seed → seed `CITES` came out
+> at 4,327 (4.3 per seed) rather than ~1,100, because collection now takes the most-cited
+> papers first, unlike the spike's sample. KG v1 is loaded at ≥3; ≥5 would halve the
+> external set.
 
 ---
 
@@ -335,6 +349,10 @@ Also note the asymmetry: `bge-*` models expect the *query* to carry a prefix tha
 > **Chosen by:** Pham Minh Hieu, confirmed by Tran Ha My · **Date:** 2026-09-24
 >
 > Still to do: the three-model comparison on the test query set (Roadmap 4.1).
+> **Update 2026-10-23:** the comparison is implemented in `notebooks/exp_search.py` —
+> `bge-small` against `all-MiniLM-L6-v2`, BM25 and SPECTER2 (768 dim, in place of a generic
+> 768-dim model) on the 200-abstract evaluation set. Waiting for judged queries; see
+> [`evaluation.md`](evaluation.md) §3.
 
 ---
 
@@ -392,6 +410,12 @@ the output.
 > **Chosen by:** Tran Ha My · **Date:** 2026-09-24
 >
 > In effect from 2026-09-24. Pull request #1 was itself the first use of it.
+>
+> **Proposed amendment, 2026-10-23 — pending Tran Ha My:** commit `data/eval/` as the one
+> exception to "data files are never committed". Its labels are written by hand, so no
+> script can regenerate them, and an evaluation score is only reproducible against the
+> exact labels it was computed from. Everything else under `data/` stays ignored.
+> **Agreed by:** ______ **Date:** ______
 
 ---
 
@@ -477,6 +501,15 @@ Whether "self-hosted" means running open weights (assumed here) or training or f
 a model. Those are very different amounts of work, and the second would need its own phase
 in the roadmap. Worth confirming before November rather than during it.
 
+> **Findings so far, 2026-10-23** (from running `notebooks/exp_extraction.py`, not a decision):
+> - On an Apple M5 laptop with 16 GB unified memory, `Qwen/Qwen2.5-3B-Instruct` in fp16
+>   (~6.2 GB of weights) does not fit next to Docker Desktop, whose VM reserves 8.3 GB for
+>   Neo4j. The run died with SIGBUS while free memory was ~130 MB — memory pressure is
+>   the likely cause, not yet confirmed. Run LLM work with Neo4j stopped, or on the team GPU.
+> - `device_map="auto"` on Apple silicon offloads layers to disk and makes generation
+>   unusably slow. Pass the device explicitly (`mps` / `cuda`); the experiment does.
+> - A 7B model in fp16 (~15 GB) is not an option on this laptop at all.
+>
 > **Decision:** GPU VRAM: ______ · model: ______ · constrained-decoding library: ______
 > **One model or two:** ______
 > **Chosen by:** ______ **Date:** ______

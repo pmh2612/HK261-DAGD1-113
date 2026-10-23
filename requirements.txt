@@ -13,6 +13,8 @@ neo4j>=5.20
 
 # --- Information extraction ---
 spacy>=3.7
+gliner>=0.2.29  # zero-shot NER, under evaluation in notebooks/exp_extraction.py
+protobuf>=4.25  # GLiNER's DeBERTa-v3 tokenizer fails to load without it
 
 # --- Local LLM (loaded in-process, no inference server) ---
 # torch and transformers already arrive with sentence-transformers, but the

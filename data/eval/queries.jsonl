@@ -1,0 +1,5 @@
+{"qid": "q01", "query": "retrieval augmented generation for long documents", "relevant": null}
+{"qid": "q02", "query": "papers that evaluate on Natural Questions using a dense retriever", "relevant": null}
+{"qid": "q03", "query": "hybrid retrieval", "relevant": null}
+{"qid": "q04", "query": "self-RAG", "relevant": null}
+{"qid": "q05", "query": "dense retrieval and BM25 compared for open-domain QA", "relevant": null}

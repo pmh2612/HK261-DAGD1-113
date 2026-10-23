@@ -73,5 +73,14 @@ class Settings(BaseSettings):
         """Directory holding normalized, deduplicated and chunked data."""
         return self.data_dir / "processed"
 
+    def latest_version(self) -> str:
+        """Newest data_version under processed/ - versions are ISO dates, so they sort."""
+        versions = sorted(
+            p.name for p in self.processed_dir.iterdir() if (p / "papers.parquet").exists()
+        )
+        if not versions:
+            raise FileNotFoundError(f"no data version in {self.processed_dir}; run collect.py")
+        return versions[-1]
+
 
 settings = Settings()

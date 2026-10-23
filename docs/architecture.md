@@ -124,6 +124,7 @@ class Paper:
     year: int | None
     venue: str | None
     authors: list[str]
+    author_ids: list[str | None]  # S2 author IDs, parallel to authors - the Author key
     doi: str | None
     arxiv_id: str | None
     citation_count: int
@@ -169,7 +170,8 @@ same IDs, so indexes can be rebuilt without invalidating anything that refers to
 
 ```python
 # collection
-def search_papers(query: str, limit: int = 1000) -> Iterator[Paper]: ...
+def search_raw(query: str, limit: int = 1000) -> list[dict]: ...      # as returned, for raw/
+def normalize(records: Iterable[dict], data_version: str, is_external: bool = False) -> list[Paper]: ...
 def fetch_references(paper_ids: Sequence[str]) -> dict[str, list[str]]: ...
 def download_pdf(paper: Paper, dest_dir: Path) -> Path | None: ...   # None = unavailable
 
@@ -178,7 +180,7 @@ def extract_sections(pdf_path: Path, paper_id: str) -> list[Section]: ...
 
 # extraction
 def extract_entities(paper: Paper, sections: list[Section]) -> PaperEntities: ...
-def normalize_entity(name: str, kind: str) -> str: ...
+def normalize_entity(name: str) -> str: ...
 
 # graph
 def ensure_constraints(driver: Driver) -> None: ...
@@ -188,8 +190,8 @@ def load_entities(driver: Driver, entities: Iterable[PaperEntities]) -> None: ..
 
 # indexing
 def chunk_paper(paper: Paper, sections: list[Section]) -> list[Chunk]: ...
-def build_vector_index(chunks: Sequence[Chunk], out_dir: Path) -> None: ...
-def build_bm25_index(chunks: Sequence[Chunk], out_dir: Path) -> None: ...
+def build_vector_index(chunks: Sequence[Chunk], titles: dict[str, str], out_dir: Path) -> None: ...
+def build_bm25_index(chunks: Sequence[Chunk], titles: dict[str, str], out_dir: Path) -> None: ...
 
 # retrieval
 def search_bm25(query: str, k: int = 10) -> list[SearchHit]: ...
@@ -303,7 +305,8 @@ on `USES_METHOD` / `USES_DATASET` / `HAS_TOPIC` rather than `CITES`, because of 
 ```
 data/
 ├── raw/<data_version>/
-│   ├── papers.parquet          # as returned by the APIs, unmodified
+│   ├── papers.jsonl            # as returned by the APIs, unmodified
+│   ├── external.jsonl          # snowballed references (DECIDE-1), unmodified
 │   ├── references.parquet      # paper_id -> referenced paper_id
 │   └── pdf/<paper_id>.pdf
 └── processed/<data_version>/
