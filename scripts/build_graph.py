@@ -93,7 +93,8 @@ def main() -> None:
 
         dataset, method = most_common_pair(entities)
         top_topic = driver.execute_query(
-            "MATCH (t:Topic)<-[:HAS_TOPIC]-(p) RETURN t.key AS k ORDER BY count(p) DESC LIMIT 1"
+            "MATCH (t:Topic)<-[:HAS_TOPIC]-(p) "
+            "RETURN t.key AS k, count(p) AS n ORDER BY n DESC LIMIT 1"
         ).records[0]["k"]
         top_paper = max((p for p in papers if not p.is_external), key=lambda p: p.citation_count)
         params = {

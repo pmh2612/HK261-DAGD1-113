@@ -17,16 +17,23 @@ from paper_search.models import Paper
 API = "https://api.semanticscholar.org/graph/v1"
 FIELDS = "title,abstract,year,venue,authors,citationCount,referenceCount,externalIds,openAccessPdf"
 BATCH_SIZE = 500  # the /paper/batch maximum
+#: The API key allows 1 request per second across all endpoints; stay just under it.
+MIN_INTERVAL = 1.1
+
+_last_request = 0.0
 
 
 def _request(method: str, url: str, **kwargs) -> dict | list:
-    """One API call with exponential backoff on 429 and 5xx (NFR-11)."""
+    """One API call, spaced to the rate limit, with exponential backoff on 429 and 5xx (NFR-11)."""
+    global _last_request
     headers = (
         {"x-api-key": settings.semantic_scholar_api_key}
         if settings.semantic_scholar_api_key
         else {}
     )
     for attempt in range(12):
+        time.sleep(max(0.0, _last_request + MIN_INTERVAL - time.monotonic()))
+        _last_request = time.monotonic()
         resp = requests.request(method, url, headers=headers, timeout=120, **kwargs)
         if resp.status_code != 429 and resp.status_code < 500:
             resp.raise_for_status()
