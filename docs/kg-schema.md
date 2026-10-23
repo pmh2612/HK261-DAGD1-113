@@ -67,9 +67,10 @@ reference and later as a seed is the same node, and the loader removes the label
 is the least reliable stage and is going to be re-run when `DECIDE-7` lands; this is what
 makes a rebuild traceable instead of a silent change to the graph.
 
-**`CITES` is thin by construction** (constraint C2): at 1,000 seeds only a small share of
-references land inside the corpus. The entity relationships are where the connectivity
-comes from, which is why §5's neighbourhood query goes through them too.
+**`CITES` density depends on how the seeds are chosen.** The spike sampled papers in the
+API's default order and measured ~1.2 internal `CITES` per paper (constraint C2). KG v1
+collects the most-cited papers first, and influential papers cite each other: §6 measures
+4.3 per seed. The `:External` papers add most of the remaining citation structure.
 
 ## 4. Entities
 
@@ -143,4 +144,44 @@ result: filter with `WHERE NOT p:External`, as above.
 
 ## 6. KG v1 statistics
 
-_Filled in from the `scripts/build_graph.py` output once v1 is loaded._
+Data version `2026-10-23`: 1,000 most-cited Semantic Scholar papers for "retrieval
+augmented generation", 996 after the English filter and deduplication. Reproduce with
+`make collect extract graph`.
+
+| Nodes | Count | | Relationships | Count |
+|---|---:|---|---|---:|
+| `Paper` | 3,092 | | `AUTHORED` | 26,086 |
+| — of which `:External` | 2,096 | | `CITES` | 22,598 |
+| `Author` | 17,638 | | — seed → seed | 4,327 |
+| `Venue` | 514 | | — seed → `:External` | 18,271 |
+| `Method` | 1,089 | | `PUBLISHED_IN` | 3,003 |
+| `Dataset` | 961 | | `USES_METHOD` | 1,448 |
+| `Topic` | 945 | | `USES_DATASET` | 1,162 |
+| | | | `HAS_TOPIC` | 1,334 |
+
+All four target queries in §5 run and return results.
+
+### What the numbers say
+
+**The citation graph is denser than C2 predicted** — 4.3 internal `CITES` per seed instead
+of ~1.2, because the seeds are the most-cited papers (§3). `UC-3` on the original RAG paper
+finds 522 citing papers and 45 cited ones.
+
+**The entity layer is weak, and this is the main finding for Phase 1:**
+
+- **Generic phrases are extracted as entities.** The five most-used "datasets" are
+  *training data*, *benchmark datasets*, *documents*, *large language models* and
+  *synthetic data*. The `UC-2` example the script picks automatically is therefore
+  (*training data*, *retrieval augmented generation*), which is meaningless.
+- **Fragmentation.** For the topic *question answering*, *Retrieval-Augmented
+  Generation*, *Retrieval-augmentation* and *RAG* are three separate `Method` nodes.
+  String normalization (§4) does not merge acronyms or paraphrases.
+- **89% of Method / Dataset / Topic nodes are used by exactly one paper**, so entities
+  connect papers far less than citations do: `UC-3` finds 3 papers sharing a method or
+  dataset with the RAG paper, against 522 linked by citation.
+- 58 of 996 seeds have no entity at all.
+
+Consequences: the extraction experiment ([`evaluation.md`](evaluation.md) §4) is what
+decides whether GLiNER stays; a generic-phrase filter and acronym merging (`FR-10`) are
+the next fixes if it does; and until then `FR-17` graph expansion should lean on `CITES`,
+not on shared entities — the reverse of what architecture §6.2 assumed.

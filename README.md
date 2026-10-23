@@ -2,7 +2,7 @@
 
 A system for searching, exploring, and asking questions over scientific papers. It combines a **Knowledge Graph**, **hybrid search** (keyword + vector), **Retrieval-Augmented Generation (RAG)**, and a **chatbot** to return relevant papers and answer questions with citations to the source papers.
 
-> 🚧 **Status:** Phase 1 (Sep – Dec 2026). Requirements, architecture and the KG schema are written; the collection → extraction → graph → index pipeline and the BM25 / vector search baseline are implemented; the evaluation set is set up and waiting for hand labels. Phase 2 (next semester): RAG, chatbot, UI, and full evaluation.
+> 🚧 **Status:** Phase 1 (Sep – Dec 2026). Requirements, architecture and the KG schema are written. The pipeline has run end to end on data version `2026-10-23`: 996 papers plus 2,096 snowballed references in KG v1, 963 chunks in the BM25 and FAISS indexes. The evaluation set is set up and waiting for hand labels. Phase 2 (next semester): RAG, chatbot, UI, and full evaluation.
 
 ---
 
@@ -224,10 +224,11 @@ for hit in search_vector("dense retrieval for open-domain question answering", k
 Each hit carries a `Chunk` with `paper_id`, `source` (`"Abstract"` or a section name) and
 character offsets, so a citation can always be traced to the exact text it came from.
 
-**Rate limits.** Without `SEMANTIC_SCHOLAR_API_KEY`, the reference lookup in `make collect`
-is throttled hard. The script backs off and retries; a batch that still fails is logged
-and skipped, and the search result is cached in `raw/<v>/papers.jsonl` so a re-run does
-not repeat it.
+**Rate limits.** With an API key Semantic Scholar allows 1 request per second; the client
+spaces requests 1.1 s apart and backs off exponentially on 429 and 5xx. Without a key the
+reference lookup is throttled so hard it rarely completes. A batch that still fails is
+logged and skipped, and the search result is cached in `raw/<v>/papers.jsonl` so a re-run
+does not repeat it. A full collection takes about 20 requests.
 
 ## Experiments
 
@@ -273,8 +274,8 @@ The project runs over two semesters. See [Roadmap.md](Roadmap.md) for the full t
 - [x] Knowledge Graph schema
 - [x] Data collection from Semantic Scholar (metadata)
 - [ ] PDF text extraction and section splitting — moved to Phase 2
-- [ ] Entity extraction and KG v1 in Neo4j — implemented (GLiNER stand-in extractor), first full load pending
-- [ ] BM25 and FAISS search baseline — implemented, first index build pending
+- [x] Entity extraction and KG v1 in Neo4j (GLiNER stand-in extractor; entity quality is weak — see [`docs/kg-schema.md`](docs/kg-schema.md) §6)
+- [x] BM25 and FAISS search baseline
 - [ ] Baseline evaluation (set-up done, hand labels pending) and Phase 1 report
 
 **Phase 2**

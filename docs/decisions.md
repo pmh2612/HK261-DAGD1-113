@@ -103,6 +103,20 @@ Proposal: a boolean property `in_corpus` on `Paper` (`true` = seed, searchable;
 > a constraint that holds across both labels so a paper cannot be duplicated by being
 > collected as a reference first and as a seed later. Re-tune the threshold once the real
 > distribution over 1,000 seeds is known.
+>
+> **Measured, 2026-10-23 — threshold still to re-tune.** Over the 996 seeds of data version
+> `2026-10-23` (most-cited first), 18,341 distinct references fall outside the seed set.
+> Kept at each threshold:
+>
+> | Cited by ≥ | 3 | 5 | 10 | 20 |
+> |---|---:|---:|---:|---:|
+> | `:External` papers | 2,100 | 979 | 379 | 152 |
+>
+> At ≥3 the graph holds twice as many external papers as seeds, with 18,271 seed →
+> external `CITES` edges against the ~10,000 estimated above. Seed → seed `CITES` came out
+> at 4,327 (4.3 per seed) rather than ~1,100, because collection now takes the most-cited
+> papers first, unlike the spike's sample. KG v1 is loaded at ≥3; ≥5 would halve the
+> external set.
 
 ---
 

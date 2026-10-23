@@ -84,10 +84,10 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 - [x] Choose a narrow topic for the prototype dataset (e.g. "retrieval-augmented generation")
 - [x] Write a Semantic Scholar client: search, pagination, rate-limit handling, retries
 - [ ] Write an arXiv client for metadata and PDF download — *metadata not needed: Semantic Scholar already returns the arXiv ID; the PDF part moves with 2.3*
-- [ ] Collect **500–1,000 papers** with metadata (title, abstract, authors, year, venue, citations, references)
+- [x] Collect **500–1,000 papers** with metadata (title, abstract, authors, year, venue, citations, references)
 - [x] Normalize fields into one common format
 - [x] Deduplicate papers that appear in both sources
-- [ ] Save raw and processed data (JSON/Parquet) with a data version
+- [x] Save raw and processed data (JSON/Parquet) with a data version
 
 **Deliverable:** a clean prototype metadata set.
 
@@ -114,17 +114,17 @@ See [`docs/learning-path.md`](docs/learning-path.md) for resources.
 #### 3.2 Knowledge Graph v1 (`src/paper_search/graph/`, `scripts/build_graph.py`)
 - [x] Create constraints and indexes in Neo4j
 - [x] Write loaders using `MERGE` so re-running does not create duplicates
-- [ ] Load papers, authors, venues, and citations
-- [ ] Load extracted methods, datasets, and topics
-- [ ] Test the target Cypher queries from 2.1
-- [ ] Record graph statistics (number of nodes and relationships by type)
+- [x] Load papers, authors, venues, and citations
+- [x] Load extracted methods, datasets, and topics
+- [x] Test the target Cypher queries from 2.1
+- [x] Record graph statistics (number of nodes and relationships by type)
 
 **Deliverable:** a populated KG v1 that answers the target queries.
 
 #### 3.3 Search baseline (`src/paper_search/indexing/`, `src/paper_search/retrieval/`, `scripts/build_index.py`)
 - [x] Split text into chunks and keep the provenance metadata
-- [ ] Build a BM25 index on titles and abstracts (then full-text chunks)
-- [ ] Generate embeddings with Sentence-Transformers and build a FAISS index
+- [x] Build a BM25 index on titles and abstracts (then full-text chunks)
+- [x] Generate embeddings with Sentence-Transformers and build a FAISS index
 - [x] Write a simple search function for each method returning top-k results
 
 **Deliverable:** working keyword and vector search.
