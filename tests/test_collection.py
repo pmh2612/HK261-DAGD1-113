@@ -6,7 +6,7 @@ from paper_search.collection.semantic_scholar import (
     select_external,
     to_paper,
 )
-from paper_search.extraction.entities import normalize_entity
+from paper_search.extraction.entities import acronym_aliases, normalize_entity
 from paper_search.models import Paper, read_records, write_records
 
 
@@ -64,3 +64,26 @@ def test_parquet_round_trip_keeps_nulls_and_ints(tmp_path):
     write_records([paper, dated], tmp_path / "p.parquet")
     back = read_records(tmp_path / "p.parquet", Paper)
     assert back == [paper, dated] and back[0].year is None and back[1].year == 2024
+
+
+def test_normalize_entity_drops_acronyms_heads_and_generic_phrases():
+    assert normalize_entity("Retrieval‐Augmented Generation (RAG) methods") == (
+        "retrieval augmented generation"
+    )
+    assert (
+        normalize_entity("retrieval augmented generation (rag") == "retrieval augmented generation"
+    )
+    assert normalize_entity("question answering tasks") == "question answering"
+    for generic in ("existing methods", "four datasets", "training data", "LLMs"):
+        assert normalize_entity(generic) == ""
+
+
+def test_acronym_aliases_match_initials():
+    aliases = acronym_aliases(
+        [
+            "We study Retrieval-Augmented Generation (RAG) with Chain-of-Thought (CoT).",
+            "Unlike standard retrieval augmented generation (RAG), we ...",
+            "This is a paper (Smith) about stuff.",
+        ]
+    )
+    assert aliases == {"rag": "retrieval augmented generation", "cot": "chain of thought"}
