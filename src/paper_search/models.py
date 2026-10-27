@@ -15,7 +15,7 @@ import pyarrow.parquet as pq
 class Paper:
     """One paper, normalized from whichever source(s) it came from."""
 
-    paper_id: str  # Semantic Scholar ID - the primary key everywhere
+    paper_id: str  # primary key everywhere: S2 ID for the RAG corpus, arXiv ID for BT1 on
     title: str
     abstract: str | None
     year: int | None
@@ -26,13 +26,16 @@ class Paper:
     author_ids: list[str | None]
     doi: str | None
     arxiv_id: str | None
-    citation_count: int
-    reference_count: int
+    citation_count: int | None  # None = the source does not know (arXiv)
+    reference_count: int | None
     pdf_url: str | None
     has_full_text: bool  # an arXiv ID or open-access PDF exists (constraint C1)
     is_external: bool  # snowballed reference, graph-only (DECIDE-1)
     source: str  # "semantic_scholar" | "arxiv" | "both"
     data_version: str
+    categories: list[str] = field(default_factory=list)  # arXiv, primary first
+    fields_of_study: list[str] = field(default_factory=list)  # Semantic Scholar
+    s2_id: str | None = None  # where paper_id is an arXiv ID; S2 references use S2 IDs
 
 
 @dataclass(frozen=True)
