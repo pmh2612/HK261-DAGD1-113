@@ -1,0 +1,5 @@
+dataset: scifact
+system: minilm
+kind: dense
+name: minilm
+id: sentence-transformers/all-MiniLM-L6-v2

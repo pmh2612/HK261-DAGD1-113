@@ -1,0 +1,11 @@
+{
+  "queries": 300,
+  "skipped": 0,
+  "ndcg@10": 0.4111,
+  "recall@10": 0.5231,
+  "recall@100": 0.6886,
+  "mrr@10": 0.3846,
+  "index_seconds": 0.02,
+  "ms_per_query": 3.91,
+  "p_vs_best": 0.0
+}

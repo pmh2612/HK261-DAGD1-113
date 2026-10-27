@@ -1,0 +1,7 @@
+dataset: scifact
+system: e5-small
+kind: dense
+name: e5-small
+id: intfloat/e5-small-v2
+query_prefix: 'query: '
+doc_prefix: 'passage: '

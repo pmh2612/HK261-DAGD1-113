@@ -1,0 +1,7 @@
+dataset: scifact
+system: bm25_title2_abstract_stop
+kind: bm25
+field: title2_abstract
+preprocess: stop
+k1: 1.5
+b: 0.75

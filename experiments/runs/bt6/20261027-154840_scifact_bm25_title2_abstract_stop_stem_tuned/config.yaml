@@ -1,0 +1,8 @@
+dataset: scifact
+system: bm25_title2_abstract_stop_stem_tuned
+kind: bm25
+field: title2_abstract
+preprocess: stop_stem
+k1: 2.0
+b: 0.5
+train_ndcg@10: 0.7019
