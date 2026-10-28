@@ -19,16 +19,33 @@ changes and every label pointing into it goes stale.
 
 ## Workflow
 
+Label with `notebooks/label.py` rather than by editing the JSONL files: it saves after
+every finished item, writes atomically, and refuses entity text that is not in the
+abstract verbatim.
+
 ```bash
-# 1. add queries to queries.jsonl (target 20-30; five seeds from requirements.md §5)
-.venv-specter2/bin/python notebooks/encode_specter2.py   # after every edit to queries
-.venv/bin/python notebooks/exp_search.py --pool          # 2. build the judging pools
-# 3. judge pool.jsonl, copy relevant paper_ids into queries.jsonl
+L=".venv/bin/python notebooks/label.py"
+
+# Queries (target 20-30; five seeds from requirements.md §5)
+$L add "graph-based retrieval augmented generation"      # 1. add queries
+.venv-specter2/bin/python notebooks/encode_specter2.py   # 2. after adding queries
+.venv/bin/python notebooks/exp_search.py --pool          #    rebuild the judging pools
+$L queries                                               # 3. y / n per candidate
 .venv/bin/python notebooks/exp_search.py                 # 4. score
 
-# 5. annotate entities.jsonl, then
-.venv/bin/python notebooks/exp_extraction.py
+# Entities - agreement round first, then split the rest
+cp data/eval/entities.jsonl data/eval/entities.hieu.jsonl
+cp data/eval/entities.jsonl data/eval/entities.my.jsonl
+$L entities --file data/eval/entities.hieu.jsonl         # each annotator, first 10 abstracts
+$L entities --file data/eval/entities.my.jsonl
+$L agree data/eval/entities.hieu.jsonl data/eval/entities.my.jsonl
+# fix the guidelines below where you disagreed, merge into entities.jsonl, then
+$L entities                                              # the remaining abstracts
+.venv/bin/python notebooks/exp_extraction.py             # score
 ```
+
+Entity input is one per line: `m: BERT`, `d: HotpotQA`, `t: question answering`. An empty
+line finishes the abstract, `none` marks one with no entities, `q` quits.
 
 ## Judging queries
 

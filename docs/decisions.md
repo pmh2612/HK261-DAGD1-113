@@ -411,11 +411,11 @@ the output.
 >
 > In effect from 2026-09-24. Pull request #1 was itself the first use of it.
 >
-> **Proposed amendment, 2026-10-23 — pending Tran Ha My:** commit `data/eval/` as the one
+> **Amendment, 2026-10-23 — agreed:** commit `data/eval/` as the one
 > exception to "data files are never committed". Its labels are written by hand, so no
 > script can regenerate them, and an evaluation score is only reproducible against the
 > exact labels it was computed from. Everything else under `data/` stays ignored.
-> **Agreed by:** ______ **Date:** ______
+> **Agreed by:** Tran Ha My, in review of pull request #2 · **Date:** 2026-10-23
 
 ---
 
