@@ -14,7 +14,7 @@ import pyarrow.parquet as pq
 from neo4j import GraphDatabase
 
 from paper_search.config import settings
-from paper_search.extraction.entities import normalize_entity
+from paper_search.extraction.entities import acronym_aliases, normalize_entity
 from paper_search.graph.loader import (
     ensure_constraints,
     load_citations,
@@ -50,12 +50,16 @@ QUERIES = {
 }
 
 
-def most_common_pair(entities: list[PaperEntities]) -> tuple[str, str]:
+def most_common_pair(entities: list[PaperEntities], aliases: dict[str, str]) -> tuple[str, str]:
     """The (dataset, method) pair shared by most papers - a UC-2 example known to exist."""
+
+    def keys(names: list[str]) -> set[str]:
+        return {aliases.get(k, k) for n in names if (k := normalize_entity(n))}
+
     counts: dict[tuple[str, str], int] = defaultdict(int)
     for e in entities:
-        for d in {normalize_entity(x) for x in e.datasets}:
-            for m in {normalize_entity(x) for x in e.methods}:
+        for d in keys(e.datasets):
+            for m in keys(e.methods):
                 counts[d, m] += 1
     return max(counts, key=counts.get)
 
@@ -69,6 +73,7 @@ def main() -> None:
 
     papers = read_records(out_dir / "papers.parquet", Paper)
     entities = read_records(out_dir / "entities.parquet", PaperEntities)
+    aliases = acronym_aliases(p.abstract for p in papers if p.abstract)
     refs: dict[str, list[str]] = defaultdict(list)
     for row in pq.read_table(settings.raw_dir / version / "references.parquet").to_pylist():
         refs[row["paper_id"]].append(row["ref_id"])
@@ -78,9 +83,9 @@ def main() -> None:
         ensure_constraints(driver)
         load_papers(driver, papers)
         load_citations(driver, refs)
-        load_entities(driver, entities)
+        load_entities(driver, entities, aliases)
 
-        print(f"KG v1 from data version {version}\n\nNodes:")
+        print(f"KG v1 from data version {version}, {len(aliases)} acronym aliases\n\nNodes:")
         for r in driver.execute_query(
             "MATCH (n) UNWIND labels(n) AS label RETURN label, count(*) AS n ORDER BY label"
         ).records:
@@ -91,7 +96,7 @@ def main() -> None:
         ).records:
             print(f"  {r['type']:<13} {r['n']:>6}")
 
-        dataset, method = most_common_pair(entities)
+        dataset, method = most_common_pair(entities, aliases)
         top_topic = driver.execute_query(
             "MATCH (t:Topic)<-[:HAS_TOPIC]-(p) "
             "RETURN t.key AS k, count(p) AS n ORDER BY n DESC LIMIT 1"

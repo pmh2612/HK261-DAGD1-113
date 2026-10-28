@@ -80,14 +80,31 @@ collects the most-cited papers first, and influential papers cite each other: §
 fields of study would add little: nearly every paper in a single-topic corpus would share
 them.
 
-**Normalization (`FR-10`).** `normalize_entity` lowercases, turns `- _ /` into spaces,
-collapses whitespace, strips surrounding punctuation, and drops size/variant suffixes
-(`base`, `large`, `small`, `xl`, `uncased`, …). So *BERT-base*, *bert* and *BERT* are one
-`Method`; *Self-RAG* and *Self RAG* are one. The first surface form seen becomes `name`.
+**Normalization (`FR-10`).** `normalize_entity` lowercases, turns `- _ /` and Unicode
+dashes into spaces, collapses whitespace, strips surrounding punctuation, and drops:
 
-What it does **not** do: merge an acronym with its expansion (*DPR* vs *dense passage
-retriever*) or catch synonyms. That fragmentation is real and will show in the graph
-statistics; alias merging is the next step if it hurts the target queries.
+- a parenthesized acronym, closed or cut off by the extractor — *Retrieval-Augmented
+  Generation (RAG)* and *retrieval augmented generation (rag* are one key;
+- a trailing type word (`method(s)`, `approach(es)`, `technique(s)`, `task(s)`,
+  `dataset(s)`) — *RAG methods* is *RAG*, *NQ dataset* is *NQ*;
+- size/variant suffixes (`base`, `large`, `small`, `xl`, `uncased`, …) — *BERT-base* is
+  *BERT*.
+
+A name made only of generic words (`GENERIC` in `extraction/entities.py`: *existing
+methods*, *four datasets*, *training data*, *large language models*) normalizes to `""` and
+gets no node.
+
+**Acronyms.** `acronym_aliases` reads definitions like *In-Context Learning (ICL)* off all
+seed abstracts and maps the acronym key to the long-form key, so *RAG* and *ICL* join
+*retrieval augmented generation* and *in context learning*. An acronym defined two ways
+keeps its most frequent long form. The first surface form seen becomes `name`.
+
+What it does **not** do: merge names whose initials do not spell the acronym (*GraphRAG*,
+*Self-RAG*) or catch paraphrases (*retrieval augmentation*). Embedding-based clustering is
+the next step if that fragmentation hurts the target queries.
+
+The entity layer is derived data: `load_entities` deletes every `Method`, `Dataset` and
+`Topic` node and rebuilds them, so a normalization change leaves no stale keys behind.
 
 **Extractor in v1:** GLiNER zero-shot NER (`urchade/gliner_medium-v2.1`) on the abstract.
 `FR-9` specifies an in-process LLM with schema-constrained decoding; that waits on
@@ -154,10 +171,10 @@ augmented generation", 996 after the English filter and deduplication. Reproduce
 | — of which `:External` | 2,096 | | `CITES` | 22,598 |
 | `Author` | 17,638 | | — seed → seed | 4,327 |
 | `Venue` | 514 | | — seed → `:External` | 18,271 |
-| `Method` | 1,089 | | `PUBLISHED_IN` | 3,003 |
-| `Dataset` | 961 | | `USES_METHOD` | 1,448 |
-| `Topic` | 945 | | `USES_DATASET` | 1,162 |
-| | | | `HAS_TOPIC` | 1,334 |
+| `Method` | 1,008 | | `PUBLISHED_IN` | 3,003 |
+| `Dataset` | 857 | | `USES_METHOD` | 1,359 |
+| `Topic` | 867 | | `USES_DATASET` | 962 |
+| | | | `HAS_TOPIC` | 1,221 |
 
 All four target queries in §5 run and return results.
 
@@ -167,21 +184,27 @@ All four target queries in §5 run and return results.
 of ~1.2, because the seeds are the most-cited papers (§3). `UC-3` on the original RAG paper
 finds 522 citing papers and 45 cited ones.
 
-**The entity layer is weak, and this is the main finding for Phase 1:**
+**The entity layer is weak, and this is the main finding for Phase 1.** The first load
+(GLiNER output with string normalization only) showed three problems; the generic-phrase
+filter and acronym merging in §4 fixed the first two in part:
 
-- **Generic phrases are extracted as entities.** The five most-used "datasets" are
+- **Generic phrases were extracted as entities.** The five most-used "datasets" were
   *training data*, *benchmark datasets*, *documents*, *large language models* and
-  *synthetic data*. The `UC-2` example the script picks automatically is therefore
-  (*training data*, *retrieval augmented generation*), which is meaningless.
-- **Fragmentation.** For the topic *question answering*, *Retrieval-Augmented
-  Generation*, *Retrieval-augmentation* and *RAG* are three separate `Method` nodes.
-  String normalization (§4) does not merge acronyms or paraphrases.
-- **89% of Method / Dataset / Topic nodes are used by exactly one paper**, so entities
-  connect papers far less than citations do: `UC-3` finds 3 papers sharing a method or
-  dataset with the RAG paper, against 522 linked by citation.
-- 58 of 996 seeds have no entity at all.
+  *synthetic data*, so the automatic `UC-2` example was (*training data*, *retrieval
+  augmented generation*). After the filter they are *HotpotQA*, *NQ*, *vector database*,
+  *knowledge graphs* and *MuSiQue*, and `UC-2` picks (*graph structured data*, *retrieval
+  augmented generation*), which returns two GraphRAG papers. Type errors remain
+  (*vector database* is not a dataset).
+- **Fragmentation.** *Retrieval-Augmented Generation*, *Retrieval-Augmented Generation
+  (RAG* and *RAG* were separate `Method` nodes. Now one node holds 203 papers. Paraphrases
+  still split: for the topic *question answering*, *Retrieval-Augmented Generation* (13
+  papers) and *Retrieval-augmentation* (2) are still two nodes.
+- **91% of Method / Dataset / Topic nodes are used by exactly one paper** — unchanged by
+  the fixes — so entities connect papers far less than citations do: `UC-3` finds 3 papers
+  sharing a method or dataset with the RAG paper, against 522 linked by citation.
+- 71 of 996 seeds have no entity at all (58 before the filter: 13 papers had only generic
+  ones).
 
 Consequences: the extraction experiment ([`evaluation.md`](evaluation.md) §4) is what
-decides whether GLiNER stays; a generic-phrase filter and acronym merging (`FR-10`) are
-the next fixes if it does; and until then `FR-17` graph expansion should lean on `CITES`,
-not on shared entities — the reverse of what architecture §6.2 assumed.
+decides whether GLiNER stays; paraphrase merging (`FR-10`) is the next fix if it does;
+and until then `FR-17` graph expansion should lean on `CITES`, not on shared entities — the reverse of what architecture §6.2 assumed.

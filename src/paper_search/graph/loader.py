@@ -104,18 +104,25 @@ def load_citations(driver: Driver, refs: dict[str, list[str]]) -> None:
         )
 
 
-def load_entities(driver: Driver, entities: Iterable[PaperEntities]) -> None:
+def load_entities(
+    driver: Driver, entities: Iterable[PaperEntities], aliases: dict[str, str]
+) -> None:
     """Method / Dataset / Topic nodes keyed on the normalized name, linked to papers.
 
-    The first surface form seen becomes the display `name`; the relationship records
-    which extractor asserted it, so a rebuild with another model is traceable.
+    `aliases` maps an acronym key to its long-form key (`acronym_aliases`). The first
+    surface form seen becomes the display `name`; the relationship records which
+    extractor asserted it, so a rebuild with another model is traceable.
+
+    The entity layer is derived data, so it is dropped and rebuilt whole: otherwise a
+    change to normalization would leave the old keys behind as orphan nodes.
     """
+    driver.execute_query("MATCH (n:Method|Dataset|Topic) DETACH DELETE n")
     rows = [
         {
             "paper_id": e.paper_id,
             "label": label,
             "rel": rel,
-            "key": key,
+            "key": aliases.get(key, key),
             "name": name,
             "extractor": e.extractor,
         }
