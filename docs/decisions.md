@@ -29,6 +29,20 @@ the outcome and any amendment made to the recommendation.
 itself rather than call a hosted API, which removes the option that decision chose. It is
 reopened as `DECIDE-7`.
 
+**The experiment plan was adopted on 2026-10-27** ([`experiment-plan.md`](experiment-plan.md),
+from the supervisor's requirements; pending Tran Ha My). It changes three things here:
+
+- **Corpus.** arXiv `cs.IR`, `cs.CL`, `cs.LG` sampled in nested levels (tiny 200 ⊂ small
+  2,000 ⊂ medium 20,000), replacing the 1,000 most-cited "retrieval augmented generation"
+  papers. Labelling had not started on the old corpus, so nothing annotated is lost.
+- **Abstracts only, no full-text PDF.** `DECIDE-2` is moot: every paper is one abstract,
+  short enough to be a single chunk. `DECIDE-1` snowballing waits for BT5.
+- **Every method is chosen by experiment.** `DECIDE-5`'s `bge-small-en-v1.5` stays pinned
+  until BT7 measures it against the alternatives. The LLM arm stays local (`DECIDE-7`).
+
+The code keeps the `paper_search` package; experiment configs live in `configs/`, runs and
+reports in `experiments/`.
+
 **Also blocking, and not really a decision:** the Semantic Scholar API key. Being applied
 for by Tran Ha My as of 2026-09-24. See [§7](#7-not-a-decision-but-do-it-this-week).
 

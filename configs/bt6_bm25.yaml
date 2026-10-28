@@ -1,0 +1,12 @@
+# BT6 - keyword search (EXPERIMENT_PLAN.md §4). Every field x preprocessing pair runs at
+# the usual BM25Okapi defaults; on a dataset with a train split, the best pair is then
+# tuned over the k1 / b grid on train and reported on test as "<name>_tuned".
+task: bt6
+bm25:
+  fields: [title, abstract, title_abstract, title2_abstract]  # title2 = title weighted x2
+  preprocess: [lower, stop, stem, stop_stem]
+  k1: 1.5
+  b: 0.75
+tune:
+  k1: [0.6, 0.9, 1.2, 1.5, 2.0]
+  b: [0.3, 0.5, 0.75, 0.9, 1.0]

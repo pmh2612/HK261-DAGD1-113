@@ -1,0 +1,18 @@
+seed: 42
+categories:
+- cs.IR
+- cs.CL
+- cs.LG
+months:
+- 2024-01
+- 2024-02
+- 2024-03
+- 2024-04
+- 2024-05
+- 2024-06
+levels:
+  tiny: 200
+  small: 2000
+  medium: 20000
+level: tiny
+method: combined

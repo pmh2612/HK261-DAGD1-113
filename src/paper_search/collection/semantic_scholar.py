@@ -15,7 +15,10 @@ from paper_search.config import settings
 from paper_search.models import Paper
 
 API = "https://api.semanticscholar.org/graph/v1"
-FIELDS = "title,abstract,year,venue,authors,citationCount,referenceCount,externalIds,openAccessPdf"
+FIELDS = (
+    "title,abstract,year,venue,authors,citationCount,referenceCount,externalIds,openAccessPdf,"
+    "s2FieldsOfStudy"
+)
 BATCH_SIZE = 500  # the /paper/batch maximum
 #: The API key allows 1 request per second across all endpoints; stay just under it.
 MIN_INTERVAL = 1.1
@@ -116,7 +119,10 @@ def to_paper(raw: dict, data_version: str, is_external: bool = False) -> Paper:
         title=" ".join((raw.get("title") or "").split()),
         abstract=" ".join(raw["abstract"].split()) if raw.get("abstract") else None,
         year=raw.get("year"),
-        venue=raw.get("venue") or None,
+        # "arXiv.org" says where the preprint is, not where it was published.
+        venue=None
+        if re.fullmatch(r"(?i)arxiv(\.org)?", raw.get("venue") or "")
+        else raw.get("venue") or None,
         authors=[a.get("name") or "" for a in authors],
         author_ids=[a.get("authorId") for a in authors],
         doi=(ids.get("DOI") or "").lower() or None,
@@ -128,6 +134,10 @@ def to_paper(raw: dict, data_version: str, is_external: bool = False) -> Paper:
         is_external=is_external,
         source="semantic_scholar",
         data_version=data_version,
+        s2_id=raw["paperId"],
+        fields_of_study=list(
+            dict.fromkeys(f["category"] for f in raw.get("s2FieldsOfStudy") or [])
+        ),
     )
 
 

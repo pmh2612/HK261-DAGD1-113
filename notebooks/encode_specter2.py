@@ -8,10 +8,13 @@ Documents use the `specter2` (proximity) adapter on "title [SEP] abstract"; quer
 the `specter2_adhoc_query` adapter, as the model card prescribes for search.
 
 Setup (once):  python3.11 -m venv .venv-specter2 && .venv-specter2/bin/pip install adapters torch
-Run:           .venv-specter2/bin/python notebooks/encode_specter2.py
-Re-run whenever data/eval/abstracts.jsonl or queries.jsonl changes - exp_search.py checks.
+Run:           .venv-specter2/bin/python notebooks/encode_specter2.py [--dir DIR]
+With --dir, reads DIR/docs.jsonl and DIR/queries.jsonl (written by scripts/run_search.py)
+and writes the vectors into DIR. Without it, encodes data/eval/ for exp_search.py.
+Re-run whenever the documents or queries change - both consumers check.
 """
 
+import argparse
 import json
 from pathlib import Path
 
@@ -46,8 +49,14 @@ def encode(model, tokenizer, adapter: str, texts: list[str]) -> np.ndarray:
 
 def main() -> None:
     """Write docs.npy / queries.npy plus the id order each row corresponds to."""
-    docs = [json.loads(line) for line in (EVAL_DIR / "abstracts.jsonl").open()]
-    queries = [json.loads(line) for line in (EVAL_DIR / "queries.jsonl").open()]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dir", type=Path)
+    io_dir = parser.parse_args().dir
+    docs_path = io_dir / "docs.jsonl" if io_dir else EVAL_DIR / "abstracts.jsonl"
+    queries_path = io_dir / "queries.jsonl" if io_dir else EVAL_DIR / "queries.jsonl"
+    out_dir = io_dir or OUT_DIR
+    docs = [json.loads(line) for line in docs_path.open()]
+    queries = [json.loads(line) for line in queries_path.open()]
 
     tokenizer = AutoTokenizer.from_pretrained("allenai/specter2_base")
     model = AutoAdapterModel.from_pretrained("allenai/specter2_base").eval()
@@ -55,18 +64,18 @@ def main() -> None:
     model.load_adapter("allenai/specter2_adhoc_query", source="hf", load_as="adhoc_query")
 
     doc_texts = [d["title"] + tokenizer.sep_token + d["abstract"] for d in docs]
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    np.save(OUT_DIR / "docs.npy", encode(model, tokenizer, "specter2", doc_texts))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    np.save(out_dir / "docs.npy", encode(model, tokenizer, "specter2", doc_texts))
     np.save(
-        OUT_DIR / "queries.npy",
+        out_dir / "queries.npy",
         encode(model, tokenizer, "adhoc_query", [q["query"] for q in queries]),
     )
-    (OUT_DIR / "ids.json").write_text(
+    (out_dir / "ids.json").write_text(
         json.dumps(
             {"docs": [d["paper_id"] for d in docs], "queries": [q["query"] for q in queries]}
         )
     )
-    print(f"encoded {len(docs)} docs and {len(queries)} queries into {OUT_DIR}")
+    print(f"encoded {len(docs)} docs and {len(queries)} queries into {out_dir}")
 
 
 if __name__ == "__main__":
