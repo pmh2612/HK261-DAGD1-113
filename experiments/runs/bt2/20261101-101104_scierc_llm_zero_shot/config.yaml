@@ -1,0 +1,5 @@
+dataset: scierc
+kind: llm
+model: Qwen/Qwen2.5-3B-Instruct
+name: llm_zero_shot
+shots: 0
