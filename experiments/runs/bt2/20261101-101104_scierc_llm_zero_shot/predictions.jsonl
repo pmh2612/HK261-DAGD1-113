@@ -1,0 +1,100 @@
+{"doc_id": "X96-1059", "entities": [[297, 352, "Task", "Multi-lingual Evaluation Task ( MET ) for Japanese text"], [666, 672, "Method", "Amorph"], [678, 684, "Method", "Amorph"]]}
+{"doc_id": "ICCV_2001_47_abs", "entities": []}
+{"doc_id": "INTERSPEECH_2013_21_abs", "entities": [[335, 353, "Method", "Bayesian inference"]]}
+{"doc_id": "H01-1049", "entities": [[105, 225, "Task", "a spoken language understanding system with intelligent mobile agents that mediate between users and information sources"], [302, 312, "Method", "LCS-Marine"], [321, 331, "Method", "LCS-Marine"]]}
+{"doc_id": "C96-1062", "entities": [[47, 103, "Task", "automated interpretation of nominal compounds in English"], [0, 26, "Method", "A domain independent model"]]}
+{"doc_id": "CVPR_2009_18_abs", "entities": [[650, 710, "Task", "matching textured scenes under blur and illumination changes"], [566, 606, "Method", "histogram-based interest point detectors"], [725, 758, "Metric", "repeatability and distinctiveness"]]}
+{"doc_id": "P85-1019", "entities": [[20, 46, "Task", "a restricted domain parser"], [180, 212, "Method", "semantic caseframe instantiation"]]}
+{"doc_id": "P05-1039", "entities": [[76, 105, "Method", "smoothing and suffix analysis"], [119, 143, "Metric", "labelled bracket F-score"], [201, 213, "Material", "NEGRA corpus"]]}
+{"doc_id": "P06-2012", "entities": [[57, 110, "Task", "disambiguate various relations between named entities"], [470, 510, "Metric", "outperforms the other clustering methods"], [408, 419, "Material", "ACE corpora"]]}
+{"doc_id": "P06-1018", "entities": [[22, 52, "Method", "generic mathematical formalism"]]}
+{"doc_id": "NIPS_2001_11_abs", "entities": [[41, 115, "Task", "high-resolution parallel inner-product computation in very high dimensions"]]}
+{"doc_id": "CVPR_1999_15_abs", "entities": [[618, 631, "Method", "factorization"]]}
+{"doc_id": "C94-1091", "entities": [[37, 88, "Task", "selecting an appropriate classifier word for a noun"], [650, 669, "Method", "corpus-based method"], [899, 913, "Material", "a large corpus"]]}
+{"doc_id": "ICCV_2003_161_abs", "entities": [[778, 822, "Material", "real scenes that include transparent objects"]]}
+{"doc_id": "CVPR_2009_10_abs", "entities": [[901, 922, "Task", "object categorization"], [19, 42, "Method", "probabilistic framework"]]}
+{"doc_id": "N03-1026", "entities": [[145, 166, "Task", "sentence condensation"], [501, 522, "Task", "sentence condensation"]]}
+{"doc_id": "ICML_2016_11_abs", "entities": [[42, 52, "Task", "robust PCA"], [467, 477, "Task", "robust PCA"], [527, 537, "Task", "robust PCA"], [706, 716, "Task", "robust PCA"], [954, 964, "Task", "robust PCA"], [1080, 1090, "Task", "robust PCA"], [654, 670, "Method", "a convex problem"]]}
+{"doc_id": "C88-1044", "entities": []}
+{"doc_id": "INTERSPEECH_2008_20_abs", "entities": [[545, 561, "Material", "IEMOCAP database"]]}
+{"doc_id": "ICASSP_2016_11_abs", "entities": [[15, 96, "Task", "blind separation of underdetermined instantaneous mixtures of independent signals"], [775, 794, "Metric", "separation accuracy"], [502, 524, "Material", "natural speech signals"], [722, 744, "Material", "natural speech signals"]]}
+{"doc_id": "N06-1037", "entities": [[110, 129, "Task", "relation extraction"], [236, 255, "Task", "relation extraction"], [303, 326, "Method", "convolution tree kernel"], [437, 448, "Metric", "performance"], [347, 362, "Material", "ACE 2003 corpus"]]}
+{"doc_id": "P05-2013", "entities": [[35, 106, "Task", "automatically inducing a Combinatory Categorial Grammar ( CCG ) lexicon"], [114, 141, "Material", "Turkish dependency treebank"]]}
+{"doc_id": "C04-1128", "entities": [[464, 483, "Task", "email summarization"], [388, 422, "Method", "detection of question-answer pairs"]]}
+{"doc_id": "CVPR_2006_10_abs", "entities": [[25, 41, "Task", "object detection"], [200, 223, "Method", "support vector machines"]]}
+{"doc_id": "NIPS_2002_11_abs", "entities": []}
+{"doc_id": "P06-3007", "entities": []}
+{"doc_id": "ICCV_2013_25_abs", "entities": []}
+{"doc_id": "P05-1076", "entities": [[40, 131, "Task", "acquiring adjectival subcategorization frames ( scfs ) and associated frequency information"], [183, 333, "Method", "a decision-tree classifier for 30 scf types which tests for the presence of grammatical relations ( grs ) in the output of a robust statistical parser"], [543, 578, "Metric", "70 % precision and 66 % recall rate"], [137, 156, "Material", "English corpus data"]]}
+{"doc_id": "C04-1103", "entities": [[0, 44, "Task", "Machine transliteration/back-transliteration"], [402, 444, "Method", "n-gram transliteration model ( n-gram TM )"], [782, 806, "Metric", "transliteration accuracy"], [607, 658, "Material", "English/Chinese and English/Japanese language pairs"]]}
+{"doc_id": "NIPS_2002_18_abs", "entities": [[347, 372, "Task", "early vision applications"], [2, 20, "Method", "bio-inspired model"], [453, 483, "Material", "a 0.5 µm standard CMOS process"]]}
+{"doc_id": "C86-1081", "entities": [[339, 358, "Method", "a logical formalism"]]}
+{"doc_id": "P03-1070", "entities": [[287, 310, "Task", "a direction-giving task"], [532, 609, "Method", "an ECA that uses verbal and nonverbal grounding acts to update dialogue state"]]}
+{"doc_id": "P05-1056", "entities": [[0, 37, "Task", "Sentence boundary detection in speech"], [404, 436, "Method", "conditional random field ( CRF )"], [202, 229, "Method", "hidden Markov model ( HMM )"], [234, 260, "Method", "maximum entropy ( Maxent )"], [702, 712, "Metric", "error rate"], [539, 570, "Material", "conversational telephone speech"], [575, 596, "Material", "broadcast news speech"]]}
+{"doc_id": "CVPR_2011_11_abs", "entities": [[105, 119, "Task", "camera handoff"], [748, 919, "Method", "Multiple Instance Learning ( MIL ) formulation for the problem based on the logistic softmax function of covariance-based region features within a MAP estimation framework"], [955, 984, "Material", "multiple PTZ camera sequences"]]}
+{"doc_id": "ICML_2016_10_abs", "entities": [[18, 108, "Task", "a specialized regression problem to obtain sampling probabilities for records in databases"], [622, 703, "Method", "an efficient and simple regularized Empirical Risk Minimization ( ERM ) algorithm"]]}
+{"doc_id": "C04-1011", "entities": [[384, 493, "Task", "distributional approximation of probabilistic context-free grammars by means of probabilistic finite automata"], [212, 247, "Method", "closed-form ( analytical ) solution"], [41, 66, "Metric", "Kullback-Leibler distance"], [268, 293, "Metric", "Kullback-Leibler distance"]]}
+{"doc_id": "ECCV_2006_13_abs", "entities": [[128, 144, "Task", "face recognition"], [1122, 1226, "Material", "171 individuals and over 1300 video sequences with extreme illumination , pose and head motion variation"]]}
+{"doc_id": "N04-1022", "entities": [[51, 82, "Task", "statistical machine translation"], [11, 46, "Method", "Minimum Bayes-Risk ( MBR ) decoding"], [198, 221, "Metric", "translation performance"], [524, 559, "Material", "Chinese-to-English translation task"]]}
+{"doc_id": "E89-1016", "entities": [[251, 282, "Task", "a task requiring data retrieval"], [420, 442, "Method", "Wizard of Oz technique"]]}
+{"doc_id": "E06-1022", "entities": [[22, 89, "Task", "addressee identification in four-participants face-to-face meetings"], [96, 112, "Method", "Bayesian Network"]]}
+{"doc_id": "I05-5004", "entities": [[8, 61, "Task", "deep analysis of compositional classes of paraphrases"], [81, 291, "Method", "a class-oriented framework for collecting paraphrase examples , in which sentential paraphrases are collected for each paraphrase class separately by means of automatic candidate generation and manual judgement"], [438, 488, "Metric", "cost-efficiency , exhaustiveness , and reliability"]]}
+{"doc_id": "H01-1042", "entities": [[481, 513, "Task", "the intelligibility of MT output"], [925, 938, "Material", "newswire text"]]}
+{"doc_id": "C04-1035", "entities": [[51, 88, "Task", "bare slice disambiguation in dialogue"], [383, 390, "Method", "SLIPPER"], [431, 436, "Method", "TiMBL"], [509, 522, "Metric", "success rates"], [648, 664, "Metric", "predictive power"], [139, 158, "Material", "corpus-based sample"]]}
+{"doc_id": "C04-1036", "entities": [[51, 75, "Task", "word similarity measures"], [527, 573, "Method", "novel feature weighting and selection function"], [273, 288, "Metric", "human agreement"]]}
+{"doc_id": "CVPR_2011_10_abs", "entities": [[314, 354, "Task", "detecting reflections in image sequences"]]}
+{"doc_id": "ECCV_2012_30_abs", "entities": [[36, 116, "Task", "reconstructing the motion of a 3D articulated tree from 2D point correspondences"], [642, 670, "Method", "dynamic programming approach"]]}
+{"doc_id": "P08-1105", "entities": [[125, 152, "Task", "topical blog post retrieval"], [524, 539, "Method", "language models"], [656, 679, "Metric", "retrieval effectiveness"], [561, 585, "Material", "TREC Blog track test set"]]}
+{"doc_id": "ICML_2006_119_abs", "entities": [[30, 79, "Task", "learning to predict moves in the board game of Go"], [909, 1005, "Metric", "ability to perfectly predict the moves made by professional Go players in 34 % of test positions"], [825, 845, "Material", "181,000 expert games"]]}
+{"doc_id": "P04-2005", "entities": [[301, 334, "Task", "Word Sense Disambiguation ( WSD )"], [628, 670, "Method", "second-order vector cooccurrence algorithm"], [703, 720, "Metric", "promising results"], [674, 695, "Material", "standard WSD datasets"]]}
+{"doc_id": "NIPS_2016_560_abs", "entities": [[49, 107, "Task", "estimating the joint eigenstructure of a set M of matrices"]]}
+{"doc_id": "P06-1053", "entities": [[178, 213, "Method", "an incremental probabilistic parser"], [479, 503, "Metric", "overall parsing accuracy"], [431, 441, "Material", "human data"]]}
+{"doc_id": "CVPR_2016_413_abs", "entities": [[59, 115, "Task", "outlier removal and quality improvement in stereo vision"], [335, 399, "Method", "a new , flexible , and scalable way for generating training data"]]}
+{"doc_id": "ICML_1995_38_abs", "entities": [[578, 596, "Method", "a variant of GOLEM"]]}
+{"doc_id": "P06-4007", "entities": [[33, 71, "Task", "interactive question-answering ( Q/A )"], [236, 258, "Method", "predictive questioning"]]}
+{"doc_id": "E99-1015", "entities": [[166, 183, "Method", "annotation scheme"]]}
+{"doc_id": "CVPR_2004_18_abs", "entities": [[4, 71, "Task", "automated segmentation of images into semantically meaningful parts"], [257, 353, "Method", "mixtures of feature distributions for color and texture as well as probabilistic shape knowledge"]]}
+{"doc_id": "J86-4002", "entities": []}
+{"doc_id": "P06-1013", "entities": [[134, 150, "Task", "unsupervised WSD"], [249, 265, "Task", "unsupervised WSD"], [466, 494, "Metric", "significantly better results"]]}
+{"doc_id": "P05-1046", "entities": [[34, 56, "Task", "information extraction"]]}
+{"doc_id": "J82-3002", "entities": [[51, 86, "Task", "natural language question answering"]]}
+{"doc_id": "ECCV_2016_99_abs", "entities": [[351, 374, "Task", "online action detection"], [445, 501, "Method", "Joint Classification-Regression Recurrent Neural Network"], [1212, 1260, "Material", "a large streaming video dataset with annotations"]]}
+{"doc_id": "I05-5003", "entities": [[12, 31, "Task", "machine translation"], [337, 500, "Method", "a novel classification method based on PER which leverages part of speech information of the words contributing to the word matches and non-matches in the sentence"], [240, 243, "Metric", "PER"], [376, 379, "Metric", "PER"]]}
+{"doc_id": "CVPR_2008_256_abs", "entities": [[114, 136, "Task", "visual object tracking"], [773, 809, "Method", "Adaptive Simulated Annealing ( ASA )"], [1215, 1288, "Material", "challenging airborne videos with heavy occlusion and large camera motions"]]}
+{"doc_id": "P01-1056", "entities": [[354, 376, "Task", "spoken dialogue system"], [321, 347, "Method", "trainable sentence planner"], [625, 651, "Method", "trainable sentence planner"], [390, 416, "Metric", "subjective human judgments"]]}
+{"doc_id": "ICCV_2003_151_abs", "entities": [[32, 97, "Task", "novel view generation in one-to-one teleconferencing applications"], [375, 463, "Method", "an improved , dynamic-programming , stereo algorithm for efficient novel-view generation"]]}
+{"doc_id": "C90-3063", "entities": [[174, 188, "Material", "a large corpus"]]}
+{"doc_id": "J05-4003", "entities": [[30, 97, "Task", "discovering parallel sentences in comparable , non-parallel corpora"], [111, 137, "Method", "maximum entropy classifier"], [449, 521, "Metric", "performance of a state-of-the-art statistical machine translation system"], [307, 368, "Material", "Chinese , Arabic , and English non-parallel newspaper corpora"]]}
+{"doc_id": "C00-2123", "entities": [[51, 89, "Task", "statistical machine translation ( MT )"], [99, 125, "Method", "dynamic programming ( DP )"], [508, 564, "Material", "Verbmobil task ( German-English , 8000-word vocabulary )"]]}
+{"doc_id": "E91-1012", "entities": [[2, 48, "Method", "purely functional implementation of LR-parsers"]]}
+{"doc_id": "J86-3001", "entities": []}
+{"doc_id": "P86-1011", "entities": []}
+{"doc_id": "E95-1033", "entities": [[143, 162, "Task", "anaphora resolution"], [97, 127, "Method", "dependency-based grammar model"]]}
+{"doc_id": "W02-1602", "entities": [[0, 85, "Task", "Coedition of a natural language text and its representation in some interlingual form"]]}
+{"doc_id": "C04-1106", "entities": [[354, 373, "Material", "multilingual corpus"]]}
+{"doc_id": "ECCV_2016_204_abs", "entities": [[259, 283, "Task", "person re-identification"], [1063, 1087, "Task", "person re-identification"], [340, 394, "Method", "Weighted Approximate Rank Component Analysis ( WARCA )"], [172, 190, "Metric", "weighted rank loss"], [1049, 1154, "Material", "nine standard person re-identification datasets including two large scale Market-1501 and CUHK03 datasets"]]}
+{"doc_id": "INTERSPEECH_2006_21_abs", "entities": [[27, 52, "Task", "language model adaptation"], [872, 901, "Metric", "speech recognition accuracies"], [776, 829, "Material", "a variety of methods for preparing a segmented corpus"]]}
+{"doc_id": "NIPS_2015_18_abs", "entities": [[705, 743, "Method", "logistic stick-breaking representation"]]}
+{"doc_id": "CVPR_1994_10_abs", "entities": [[0, 7, "Method", "MINPRAN"], [173, 180, "Method", "MINPRAN"], [371, 378, "Method", "MINPRAN"], [654, 661, "Method", "MINPRAN"], [718, 725, "Method", "MINPRAN"], [832, 839, "Method", "MINPRAN"], [972, 979, "Method", "MINPRAN"]]}
+{"doc_id": "P83-1004", "entities": [[412, 416, "Method", "none"], [345, 396, "Metric", "computational tractability and explanatory adequacy"], [190, 216, "Material", "Unconstrained MPS grammars"]]}
+{"doc_id": "C90-3045", "entities": [[175, 198, "Task", "semantic interpretation"], [284, 300, "Method", "synchronous TAGs"], [678, 694, "Method", "synchronous TAGs"]]}
+{"doc_id": "CVPR_1993_10_abs", "entities": [[26, 78, "Task", "on-line cursive handwriting analysis and recognition"], [0, 22, "Method", "A model-based approach"]]}
+{"doc_id": "ICML_2016_18_abs", "entities": [[7, 25, "Task", "Object Recognition"], [600, 637, "Method", "Convolutional Neural Networks ( CNN )"], [1131, 1147, "Metric", "state-of-the-art"], [1047, 1099, "Material", "two recent large and challenging multi-view datasets"]]}
+{"doc_id": "I05-4010", "entities": [[44, 103, "Task", "harvesting English-Chinese bitexts of the laws of Hong Kong"], [165, 223, "Method", "utilizing the numbering system in the legal text hierarchy"], [55, 103, "Material", "English-Chinese bitexts of the laws of Hong Kong"]]}
+{"doc_id": "ICCV_2013_47_abs", "entities": [[187, 232, "Task", "light field triangulation and stereo matching"], [1122, 1149, "Metric", "accuracy and visual quality"], [1004, 1027, "Material", "synthetic and real data"]]}
+{"doc_id": "H05-1095", "entities": [[47, 66, "Task", "machine translation"], [391, 413, "Metric", "NIST evaluation metric"], [178, 198, "Material", "word-aligned corpora"]]}
+{"doc_id": "A97-1020", "entities": [[31, 81, "Task", "reading and learning to read in a foreign language"], [446, 508, "Method", "intelligent computer-assisted morphological analysis ( ICALL )"], [586, 630, "Material", "an aligned bilingual corpus of word examples"]]}
+{"doc_id": "N03-1033", "entities": [[17, 38, "Task", "part-of-speech tagger"], [495, 512, "Material", "Penn Treebank WSJ"]]}
+{"doc_id": "ECCV_2016_212_abs", "entities": [[1078, 1102, "Task", "person re-identification"], [1379, 1403, "Task", "person re-identification"], [1517, 1541, "Task", "person re-identification"], [1648, 1672, "Task", "person re-identification"], [400, 417, "Metric", "geodesic distance"], [742, 759, "Metric", "geodesic distance"], [153, 168, "Material", "pedestrian data"]]}
+{"doc_id": "ICASSP_1997_706_abs", "entities": [[0, 22, "Task", "Utterance Verification"], [759, 824, "Material", "a real telephone application on a natural number recognition task"]]}
+{"doc_id": "INTERSPEECH_2008_28_abs", "entities": []}
+{"doc_id": "ECCV_2016_110_abs", "entities": [[265, 276, "Method", "an approach"], [336, 379, "Material", "images extracted from modern computer games"]]}
+{"doc_id": "CVPR_2008_258_abs", "entities": [[671, 750, "Method", "recent advances in spectral clustering , image matting , and boundary detection"], [582, 636, "Metric", "accurate and parsimonious delineation of scene objects"], [808, 827, "Material", "a dataset of scenes"]]}
+{"doc_id": "C08-2010", "entities": [[171, 193, "Material", "reference translations"]]}
+{"doc_id": "E93-1066", "entities": []}
+{"doc_id": "INTERSPEECH_2014_40_abs", "entities": [[37, 145, "Task", "generating the fundamental frequency ( F0 ) contour of speech from a text input for text-to-speech synthesis"]]}
+{"doc_id": "CVPR_2010_30_abs", "entities": [[54, 79, "Task", "object detection cascades"], [805, 828, "Material", "PASCAL VOC 2006 dataset"]]}
+{"doc_id": "CVPR_2004_30_abs", "entities": [[0, 19, "Task", "Background modeling"], [719, 742, "Metric", "utility and performance"]]}
+{"doc_id": "INTERSPEECH_2007_40_abs", "entities": [[0, 24, "Task", "Information distillation"], [217, 304, "Method", "using information extraction annotations to augment document retrieval for distillation"], [636, 645, "Metric", "precision"], [437, 483, "Material", "NIST Automatic Content Extraction ( ACE ) task"]]}
+{"doc_id": "CVPR_2003_30_abs", "entities": [[325, 456, "Task", "acquisition of true three-dimensional affine and Euclidean models from multiple images and their recognition in a single photograph"], [20, 147, "Method", "a novel representation for three-dimensional objects in terms of affine-invariant image patches and their spatial relationships"]]}
+{"doc_id": "NIPS_2016_80_abs", "entities": [[20, 50, "Task", "nearest neighbor ( NN ) search"]]}

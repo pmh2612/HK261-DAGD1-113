@@ -1,0 +1,10 @@
+dataset: scierc
+kind: gliner
+labels:
+  dataset: Material
+  evaluation metric: Metric
+  method: Method
+  task: Task
+model: urchade/gliner_medium-v2.1
+name: gliner
+threshold: 0.5

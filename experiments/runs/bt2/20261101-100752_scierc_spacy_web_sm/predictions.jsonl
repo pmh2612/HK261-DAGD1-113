@@ -1,0 +1,100 @@
+{"doc_id": "X96-1059", "entities": [[0, 11, "Method", "Recognition"], [311, 326, "Method", "Evaluation Task"], [329, 332, "Method", "MET"]]}
+{"doc_id": "ICCV_2001_47_abs", "entities": []}
+{"doc_id": "INTERSPEECH_2013_21_abs", "entities": []}
+{"doc_id": "H01-1049", "entities": [[302, 312, "Method", "LCS-Marine"]]}
+{"doc_id": "C96-1062", "entities": []}
+{"doc_id": "CVPR_2009_18_abs", "entities": []}
+{"doc_id": "P85-1019", "entities": [[91, 117, "Method", "Carnegie-Mellon University"]]}
+{"doc_id": "P05-1039", "entities": [[136, 143, "Method", "F-score"], [201, 206, "Method", "NEGRA"]]}
+{"doc_id": "P06-2012", "entities": [[408, 411, "Method", "ACE"]]}
+{"doc_id": "P06-1018", "entities": [[415, 418, "Method", "TAG"], [421, 425, "Method", "HPSG"], [430, 433, "Method", "LFG"]]}
+{"doc_id": "NIPS_2001_11_abs", "entities": [[701, 705, "Method", "DRAM"], [744, 748, "Method", "CMOS"]]}
+{"doc_id": "CVPR_1999_15_abs", "entities": [[54, 62, "Method", "bifo-cal"]]}
+{"doc_id": "C94-1091", "entities": [[686, 691, "Method", "Nagao"], [731, 759, "Method", "Noun Classifier Associations"], [762, 765, "Method", "NCA"], [865, 868, "Method", "NCA"]]}
+{"doc_id": "ICCV_2003_161_abs", "entities": []}
+{"doc_id": "CVPR_2009_10_abs", "entities": [[1074, 1089, "Method", "PASCAL VOC 2006"]]}
+{"doc_id": "N03-1026", "entities": [[92, 119, "Method", "Lexical-Functional Grammars"], [122, 125, "Method", "LFG"], [227, 230, "Method", "LFG"]]}
+{"doc_id": "ICML_2016_11_abs", "entities": [[49, 52, "Method", "PCA"], [534, 537, "Method", "PCA"], [713, 716, "Method", "PCA"], [961, 964, "Method", "PCA"], [1087, 1090, "Method", "PCA"]]}
+{"doc_id": "C88-1044", "entities": []}
+{"doc_id": "INTERSPEECH_2008_20_abs", "entities": []}
+{"doc_id": "ICASSP_2016_11_abs", "entities": [[630, 640, "Method", "Cramér-Rao"]]}
+{"doc_id": "N06-1037", "entities": [[513, 516, "Method", "ACE"], [643, 646, "Method", "ACE"]]}
+{"doc_id": "P05-2013", "entities": [[93, 96, "Method", "CCG"], [328, 331, "Method", "CCG"], [405, 413, "Method", "Penn WSJ"]]}
+{"doc_id": "C04-1128", "entities": []}
+{"doc_id": "CVPR_2006_10_abs", "entities": [[886, 889, "Method", "SVM"]]}
+{"doc_id": "NIPS_2002_11_abs", "entities": []}
+{"doc_id": "P06-3007", "entities": [[330, 338, "Method", "PageRank"]]}
+{"doc_id": "ICCV_2013_25_abs", "entities": []}
+{"doc_id": "P05-1076", "entities": []}
+{"doc_id": "C04-1103", "entities": [[267, 270, "Method", "DOM"], [402, 408, "Method", "n-gram"], [440, 442, "Method", "TM"]]}
+{"doc_id": "NIPS_2002_18_abs", "entities": [[201, 205, "Method", "VLSI"]]}
+{"doc_id": "C86-1081", "entities": []}
+{"doc_id": "P03-1070", "entities": [[535, 538, "Method", "ECA"]]}
+{"doc_id": "P05-1056", "entities": [[224, 227, "Method", "HMM"], [677, 680, "Method", "CRF"], [722, 725, "Method", "HMM"], [752, 756, "Method", "NIST"]]}
+{"doc_id": "CVPR_2011_11_abs", "entities": [[748, 774, "Method", "Multiple Instance Learning"], [777, 780, "Method", "MIL"], [895, 898, "Method", "MAP"]]}
+{"doc_id": "ICML_2016_10_abs", "entities": [[658, 685, "Method", "Empirical Risk Minimization"], [688, 691, "Method", "ERM"]]}
+{"doc_id": "C04-1011", "entities": [[41, 57, "Method", "Kullback-Leibler"], [264, 284, "Method", "the Kullback-Leibler"]]}
+{"doc_id": "ECCV_2006_13_abs", "entities": []}
+{"doc_id": "N04-1022", "entities": [[19, 29, "Method", "Bayes-Risk"], [32, 35, "Method", "MBR"], [378, 380, "Method", "MT"], [506, 509, "Method", "MBR"], [584, 587, "Method", "MBR"], [629, 631, "Method", "MT"]]}
+{"doc_id": "E89-1016", "entities": [[109, 125, "Method", "Natural Language"], [416, 432, "Method", "the Wizard of Oz"], [455, 457, "Method", "NL"]]}
+{"doc_id": "E06-1022", "entities": [[96, 112, "Method", "Bayesian Network"], [117, 128, "Method", "Naive Bayes"]]}
+{"doc_id": "I05-5004", "entities": []}
+{"doc_id": "H01-1042", "entities": [[205, 207, "Method", "MT"], [504, 506, "Method", "MT"]]}
+{"doc_id": "C04-1035", "entities": [[431, 436, "Method", "TiMBL"]]}
+{"doc_id": "C04-1036", "entities": [[173, 176, "Method", "NLP"]]}
+{"doc_id": "CVPR_2011_10_abs", "entities": []}
+{"doc_id": "ECCV_2012_30_abs", "entities": []}
+{"doc_id": "P08-1105", "entities": []}
+{"doc_id": "ICML_2006_119_abs", "entities": []}
+{"doc_id": "P04-2005", "entities": [[242, 269, "Method", "Natural Language Processing"], [272, 275, "Method", "NLP"], [598, 601, "Method", "WSD"], [661, 686, "Method", "algorithm on standard WSD"]]}
+{"doc_id": "NIPS_2016_560_abs", "entities": []}
+{"doc_id": "P06-1053", "entities": []}
+{"doc_id": "CVPR_2016_413_abs", "entities": []}
+{"doc_id": "ICML_1995_38_abs", "entities": [[591, 596, "Method", "GOLEM"]]}
+{"doc_id": "P06-4007", "entities": [[21, 27, "Method", "FERRET"]]}
+{"doc_id": "E99-1015", "entities": []}
+{"doc_id": "CVPR_2004_18_abs", "entities": []}
+{"doc_id": "J86-4002", "entities": []}
+{"doc_id": "P06-1013", "entities": [[147, 150, "Method", "WSD"], [262, 265, "Method", "WSD"], [397, 403, "Method", "SemCor"]]}
+{"doc_id": "P05-1046", "entities": [[496, 499, "Method", "HMM"]]}
+{"doc_id": "J82-3002", "entities": [[103, 110, "Method", "Chat-80"], [113, 120, "Method", "Chat-80"], [379, 386, "Method", "Chat-80"]]}
+{"doc_id": "ECCV_2016_99_abs", "entities": [[445, 501, "Method", "Joint Classification-Regression Recurrent Neural Network"]]}
+{"doc_id": "I05-5003", "entities": [[34, 36, "Method", "MT"], [218, 222, "Method", "BLEU"], [225, 229, "Method", "NIST"], [232, 235, "Method", "WER"]]}
+{"doc_id": "CVPR_2008_256_abs", "entities": [[773, 801, "Method", "Adaptive Simulated Annealing"], [937, 940, "Method", "ASA"], [1349, 1354, "Method", "VIVID"]]}
+{"doc_id": "P01-1056", "entities": []}
+{"doc_id": "ICCV_2003_151_abs", "entities": []}
+{"doc_id": "C90-3063", "entities": []}
+{"doc_id": "J05-4003", "entities": [[557, 559, "Method", "MT"]]}
+{"doc_id": "C00-2123", "entities": [[85, 87, "Method", "MT"], [508, 517, "Method", "Verbmobil"]]}
+{"doc_id": "E91-1012", "entities": [[496, 498, "Method", "LR"], [797, 799, "Method", "CF"]]}
+{"doc_id": "J86-3001", "entities": []}
+{"doc_id": "P86-1011", "entities": [[69, 92, "Method", "Tree Adjoining Grammars"]]}
+{"doc_id": "E95-1033", "entities": []}
+{"doc_id": "W02-1602", "entities": [[182, 185, "Method", "UNL"], [461, 467, "Method", "UNL-L0"], [1544, 1546, "Method", "MT"]]}
+{"doc_id": "C04-1106", "entities": []}
+{"doc_id": "ECCV_2016_204_abs", "entities": [[23, 34, "Method", "Mahalanobis"], [340, 384, "Method", "Weighted Approximate Rank Component Analysis"], [852, 858, "Method", "minima"]]}
+{"doc_id": "INTERSPEECH_2006_21_abs", "entities": []}
+{"doc_id": "NIPS_2015_18_abs", "entities": [[648, 657, "Method", "Dirichlet"]]}
+{"doc_id": "CVPR_1994_10_abs", "entities": [[173, 180, "Method", "MINPRAN"], [371, 378, "Method", "MINPRAN"], [588, 589, "Method", "N"], [654, 661, "Method", "MINPRAN"], [832, 839, "Method", "MINPRAN"]]}
+{"doc_id": "P83-1004", "entities": [[92, 95, "Method", "MPS"]]}
+{"doc_id": "C90-3045", "entities": []}
+{"doc_id": "CVPR_1993_10_abs", "entities": []}
+{"doc_id": "ICML_2016_18_abs", "entities": [[600, 629, "Method", "Convolutional Neural Networks"], [632, 635, "Method", "CNN"], [785, 788, "Method", "CNN"]]}
+{"doc_id": "I05-4010", "entities": [[529, 531, "Method", "MT"]]}
+{"doc_id": "ICCV_2013_47_abs", "entities": [[770, 804, "Method", "Constrained Delaunay Triangulation"], [892, 896, "Method", "LAGC"]]}
+{"doc_id": "H05-1095", "entities": []}
+{"doc_id": "A97-1020", "entities": [[0, 7, "Method", "GLOSSER"], [253, 257, "Method", "UNIX"], [262, 269, "Method", "Windows"], [357, 392, "Method", "Applied Natural Language Processing"]]}
+{"doc_id": "N03-1033", "entities": [[491, 512, "Method", "the Penn Treebank WSJ"]]}
+{"doc_id": "ECCV_2016_212_abs", "entities": [[286, 289, "Method", "CNN"], [904, 907, "Method", "CNN"], [1070, 1073, "Method", "CNN"]]}
+{"doc_id": "ICASSP_1997_706_abs", "entities": [[179, 182, "Method", "OOV"], [416, 419, "Method", "OOV"], [448, 451, "Method", "ASR"], [633, 641, "Method", "acoustic"]]}
+{"doc_id": "INTERSPEECH_2008_28_abs", "entities": [[368, 370, "Method", "OA"], [478, 481, "Method", "ASR"], [789, 792, "Method", "ANF"], [878, 881, "Method", "MSG"]]}
+{"doc_id": "ECCV_2016_110_abs", "entities": []}
+{"doc_id": "CVPR_2008_258_abs", "entities": []}
+{"doc_id": "C08-2010", "entities": [[40, 43, "Method", "NLP"], [129, 132, "Method", "NLP"], [164, 166, "Method", "MT"], [633, 635, "Method", "MT"]]}
+{"doc_id": "E93-1066", "entities": []}
+{"doc_id": "INTERSPEECH_2014_40_abs", "entities": [[242, 244, "Method", "F0"], [298, 306, "Method", "Fujisaki"], [468, 476, "Method", "Fujisaki"], [548, 556, "Method", "Fujisaki"]]}
+{"doc_id": "CVPR_2010_30_abs", "entities": []}
+{"doc_id": "CVPR_2004_30_abs", "entities": []}
+{"doc_id": "INTERSPEECH_2007_40_abs", "entities": [[433, 476, "Method", "the NIST Automatic Content Extraction ( ACE"], [524, 527, "Method", "ACE"]]}
+{"doc_id": "CVPR_2003_30_abs", "entities": []}
+{"doc_id": "NIPS_2016_80_abs", "entities": []}
