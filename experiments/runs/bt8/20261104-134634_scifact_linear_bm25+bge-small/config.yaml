@@ -1,0 +1,18 @@
+dataset: scifact
+system:
+  name: linear_bm25+bge-small
+  kind: linear
+  sparse: bm25
+  dense: bge-small
+  alpha: 0.5
+components:
+  bm25:
+    kind: bm25
+    field: title2_abstract
+    preprocess: stop_stem
+    k1: 1.5
+    b: 0.75
+  bge-small:
+    kind: dense
+    id: BAAI/bge-small-en-v1.5
+    query_prefix: 'Represent this sentence for searching relevant passages: '
