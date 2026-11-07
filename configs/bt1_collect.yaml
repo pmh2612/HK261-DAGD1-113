@@ -1,11 +1,14 @@
 # BT1 - data collection (EXPERIMENT_PLAN.md §4). One run compares three sources on the
 # same sample: arXiv only, Semantic Scholar only, and the two merged.
 #
-# Sampling frame: every arXiv ID listed under `categories` in `months` (cross-lists
-# included), sorted, then shuffled once with `seed`. Each level is a prefix of that order,
+# Sampling frame: every arXiv ID listed under `categories` in `months`, sorted, then
+# shuffled once with `seed`. With `cross_lists: false` (supervisor, 2026-11-06) only papers
+# whose primary category is in `categories` are kept. Each level is a prefix of that order,
 # so tiny ⊂ small ⊂ medium. Changing categories, months or seed changes every level.
 seed: 42
 categories: [cs.IR, cs.CL, cs.LG]
-months: ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06"]  # 3 months gave 13,536 < 20,000
+cross_lists: false
+# Primary-only frame: 6 months give 18,805 < 20,000, 7 months give 21,808.
+months: ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07"]
 levels: {tiny: 200, small: 2000, medium: 20000}
 level: tiny

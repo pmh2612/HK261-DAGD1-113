@@ -1,0 +1,4 @@
+listed 32939 papers, frame 21808 (cross-lists: False, order sha 4a8bb592a815); level tiny: 200
+arXiv: 200/200 records in 2979s (1 cached)
+Semantic Scholar: 200/200 records in 2s (cached: False)
+wrote 200 papers to data/processed/papers_tiny.jsonl

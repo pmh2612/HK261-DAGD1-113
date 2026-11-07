@@ -1,6 +1,8 @@
 """Tests for arXiv OAI-PMH parsing and the arXiv + Semantic Scholar merge."""
 
-from paper_search.collection.arxiv_oai import merge, to_paper
+import pytest
+
+from paper_search.collection.arxiv_oai import merge, parse_listing, to_paper
 from paper_search.collection.semantic_scholar import to_paper as s2_paper
 
 RECORD = """<?xml version="1.0" encoding="UTF-8"?>
@@ -58,3 +60,21 @@ def test_merge_keeps_arxiv_text_and_s2_metadata():
     assert merge(ax, None) == ax
     preprint = s2_paper({"paperId": "x", "venue": "arXiv.org", "externalIds": {}}, "v")
     assert preprint.venue is None
+
+
+LISTING = """<dl id='articles'>
+<dt><a href ="/abs/2401.00272" title="Abstract" id="2401.00272">arXiv:2401.00272</a></dt>
+<dd><div class='list-subjects'><span class='descriptor'>Subjects:</span>
+  <span class="primary-subject">Information Retrieval (cs.IR)</span>
+</div></dd>
+<dt><a href ="/abs/2401.00737" title="Abstract" id="2401.00737">arXiv:2401.00737</a></dt>
+<dd><div class='list-subjects'><span class='descriptor'>Subjects:</span>
+  <span class="primary-subject">Computer Vision and Pattern Recognition (cs.CV)</span>;
+  Information Retrieval (cs.IR)
+</div></dd>"""
+
+
+def test_parse_listing_reads_primary_category():
+    assert parse_listing(LISTING) == {"2401.00272": "cs.IR", "2401.00737": "cs.CV"}
+    with pytest.raises(ValueError):
+        parse_listing('<dt><a href ="/abs/2401.00001">x</a></dt>')

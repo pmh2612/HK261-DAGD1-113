@@ -7,7 +7,7 @@ under data/raw/, so a re-run makes no network calls.
 
 Metrics for each source go to experiments/runs/bt1/<timestamp>_<source>/.
 
-Run: .venv/bin/python scripts/bt1_collect.py [--config configs/bt1_collect.yaml]
+Run: .venv/bin/python scripts/bt1_collect.py [--config configs/bt1_collect.yaml] [--level small]
 """
 
 import argparse
@@ -72,7 +72,10 @@ def main() -> None:
     """Frame, sample, fetch, merge, measure."""
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--config", type=Path, default=PROJECT_ROOT / "configs/bt1_collect.yaml")
-    cfg = yaml.safe_load(parser.parse_args().config.read_text())
+    parser.add_argument("--level", help="override the config's level (tiny / small / medium)")
+    args = parser.parse_args()
+    cfg = yaml.safe_load(args.config.read_text())
+    cfg["level"] = args.level or cfg["level"]
     level, n = cfg["level"], cfg["levels"][cfg["level"]]
     version = f"arxiv-{level}"
     raw = settings.raw_dir / "arxiv"
@@ -82,20 +85,23 @@ def main() -> None:
         print(line, flush=True)
         log.append(line)
 
-    frame = sorted(
-        {
-            i
-            for c in cfg["categories"]
-            for m in cfg["months"]
-            for i in arxiv_oai.list_month(c, m, raw / "listing")
-        }
-    )
+    listed = {
+        i: primary
+        for c in cfg["categories"]
+        for m in cfg["months"]
+        for i, primary in arxiv_oai.list_month(c, m, raw / "listing_primary").items()
+    }
+    keep_cross = cfg.get("cross_lists", True)
+    frame = sorted(i for i, p in listed.items() if keep_cross or p in cfg["categories"])
     assert len(frame) >= max(cfg["levels"].values()), f"frame has only {len(frame)} papers"
     order = frame.copy()
     random.Random(cfg["seed"]).shuffle(order)
     ids = order[:n]
     frame_sha = hashlib.sha256("\n".join(order).encode()).hexdigest()[:12]
-    say(f"frame {len(frame)} papers (order sha {frame_sha}); level {level}: {n}")
+    say(
+        f"listed {len(listed)} papers, frame {len(frame)} (cross-lists: {keep_cross}, "
+        f"order sha {frame_sha}); level {level}: {n}"
+    )
 
     # (b) arXiv only
     start, from_cache = time.monotonic(), 0
@@ -110,7 +116,8 @@ def main() -> None:
 
     # (a) Semantic Scholar only
     start = time.monotonic()
-    s2_cache = settings.raw_dir / "s2" / f"arxiv_{level}.jsonl"
+    # Keyed by the frame too: a new frame gives a new sample under the same level name.
+    s2_cache = settings.raw_dir / "s2" / f"arxiv_{level}_{frame_sha}.jsonl"
     s2_cached = s2_cache.exists()
     if s2_cached:
         records = [json.loads(line) for line in s2_cache.open()]

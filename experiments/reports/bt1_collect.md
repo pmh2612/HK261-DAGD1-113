@@ -1,18 +1,25 @@
 # BT1 — Data collection (`tiny`)
 
-Run `20261027-112046`, config [`configs/bt1_collect.yaml`](../../configs/bt1_collect.yaml),
+Run `20261107-164502`, config [`configs/bt1_collect.yaml`](../../configs/bt1_collect.yaml),
 script [`scripts/bt1_collect.py`](../../scripts/bt1_collect.py). Metrics per source in
-[`experiments/runs/bt1/`](../runs/bt1/). The metrics files come from a re-run served from
-the cache; collection times are from the first, uncached run
-([`20261027-112046_network.log`](../runs/bt1/20261027-112046_network.log)).
+[`experiments/runs/bt1/`](../runs/bt1/), from an uncached run, so collection times are real.
+
+**Re-run on 2026-11-07 after the supervisor dropped cross-lists** (decision in
+[`docs/decisions.md`](../../docs/decisions.md)). The first run, `20261027-112046`, sampled a
+frame with cross-lists; its numbers are kept at the end of this report.
 
 ## Setup
 
-- **Sampling frame:** every arXiv ID listed under `cs.IR`, `cs.CL` or `cs.LG` and
-  submitted January–June 2024, cross-lists included: 32,152 listings, **28,330 unique
-  papers**. Sorted, shuffled once with seed 42; `tiny` is the first 200, `small` the first
-  2,000, `medium` the first 20,000, so `tiny ⊂ small ⊂ medium`.
-  Three months (13,536 papers) were too few for `medium`, hence six.
+- **Sampling frame:** every arXiv ID listed under `cs.IR`, `cs.CL` or `cs.LG`, submitted
+  January–July 2024, whose **primary** category is one of the three: 32,939 listed papers,
+  **21,808 in the frame**. Sorted, shuffled once with seed 42; `tiny` is the first 200,
+  `small` the first 2,000, `medium` the first 20,000, so `tiny ⊂ small ⊂ medium`.
+  - The primary category comes from the `/list` pages themselves (`primary-subject`), so
+    filtering the frame costs no extra OAI calls.
+  - Primary-only keeps 66% of listed papers: six months give 18,805, too few for `medium`,
+    hence July was added.
+  - The new listings were checked against the first run's: the same IDs for every
+    category and month of January–June.
 - **arXiv:** the search API (`export.arxiv.org`) returned 429 to every request on
   2026-10-27, so the frame comes from the `/list` pages (allowed by robots.txt, 15 s apart)
   and metadata from OAI-PMH `GetRecord` (3 s apart).
@@ -29,15 +36,15 @@ Share of the 200 sampled papers that have each field:
 |---|---:|---:|---:|
 | abstract | 1.00 | 1.00 | 1.00 |
 | year | 1.00 | 1.00 | 1.00 |
-| venue | 0.675 | 0.08¹ | 0.68 |
+| venue | 0.67 | 0.125¹ | 0.67 |
 | authors | 1.00 | 1.00 | 1.00 |
 | author IDs | 1.00 | 0.00 | 1.00 |
-| DOI | 0.945 | 0.09 | 0.945 |
+| DOI | 0.945 | 0.125 | 0.945 |
 | citation count | 1.00 | 0.00 | 1.00 |
 | fields of study | 1.00 | 0.00 | 1.00 |
 | arXiv categories | 0.00 | 1.00 | 1.00 |
-| mean abstract length (words) | 177.7 | 177.1 | 177.1 |
-| collection time, 200 papers | 21 s | 788 s | 809 s |
+| mean abstract length (words) | 169.9 | 170.6 | 170.6 |
+| collection time, 200 papers | 2 s | 2,979 s | 2,981 s |
 
 ¹ arXiv's `journal-ref`, a free-text citation string, not a venue name.
 
@@ -49,31 +56,38 @@ Agreement between the two sources:
 | titles equal after normalization | 97.0% (6 differ) |
 | DOI conflicts | 0 |
 | S2 has no abstract | 0 |
-| abstracts identical (similarity ≥ 0.95) | 90.5% (19 differ) |
+| abstracts identical (similarity ≥ 0.95) | 91.5% (17 differ) |
 | median abstract similarity | 1.00 |
 | duplicate titles in the sample | 0 |
 
+Primary category of the 200: `cs.LG` 106, `cs.CL` 83, `cs.IR` 11. 128 are also cross-listed
+elsewhere. Fields of study (S2): all 200 Computer Science, then Mathematics 29,
+Linguistics 25, Engineering 21, Medicine 12.
+
+**arXiv was four times slower than in the first run: 14.9 s per paper** (3.9 s on
+2026-10-27). Single records took up to 2 minutes, i.e. the client was backing off on
+429s or timeouts; the run does not log which. The `/list` download the same day also
+timed out once, which is why `_get` now retries on timeouts and dropped connections too.
+At this rate `small` takes about 8 hours instead of 2.2.
+
 ## Error analysis
 
-1. **S2 gives "arXiv.org" as the venue for 59 of 200 papers** (29.5%). That is where the
-   preprint lives, not a venue, and would become one `Venue` node holding a third of the
-   graph. Now normalized to no venue; real venue coverage is 67.5%, not 97%.
-2. **OAI-PMH `<created>` is not the v1 date.** `2401.06344` has `created` 2026-03-20; 33
-   of 200 papers got a 2025 or 2026 year from it. Year is now taken from the arXiv ID
-   (`2401` → 2024).
-3. **Title differs where the published version was renamed:** `2403.08002` *Towards a
-   clinically accessible radiology foundation model…* vs *A clinically accessible small
-   multimodal radiology model…*; `2405.10780` adds/drops *and Miniaturized*;
-   `2405.06361` LaTeX `$\ell_2$` vs Unicode `ℓ2`.
-4. **Abstract differs for the same reason (19 papers).** `2405.10780` similarity 0.02 and
-   `2403.08002` 0.05: S2 holds the journal abstract, arXiv the preprint's. The combined
-   record keeps the arXiv text.
-5. **S2 year is the publication year:** 6 papers are earlier than their arXiv year, e.g.
-   `2401.10355` (2019, *Mechanical Systems and Signal Processing*) posted to arXiv in 2024.
-   The combined record keeps the S2 year.
-6. **Cross-lists bring in other fields.** Only 123 of 200 papers have `cs.IR`, `cs.CL` or
-   `cs.LG` as their *primary* category; the rest are primarily `cs.CV` (21), `stat.ML` (7),
-   `eess.SP` (6) and others.
+1. **S2 gives "arXiv.org" as the venue for 58 of 200 papers** (29%; 59 in the first
+   sample). That is where the preprint lives, not a venue, and would become one `Venue`
+   node holding a third of the graph. Normalized to no venue; real venue coverage is 67%.
+2. **OAI-PMH `<created>` is not the v1 date** (found in the first sample: `2401.06344` has
+   `created` 2026-03-20; 33 of 200 papers got a 2025 or 2026 year from it). Year is taken
+   from the arXiv ID (`2401` → 2024); no paper in this sample is dated after 2024.
+3. **Title and abstract differ where the published version was revised** (6 titles,
+   17 abstracts): S2 holds the published text, arXiv the preprint's. The combined record
+   keeps the arXiv text. Examples from the first sample: `2403.08002` renamed on
+   publication, abstract similarity 0.05; `2405.06361` LaTeX `$\ell_2$` vs Unicode `ℓ2`.
+4. **S2 year is the publication year:** 6 papers are earlier than their arXiv year (the
+   first sample's `2401.10355`: 2019 journal paper posted to arXiv in 2024). The combined
+   record keeps the S2 year.
+5. **`cs.IR` is small:** 11 of 200 papers (5.5%), against 106 `cs.LG`. That is its share
+   of the frame (1,278 of 21,808, 5.9%; `cs.CL` 41.4%, `cs.LG` 52.7%), not a sampling
+   error, but queries about retrieval itself will have few relevant papers at `tiny`.
 
 ## Conclusion
 
@@ -82,12 +96,16 @@ venues or fields of study (needed by BT5); S2 has no arXiv categories and in ~10
 cases holds a different (published) abstract. Matching by arXiv ID is exact: 200/200, no
 DOI conflicts.
 
-## Before `small` — decisions for the team
+## Next: `small`
 
-1. **Keep cross-lists whose primary category is outside the three?** (77/200 now.)
-   Keeping them gives a broader corpus; dropping them makes labelling easier. Restricting
-   to primary would change the frame, so it has to be decided before `small`.
-2. **arXiv OAI is the bottleneck: 3.9 s per paper** — `small` ≈ 2.2 h, `medium` ≈ 22 h.
-   S2 takes ~1 min for `medium`. Options: accept it (it runs unattended and caches), or
-   take abstracts from S2 and only categories from arXiv (the `/list` pages already show
-   them). The second trades ~10% preprint abstracts for published ones; not tested yet.
+The supervisor chose option A for `small`: abstracts from arXiv, run unattended (about
+8 hours at today's speed; cached, so an interrupted run resumes). The `small` run measures
+how often S2's abstract differs from arXiv's, which decides A or B for `medium`.
+
+## First run (with cross-lists), for reference
+
+Run `20261027-112046`: frame of January–June 2024 with cross-lists, 28,330 papers. Same
+conclusion; coverage within one point of the table above (venue 0.68, DOI 0.945), abstracts
+identical 90.5%, arXiv 3.9 s per paper. Only 123 of 200 papers had a primary category among
+the three (the rest mainly `cs.CV` 21, `stat.ML` 7, `eess.SP` 6), which led to dropping
+cross-lists.

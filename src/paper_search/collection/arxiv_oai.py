@@ -25,42 +25,61 @@ NS = {"a": "http://arxiv.org/OAI/arXiv/"}
 
 
 def _get(url: str, delay: float, **params) -> str:
-    """One polite GET, with backoff on 429 and 5xx."""
+    """One polite GET, with backoff on 429, 5xx, timeouts and dropped connections."""
     for attempt in range(8):
         time.sleep(delay)
-        resp = requests.get(url, params=params, timeout=120)
-        if resp.status_code != 429 and resp.status_code < 500:
-            resp.raise_for_status()
-            return resp.text
+        try:
+            resp = requests.get(url, params=params, timeout=120)
+        except (requests.Timeout, requests.ConnectionError):
+            if attempt == 7:
+                raise
+        else:
+            if resp.status_code != 429 and resp.status_code < 500:
+                resp.raise_for_status()
+                return resp.text
+            if attempt == 7:
+                resp.raise_for_status()
         time.sleep(min(10 * 2**attempt, 300))
-    resp.raise_for_status()
-    return ""  # unreachable: raise_for_status raised on the last 429/5xx
+    return ""  # unreachable: the last attempt returns or raises
 
 
-def list_month(category: str, month: str, cache_dir: Path) -> list[str]:
-    """The arXiv IDs listed under `category` for `month` ("2024-03"), cross-lists included.
+def parse_listing(html: str) -> dict[str, str]:
+    """{arXiv ID: primary category} for every entry on one /list page."""
+    out = {}
+    for entry in html.split("<dt>")[1:]:
+        arxiv_id = re.search(r'href\s*=\s*"/abs/(\d{4}\.\d{4,5})"', entry)
+        primary = re.search(r'class="primary-subject">[^<]*\(([^)]+)\)</span>', entry)
+        if not (arxiv_id and primary):
+            raise ValueError(f"unexpected /list entry: {entry[:200]!r}")
+        out[arxiv_id.group(1)] = primary.group(1)
+    return out
 
-    Only IDs with that month's YYMM prefix are kept, so the frame means "submitted in
-    the month" however late a cross-list was added. Cached, since a past month's
-    listing is what defines the sample.
+
+def list_month(category: str, month: str, cache_dir: Path) -> dict[str, str]:
+    """{arXiv ID: primary category} listed under `category` for `month` ("2024-03").
+
+    Cross-lists are included; the caller filters on the primary category. Only IDs with
+    that month's YYMM prefix are kept, so the frame means "submitted in the month"
+    however late a cross-list was added. Cached, since a past month's listing is what
+    defines the sample.
     """
     path = cache_dir / f"{category}_{month}.json"
     if path.exists():
         return json.loads(path.read_text())
-    ids: list[str] = []
+    listed: dict[str, str] = {}
     skip, total = 0, 1
     while skip < total:
         html = _get(
             LIST_URL.format(category=category, month=month), LIST_DELAY, skip=skip, show=PAGE
         )
         total = int(re.search(r"Total of (\d+) entries", html).group(1))
-        ids += re.findall(r'href\s*=\s*"/abs/(\d{4}\.\d{4,5})"', html)
+        listed |= parse_listing(html)
         skip += PAGE
     prefix = month[2:4] + month[5:7]
-    ids = [i for i in dict.fromkeys(ids) if i.startswith(prefix)]
+    listed = {i: c for i, c in listed.items() if i.startswith(prefix)}
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(ids))
-    return ids
+    path.write_text(json.dumps(listed))
+    return listed
 
 
 def fetch_record(arxiv_id: str, cache_dir: Path) -> tuple[str, bool]:
