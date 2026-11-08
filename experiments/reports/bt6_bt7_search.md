@@ -33,8 +33,9 @@ for the supervisor's answer on cross-listed papers, which decides what `tiny` co
 
 nDCG@10, `rank_bm25` BM25Okapi, k1 = 1.5, b = 0.75.
 
-- **Stemming + stopword removal is the one change that clearly matters:** +0.040 over
-  plain lowercase on title ×2 + abstract (p = 0.0005).
+- **Stemming + stopword removal is the one change that clearly matters:** +0.032 over
+  lowercase only on the same field, title ×2 + abstract (0.692 vs 0.659, p = 0.004);
+  +0.040 over the plainest setup, title + abstract with lowercase only (p = 0.0005).
 - **Weighting the title ×2 helps a little:** +0.008 over title + abstract, not
   significant (p = 0.07).
 - **Title alone is far worse** (0.41–0.47): the abstract carries the evidence. This backs
