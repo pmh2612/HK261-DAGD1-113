@@ -16,6 +16,8 @@ from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 Rank = Callable[[list[str], int], list[list[int]]]
+#: Queries -> scores, one row per query, one column per document.
+Scorer = Callable[[list[str]], np.ndarray]
 
 #: What BM25 indexes. Repeating the title is the simplest way to weight it x2.
 FIELDS: dict[str, Callable[[dict], str]] = {
@@ -40,6 +42,19 @@ def analyzer(preprocess: str) -> Callable[[str], list[str]]:
     return analyze
 
 
+def bm25_scores(
+    docs: list[dict],
+    field: str = "title_abstract",
+    preprocess: str = "lower",
+    k1: float = 1.5,
+    b: float = 0.75,
+) -> Scorer:
+    """BM25Okapi over one field, with the same analyzer at index and query time."""
+    analyze = analyzer(preprocess)
+    index = BM25Okapi([analyze(FIELDS[field](d)) for d in docs], k1=k1, b=b)
+    return lambda queries: np.stack([index.get_scores(analyze(q)) for q in queries])
+
+
 def bm25(
     docs: list[dict],
     field: str = "title_abstract",
@@ -47,17 +62,33 @@ def bm25(
     k1: float = 1.5,
     b: float = 0.75,
 ) -> Rank:
-    """BM25Okapi over one field, with the same analyzer at index and query time."""
-    analyze = analyzer(preprocess)
-    index = BM25Okapi([analyze(FIELDS[field](d)) for d in docs], k1=k1, b=b)
+    """BM25 as a ranker: documents by descending score."""
+    return ranked(bm25_scores(docs, field, preprocess, k1, b))
 
-    def rank(queries: list[str], k: int) -> list[list[int]]:
-        # Stable sort: ties (often all-zero scores) keep document order, run after run.
-        return [
-            np.argsort(-index.get_scores(analyze(q)), kind="stable")[:k].tolist() for q in queries
-        ]
 
-    return rank
+def ranked(score: Scorer) -> Rank:
+    """Turn a scorer into a ranker.
+
+    Stable sort: ties (often all-zero scores) keep document order, run after run.
+    """
+    return lambda queries, k: [
+        np.argsort(-row, kind="stable")[:k].tolist() for row in score(queries)
+    ]
+
+
+def dense_scores(
+    docs: list[dict], model_id: str, query_prefix: str = "", doc_prefix: str = ""
+) -> Scorer:
+    """Cosine similarity to every document, for fusion (BT8). Same vectors as `dense`."""
+    model = SentenceTransformer(model_id)
+    vecs = model.encode(
+        [f"{doc_prefix}{d['title']}. {d['abstract']}" for d in docs],
+        normalize_embeddings=True,
+        batch_size=32,
+    )
+    return lambda queries: (
+        model.encode([query_prefix + q for q in queries], normalize_embeddings=True) @ vecs.T
+    )
 
 
 def _flat_index(vecs: np.ndarray) -> faiss.Index:

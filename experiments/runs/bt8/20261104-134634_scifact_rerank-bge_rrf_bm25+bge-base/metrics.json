@@ -1,0 +1,12 @@
+{
+  "queries": 300,
+  "skipped": 0,
+  "ndcg@10": 0.7244,
+  "recall@10": 0.8578,
+  "recall@100": 0.97,
+  "mrr@10": 0.6882,
+  "ms_per_query": 1754.26,
+  "own_ms_per_query": 1749.03,
+  "p_vs_best": 0.0067,
+  "p_vs_bge-base": 0.2509
+}
