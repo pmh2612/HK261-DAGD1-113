@@ -1,0 +1,8 @@
+dataset: scierc
+kind: spacy
+label_map:
+  ORG: Method
+  PRODUCT: Method
+  WORK_OF_ART: Method
+model: en_core_web_sm
+name: spacy_web_sm
