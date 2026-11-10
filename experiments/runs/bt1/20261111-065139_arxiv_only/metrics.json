@@ -1,0 +1,23 @@
+{
+  "papers": 2000,
+  "coverage": {
+    "abstract": 1.0,
+    "year": 1.0,
+    "venue": 0.085,
+    "authors": 1.0,
+    "author_ids": 0.0,
+    "doi": 0.105,
+    "citation_count": 0.0,
+    "fields_of_study": 0.0,
+    "categories": 1.0
+  },
+  "abstract_words_mean": 172.8,
+  "seconds": 12263.5,
+  "n_requested": 2000,
+  "frame_size": 21808,
+  "frame_sha": "4a8bb592a815",
+  "network_cached": {
+    "arxiv": false,
+    "s2": false
+  }
+}

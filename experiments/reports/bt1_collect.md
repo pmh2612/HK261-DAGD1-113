@@ -1,6 +1,6 @@
 # BT1 — Data collection (`tiny`)
 
-Run `20261107-164502`, config [`configs/bt1_collect.yaml`](../../configs/bt1_collect.yaml),
+Runs `20261107-164502` (`tiny`) and `20261111-065139` (`small`, section below), config [`configs/bt1_collect.yaml`](../../configs/bt1_collect.yaml),
 script [`scripts/bt1_collect.py`](../../scripts/bt1_collect.py). Metrics per source in
 [`experiments/runs/bt1/`](../runs/bt1/), from an uncached run, so collection times are real.
 
@@ -96,11 +96,62 @@ venues or fields of study (needed by BT5); S2 has no arXiv categories and in ~10
 cases holds a different (published) abstract. Matching by arXiv ID is exact: 200/200, no
 DOI conflicts.
 
-## Next: `small`
+## `small` (2,000 papers)
 
-The supervisor chose option A for `small`: abstracts from arXiv, run unattended (about
-8 hours at today's speed; cached, so an interrupted run resumes). The `small` run measures
-how often S2's abstract differs from arXiv's, which decides A or B for `medium`.
+Run `20261111-065139`, same config with `--level small`; the 200 `tiny` papers come from
+the cache (`tiny ⊂ small`).
+
+| Field | (a) S2 only | (b) arXiv only | (c) combined |
+|---|---:|---:|---:|
+| abstract | 1.00 | 1.00 | 1.00 |
+| venue | 0.677 | 0.085¹ | 0.68 |
+| author IDs | 1.00 | 0.00 | 1.00 |
+| DOI | 0.941 | 0.105 | 0.941 |
+| citation count, fields of study | 1.00 | 0.00 | 1.00 |
+| arXiv categories | 0.00 | 1.00 | 1.00 |
+| collection time | 10 s | 12,263 s² | 12,273 s |
+
+S2 resolves 2,000 / 2,000 by arXiv ID; titles agree 98.0%; no DOI conflicts; no duplicate
+titles. Same picture as `tiny`, so the conclusion stands.
+
+² Time the machine was awake (`time.monotonic`, which stops while macOS sleeps): **6.9 s
+per uncached paper** (1,788 fetched, 212 cached). The run actually took 3.6 days of wall
+time because the laptop slept with its lid closed; `caffeinate -i` only prevents idle
+sleep. At 6.9 s, `medium` (18,000 more papers) needs about 35 hours of awake time.
+
+### How far S2 abstracts differ from arXiv's (the measurement for option A vs B)
+
+- **92.6% identical** (similarity ≥ 0.95); 147 papers (7.4%) differ. 146 of the 147 have
+  a venue: S2 holds the published version, arXiv the preprint.
+- **52 papers (2.6%) differ a lot** (similarity < 0.5). Judged from each S2
+  abstract's opening lines against the paper's title, 49 are the same paper's abstract
+  rewritten for publication (same topic and method, e.g.
+  `2403.11020` *Accelerating prototype selection with spatial abstraction*).
+- **3 are broken in S2 (0.15%):**
+  - `2406.15038`: the abstract is an empty JATS tag, `<jats:p/>`.
+  - `2405.04292`: *Mitigating Clickbait: … Spoiler Generation* carries the abstract of
+    a different paper (abusive comments in Indic languages).
+  - `2406.15291`: truncated to under 30 words.
+
+  The combined record keeps arXiv's abstract, so none of these reaches the data at `small`.
+
+### Proposal for `medium`
+
+**Option B: abstracts from S2 for the 18,000 papers not yet fetched,** keeping the arXiv
+abstracts already in the cache for the first 2,000.
+
+- Under 3% of S2 abstracts are materially different, and those are the published
+  version of the same paper, which is fine for search and extraction.
+- The broken 0.15% can be caught by a check (empty or tag-only text, fewer than 30 words)
+  and fetched from arXiv OAI instead; the wrong-paper case needs a title–abstract
+  vocabulary check, to be tested on these 2,000 before relying on it.
+- Primary category comes from the `/list` pages, which already show every paper's
+  subjects, so no OAI call is needed for categories.
+- Every record says where its abstract came from, so the mix stays traceable.
+- About 35 hours of arXiv calls (A) against minutes (B).
+
+`medium` is not needed yet: the plan runs the 2–3 best methods of each task on `small`
+first.
 
 ## First run (with cross-lists), for reference
 
