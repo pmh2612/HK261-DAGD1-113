@@ -1,0 +1,4 @@
+listed 32939 papers, frame 21808 (cross-lists: False, order sha 4a8bb592a815); level small: 2000
+arXiv: 2000/2000 records in 12263s (212 cached)
+Semantic Scholar: 2000/2000 records in 10s (cached: False)
+wrote 2000 papers to data/processed/papers_small.jsonl

@@ -43,6 +43,22 @@ from the supervisor's requirements; pending Tran Ha My). It changes three things
 The code keeps the `paper_search` package; experiment configs live in `configs/`, runs and
 reports in `experiments/`.
 
+**The supervisor answered the four open questions of the first progress report
+(2026-11-06), accepting each of the team's proposals:**
+
+1. **Cross-lists are dropped.** The frame keeps only papers whose *primary* category is
+   `cs.IR`, `cs.CL` or `cs.LG` (`cross_lists: false` in `configs/bt1_collect.yaml`). The
+   tiny sample is redrawn, so the BT1 tiny numbers are measured again.
+2. **arXiv speed: option A at `small`.** Abstracts come from arXiv (2.2 hours for 2,000
+   papers at the first run's 3.9 s per paper; about 8 hours at the 14.9 s of the tiny
+   re-run on 2026-11-07). The `small` run also measures how far Semantic Scholar abstracts differ
+   from arXiv's; that number decides between A and B (abstracts from Semantic Scholar)
+   for `medium`.
+3. **LLM.** Entities are extracted with the fine-tuned SciBERT (BT2). The local
+   Qwen2.5-3B is tried only for relations (BT3) and normalization (BT4).
+4. **Smaller pooling.** Retrieval judgments pool the top 20 of: linear BM25 + bge-base,
+   BM25, bge-base, bge-small, MiniLM and SPECTER2, instead of every system.
+
 **Also blocking, and not really a decision:** the Semantic Scholar API key. Being applied
 for by Tran Ha My as of 2026-09-24. See [§7](#7-not-a-decision-but-do-it-this-week).
 
