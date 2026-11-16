@@ -1,0 +1,7 @@
+dataset: scifact
+system: bm25_abstract_lower
+kind: bm25
+field: abstract
+preprocess: lower
+k1: 1.5
+b: 0.75

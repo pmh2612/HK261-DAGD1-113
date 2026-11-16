@@ -1,0 +1,43 @@
+# Runtime dependencies. Install with: pip install -r requirements.txt
+# (or `pip install -e .`, which reads pyproject.toml instead)
+
+# --- Data collection ---
+requests>=2.31
+arxiv>=2.1
+
+# --- PDF processing ---
+pymupdf>=1.24
+
+# --- Knowledge Graph ---
+neo4j>=5.20
+
+# --- Information extraction ---
+spacy>=3.7
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl  # BT2 baseline
+gliner>=0.2.29  # zero-shot NER, under evaluation in notebooks/exp_extraction.py
+protobuf>=4.25  # GLiNER's DeBERTa-v3 tokenizer fails to load without it
+
+# --- Local LLM (loaded in-process, no inference server) ---
+# torch and transformers already arrive with sentence-transformers, but the
+# extraction and RAG modules use them directly, so they are declared here too.
+torch>=2.2
+transformers>=4.44
+accelerate>=0.30
+
+# --- Indexing & search ---
+sentence-transformers>=3.0
+faiss-cpu>=1.8
+rank-bm25>=0.2.2
+PyStemmer>=2.2  # Snowball stemming for BM25 (BT6)
+scikit-learn>=1.4  # English stopword list (BT6)
+scipy>=1.11  # paired significance tests
+
+# --- Data handling ---
+pandas>=2.2
+pyarrow>=16.0
+
+# --- Config & utilities ---
+pydantic-settings>=2.2
+python-dotenv>=1.0
+tqdm>=4.66
+pyyaml>=6.0  # experiment configs in configs/

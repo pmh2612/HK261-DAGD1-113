@@ -1,0 +1,5 @@
+dataset: scifact
+system: specter2
+kind: dense
+name: specter2
+precomputed: true

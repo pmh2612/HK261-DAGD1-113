@@ -1,0 +1,33 @@
+{
+  "papers": 200,
+  "coverage": {
+    "abstract": 1.0,
+    "year": 1.0,
+    "venue": 0.68,
+    "authors": 1.0,
+    "author_ids": 1.0,
+    "doi": 0.945,
+    "citation_count": 1.0,
+    "fields_of_study": 1.0,
+    "categories": 1.0
+  },
+  "abstract_words_mean": 177.1,
+  "seconds": 0.0,
+  "overlap": {
+    "matched": 200,
+    "match_rate": 1.0,
+    "title_agrees": 0.97,
+    "doi_conflicts": 0,
+    "s2_abstract_missing_when_matched": 0,
+    "abstract_similarity_median": 1.0,
+    "abstract_identical_share": 0.905,
+    "duplicate_titles_in_sample": 0
+  },
+  "n_requested": 200,
+  "frame_size": 28330,
+  "frame_sha": "41ae7b4da92c",
+  "network_cached": {
+    "arxiv": true,
+    "s2": true
+  }
+}

@@ -1,0 +1,39 @@
+# BT8 - hybrid search and rerank (EXPERIMENT_PLAN.md §4). Components are the systems BT6
+# and BT7 carried forward. KG-augmented search (plan method 3) waits for the BT5 graph.
+# Model names checked on Hugging Face on 2026-11-04 (cross-encoder/ms-marco-MiniLM-L-6-v2
+# now redirects to cross-encoder/ms-marco-MiniLM-L6-v2).
+task: bt8
+components:
+  bm25: {kind: bm25, field: title2_abstract, preprocess: stop_stem, k1: 1.5, b: 0.75}
+  bge-base:
+    kind: dense
+    id: BAAI/bge-base-en-v1.5
+    query_prefix: "Represent this sentence for searching relevant passages: "
+  bge-small:
+    kind: dense
+    id: BAAI/bge-small-en-v1.5
+    query_prefix: "Represent this sentence for searching relevant passages: "
+alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]  # weight on dense, tuned on train
+systems:
+  - {name: bm25, kind: single, part: bm25}
+  - {name: bge-base, kind: single, part: bge-base}
+  - {name: bge-small, kind: single, part: bge-small}
+  - {name: rrf_bm25+bge-base, kind: rrf, parts: [bm25, bge-base], k: 60}
+  - {name: rrf_bm25+bge-small, kind: rrf, parts: [bm25, bge-small], k: 60}
+  - {name: linear_bm25+bge-base, kind: linear, sparse: bm25, dense: bge-base, alpha: 0.5}
+  - {name: linear_bm25+bge-small, kind: linear, sparse: bm25, dense: bge-small, alpha: 0.5}
+  - name: rerank-minilm_bge-base
+    kind: rerank
+    base: bge-base
+    model: cross-encoder/ms-marco-MiniLM-L6-v2
+    depth: 50
+  - name: rerank-minilm_rrf_bm25+bge-base
+    kind: rerank
+    base: rrf_bm25+bge-base
+    model: cross-encoder/ms-marco-MiniLM-L6-v2
+    depth: 50
+  - name: rerank-bge_rrf_bm25+bge-base
+    kind: rerank
+    base: rrf_bm25+bge-base
+    model: BAAI/bge-reranker-base
+    depth: 50

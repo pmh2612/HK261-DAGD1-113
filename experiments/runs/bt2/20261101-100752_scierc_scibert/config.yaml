@@ -1,0 +1,4 @@
+dataset: scierc
+kind: scibert
+model_dir: data/processed/models/scibert_scierc
+name: scibert

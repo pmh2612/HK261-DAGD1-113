@@ -1,0 +1,30 @@
+# BT2 - entity extraction (EXPERIMENT_PLAN.md §4), on SciERC test until our own
+# 50-100 annotated abstracts exist. Types: Task, Method, Metric, Material (SciERC's
+# datasets-and-resources type, the plan's Dataset). Model names checked on Hugging Face
+# on 2026-11-01.
+task: bt2
+systems:
+  - name: gazetteer          # 1. dictionary: every entity name in SciERC train
+    kind: gazetteer
+  - name: spacy_web_sm       # 2. general-purpose NER, the weak reference point
+    kind: spacy
+    model: en_core_web_sm
+    label_map: {ORG: Method, PRODUCT: Method, WORK_OF_ART: Method}
+  - name: scispacy_sci_sm    # 3. SciSpaCy spans, typed by their head word in train
+    kind: scispacy
+  - name: gliner             # zero-shot NER, the prototype's extractor
+    kind: gliner
+    model: urchade/gliner_medium-v2.1
+    labels: {task: Task, method: Method, evaluation metric: Metric, dataset: Material}
+    threshold: 0.5
+  - name: scibert            # 4. SciBERT fine-tuned on SciERC train (train_scibert_ner.py)
+    kind: scibert
+    model_dir: data/processed/models/scibert_scierc
+  - name: llm_zero_shot      # 5. LLM, JSON answer, no examples
+    kind: llm
+    model: Qwen/Qwen2.5-3B-Instruct
+    shots: 0
+  - name: llm_few_shot       # 6. the same with 3 train abstracts as examples
+    kind: llm
+    model: Qwen/Qwen2.5-3B-Instruct
+    shots: 3

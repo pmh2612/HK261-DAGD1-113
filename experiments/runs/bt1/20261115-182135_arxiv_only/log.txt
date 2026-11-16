@@ -1,0 +1,4 @@
+frame 28330 papers (order sha 41ae7b4da92c); level tiny: 200
+arXiv: 200/200 records in 643s (0 cached)
+Semantic Scholar: 200/200 records in 4s (cached: False)
+wrote 200 papers to C:\Users\Ha My\Downloads\HK261-DAGD1-113-main (1)\HK261-DAGD1-113-main\data\processed\papers_tiny.jsonl

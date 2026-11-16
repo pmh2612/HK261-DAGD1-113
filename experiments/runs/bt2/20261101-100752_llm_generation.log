@@ -1,0 +1,4 @@
+# Uncached LLM generation run, 2026-11-01, before this run. Its scores were wrong (bare-string
+# answers parsed as characters, fixed in parse_answer); its timings are the real ones:
+llm_zero_shot: (4.66 s/abstract)
+llm_few_shot: (5.73 s/abstract)
