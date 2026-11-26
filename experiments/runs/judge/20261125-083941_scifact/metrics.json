@@ -1,0 +1,69 @@
+{
+  "dataset": "scifact",
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "depth": 10,
+  "queries": 100,
+  "pairs": 2617,
+  "grade_counts": {
+    "0": 1851,
+    "1": 543,
+    "2": 223
+  },
+  "seconds_per_pair": 1.109,
+  "check": {
+    "pairs": 2617,
+    "gold_relevant": 107,
+    "grade>=1": {
+      "kappa": 0.177,
+      "precision": 0.134,
+      "recall": 0.963
+    },
+    "grade>=2": {
+      "kappa": 0.448,
+      "precision": 0.354,
+      "recall": 0.738
+    },
+    "kendall_tau": 0.5,
+    "kendall_p": 0.0752,
+    "best_by_gold": "linear_bm25+bge-small",
+    "best_by_llm": "rrf_bm25+bge-base",
+    "systems": {
+      "bge-base": {
+        "gold_ndcg@10": 0.7559,
+        "llm_ndcg@10": 0.757
+      },
+      "bge-small": {
+        "gold_ndcg@10": 0.7459,
+        "llm_ndcg@10": 0.7363
+      },
+      "bm25": {
+        "gold_ndcg@10": 0.7321,
+        "llm_ndcg@10": 0.742
+      },
+      "linear_bm25+bge-base": {
+        "gold_ndcg@10": 0.7809,
+        "llm_ndcg@10": 0.7904
+      },
+      "linear_bm25+bge-small": {
+        "gold_ndcg@10": 0.7844,
+        "llm_ndcg@10": 0.789
+      },
+      "rerank-minilm_bge-base": {
+        "gold_ndcg@10": 0.7197,
+        "llm_ndcg@10": 0.7468
+      },
+      "rerank-minilm_rrf_bm25+bge-base": {
+        "gold_ndcg@10": 0.7204,
+        "llm_ndcg@10": 0.736
+      },
+      "rrf_bm25+bge-base": {
+        "gold_ndcg@10": 0.7727,
+        "llm_ndcg@10": 0.7933
+      },
+      "rrf_bm25+bge-small": {
+        "gold_ndcg@10": 0.7782,
+        "llm_ndcg@10": 0.7892
+      }
+    }
+  }
+}

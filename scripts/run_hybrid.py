@@ -126,6 +126,7 @@ def main() -> None:
                 sort_keys=False,
             )
         )
+        (out / "run.json").write_text(json.dumps(run) + "\n")  # pooled by scripts/llm_judge.py
         print(f"{name}: nDCG@10 {results[name]['ndcg@10']}", flush=True)
         systems[name]["out"] = out
 
