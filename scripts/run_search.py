@@ -191,6 +191,7 @@ def main() -> None:
             (out / "config.yaml").write_text(
                 yaml.safe_dump({"dataset": args.dataset, "system": name, **spec}, sort_keys=False)
             )
+            (out / "run.json").write_text(json.dumps(ranked) + "\n")  # pooled by llm_judge.py
             out_dirs[name] = out
 
     # Paired t-test on per-query nDCG@10 against the best system: is the gap more than

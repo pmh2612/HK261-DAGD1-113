@@ -127,8 +127,11 @@ def main() -> None:
             )
         )
         (out / "run.json").write_text(json.dumps(run) + "\n")  # pooled by scripts/llm_judge.py
-        print(f"{name}: nDCG@10 {results[name]['ndcg@10']}", flush=True)
+        print(f"{name}: nDCG@10 {results[name].get('ndcg@10', 'no qrels')}", flush=True)
         systems[name]["out"] = out
+
+    if not qrels:  # runs saved for pooling (llm_judge.py); nothing to score yet
+        return
 
     # Paired t-tests on per-query nDCG@10, as in BT6/BT7: against the best system, and
     # against the best single retriever (does fusion help at all?).

@@ -160,6 +160,8 @@ def main() -> None:
     args = parser.parse_args()
 
     docs, queries, gold, _ = load(args.dataset)
+    if args.dataset != "scifact":  # on our corpus load() returns this script's own qrels
+        gold = {}
     docs = {d["paper_id"]: d for d in docs}
     runs = {
         d.name.split(f"_{args.dataset}_", 1)[-1]: json.loads((d / "run.json").read_text())
@@ -202,6 +204,20 @@ def main() -> None:
     }
     if gold:
         result["check"] = check(grades, gold, runs, qids)
+    else:  # our corpus: the grades become the qrels run_search.py / run_hybrid.py read
+        path = PROJECT_ROOT / "data/annotations/retrieval_qrels.jsonl"
+        if path.exists() and any("source" not in r for r in jsonl(path)):
+            raise SystemExit(f"{path} holds hand labels; not overwriting them")
+        # Every cached grade of these queries, not just this pool: a later call with
+        # other runs or another depth adds to the qrels instead of replacing them.
+        # Relevant = grade 2 only. On SciFact grade >= 2 agreed with people (kappa 0.45),
+        # grade >= 1 did not (0.18): the 4B judge hands out 1 too freely (2026-11-27).
+        with path.open("w", encoding="utf-8") as f:
+            for (q, p), g in sorted((k, g) for k, g in done.items() if k[0] in queries):
+                row = {"qid": q, "paper_id": p, "rel": int(g == 2), "grade": g}
+                row["source"] = args.model
+                f.write(json.dumps(row) + "\n")
+        result["qrels"] = str(path.relative_to(PROJECT_ROOT))
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     out = PROJECT_ROOT / "experiments/runs/judge" / f"{stamp}_{args.dataset}"
     out.mkdir(parents=True)
