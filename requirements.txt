@@ -31,6 +31,7 @@ rank-bm25>=0.2.2
 PyStemmer>=2.2  # Snowball stemming for BM25 (BT6)
 scikit-learn>=1.4  # English stopword list (BT6)
 scipy>=1.11  # paired significance tests
+rapidfuzz>=3.9  # fuzzy name matching (BT4)
 
 # --- Data handling ---
 pandas>=2.2

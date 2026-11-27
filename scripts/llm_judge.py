@@ -25,6 +25,7 @@ from scipy.stats import kendalltau
 from sklearn.metrics import cohen_kappa_score
 
 from paper_search.config import PROJECT_ROOT, settings
+from paper_search.eval.llm_label import chooser
 from paper_search.eval.metrics import evaluate
 from run_search import jsonl, load  # scripts/ is on sys.path when this file runs
 
@@ -63,50 +64,23 @@ def pool(runs: list[dict], qids: list[str], depth: int) -> list[tuple[str, str]]
     return list(pairs)
 
 
-def judge(model_id: str, dataset: str, queries: dict, docs: dict, batch: int):
+def judge(model_id: str, dataset: str, queries: dict, docs: dict):
     """A function grading a list of pairs: [(grade, [p0, p1, p2]), ...]."""
-    import torch
-    from transformers import AutoModelForCausalLM, AutoTokenizer
-
-    from paper_search.extraction.ner import device
-
-    tokenizer = AutoTokenizer.from_pretrained(model_id, padding_side="left")
-    # Load on CPU, then move: device_map="mps" segfaults while loading (see ner.llm).
-    model = AutoModelForCausalLM.from_pretrained(model_id, dtype=torch.bfloat16)
-    model = model.to(device()).eval()
-    digits = [tokenizer.convert_tokens_to_ids(d) for d in "012"]
+    choose = chooser(model_id)
     intro, scale = GRADES.get(dataset, GRADES["default"])
 
-    def text(qid: str, pid: str) -> str:
-        d = docs[pid]
-        user = PROMPT.format(
-            intro=intro, query=queries[qid], title=d["title"], abstract=d["abstract"], scale=scale
-        )
-        return tokenizer.apply_chat_template(
-            [{"role": "user", "content": user}],
-            add_generation_prompt=True,
-            enable_thinking=False,  # Qwen3-style templates; ignored by others
-            tokenize=False,
-        )
-
     def grade(pairs: list[tuple[str, str]]) -> list[tuple[int, list[float]]]:
-        out = []
-        for i in range(0, len(pairs), batch):
-            enc = tokenizer(
-                [text(q, p) for q, p in pairs[i : i + batch]], return_tensors="pt", padding=True
-            ).to(model.device)
-            # Left padding: positions must count real tokens only, or a padded pair is
-            # graded differently from the same pair alone.
-            positions = (enc.attention_mask.cumsum(-1) - 1).clamp(min=0)
-            with torch.no_grad():
-                logits = model(**enc, position_ids=positions).logits[:, -1, digits].float()
-            for row in logits.softmax(-1).tolist():
-                out.append((max(range(3), key=row.__getitem__), [round(x, 4) for x in row]))
-        if model.device.type == "mps":
-            # The MPS cache grows with every new input length; on 16 GB it reached 11 GB
-            # and swapped to a crawl (2026-11-25). Freeing it costs nothing measurable.
-            torch.mps.empty_cache()
-        return out
+        prompts = [
+            PROMPT.format(
+                intro=intro,
+                query=queries[q],
+                title=docs[p]["title"],
+                abstract=docs[p]["abstract"],
+                scale=scale,
+            )
+            for q, p in pairs
+        ]
+        return [(max(range(3), key=row.__getitem__), row) for row in choose(prompts, list("012"))]
 
     return grade
 
@@ -155,8 +129,6 @@ def main() -> None:
     parser.add_argument("--model", default="Qwen/Qwen3-4B-Instruct-2507")
     parser.add_argument("--depth", type=int, default=10)
     parser.add_argument("--queries", type=int, help="sample this many queries (seed 42)")
-    # >1 is no faster on MPS and padding flipped a borderline grade (2026-11-25): keep 1.
-    parser.add_argument("--batch", type=int, default=1)
     args = parser.parse_args()
 
     docs, queries, gold, _ = load(args.dataset)
@@ -181,7 +153,7 @@ def main() -> None:
 
     start = time.perf_counter()
     if todo:
-        grade = judge(args.model, args.dataset, queries, docs, args.batch)
+        grade = judge(args.model, args.dataset, queries, docs)
         with cache.open("a", encoding="utf-8") as f:
             for i in range(0, len(todo), 50):
                 chunk = todo[i : i + 50]
