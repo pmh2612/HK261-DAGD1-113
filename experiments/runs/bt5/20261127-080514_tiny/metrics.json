@@ -1,0 +1,342 @@
+{
+  "level": "tiny",
+  "papers": 200,
+  "external_papers": 212,
+  "extractor": "scibert-scierc",
+  "extract_seconds": 14.9,
+  "load_seconds": 1.4,
+  "nodes": {
+    "Author": 4229,
+    "Dataset": 282,
+    "External": 212,
+    "FieldOfStudy": 22,
+    "Method": 1069,
+    "Metric": 185,
+    "Paper": 412,
+    "Task": 645,
+    "Venue": 110
+  },
+  "relationships": {
+    "ADDRESSES": 729,
+    "AUTHORED": 4947,
+    "CITES": 1121,
+    "EVALUATES_ON": 296,
+    "HAS_FIELD": 668,
+    "PUBLISHED_IN": 303,
+    "REPORTS": 242,
+    "USES": 1206
+  },
+  "bt4_rule_normalization": {
+    "Method": {
+      "surface_forms": 1231,
+      "after_normalize": 1100,
+      "after_aliases": 1069
+    },
+    "Dataset": {
+      "surface_forms": 315,
+      "after_normalize": 282,
+      "after_aliases": 282
+    },
+    "Task": {
+      "surface_forms": 715,
+      "after_normalize": 655,
+      "after_aliases": 645
+    },
+    "Metric": {
+      "surface_forms": 190,
+      "after_normalize": 185,
+      "after_aliases": 185
+    }
+  },
+  "acronym_aliases": 84,
+  "queries": {
+    "most-used datasets": {
+      "params": {},
+      "ms": 4.8,
+      "rows": [
+        [
+          "synthetic and real-world datasets",
+          "3"
+        ],
+        [
+          "limited data",
+          "3"
+        ],
+        [
+          "social media",
+          "3"
+        ],
+        [
+          "pre",
+          "2"
+        ],
+        [
+          "online platforms",
+          "2"
+        ]
+      ]
+    },
+    "most-used methods": {
+      "params": {},
+      "ms": 9.6,
+      "rows": [
+        [
+          "machine learning",
+          "9"
+        ],
+        [
+          "GPT-4",
+          "8"
+        ],
+        [
+          "Graph Neural Networks (GNNs)",
+          "6"
+        ],
+        [
+          "ChatGPT",
+          "6"
+        ],
+        [
+          "reinforcement learning",
+          "6"
+        ]
+      ]
+    },
+    "most-studied tasks": {
+      "params": {},
+      "ms": 3.6,
+      "rows": [
+        [
+          "natural language processing",
+          "14"
+        ],
+        [
+          "machine learning",
+          "11"
+        ],
+        [
+          "learning",
+          "7"
+        ],
+        [
+          "generation",
+          "6"
+        ],
+        [
+          "automatic speech recognition",
+          "5"
+        ]
+      ]
+    },
+    "datasets used for task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 2.5,
+      "rows": [
+        [
+          "Instagram",
+          "1"
+        ],
+        [
+          "Twitter",
+          "1"
+        ],
+        [
+          "Telegram",
+          "1"
+        ],
+        [
+          "Persian language",
+          "1"
+        ],
+        [
+          "social",
+          "1"
+        ]
+      ]
+    },
+    "methods used with dataset Y": {
+      "params": {
+        "dataset": "instagram"
+      },
+      "ms": 2.2,
+      "rows": [
+        [
+          "deep learning",
+          "1"
+        ],
+        [
+          "hybrid approach",
+          "1"
+        ],
+        [
+          "classifiers",
+          "1"
+        ],
+        [
+          "regularization techniques",
+          "1"
+        ],
+        [
+          "deep learning networks",
+          "1"
+        ]
+      ]
+    },
+    "papers on task X evaluated on dataset Y": {
+      "params": {
+        "task": "natural language processing",
+        "dataset": "instagram"
+      },
+      "ms": 3.5,
+      "rows": [
+        [
+          "Deep Learning-based Sentiment Analysis in Persian Language",
+          "2021"
+        ]
+      ]
+    },
+    "metrics reported for task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 2.5,
+      "rows": [
+        [
+          "accuracy",
+          "2"
+        ],
+        [
+          "quantitative metrics",
+          "1"
+        ],
+        [
+          "hold-out accuracy",
+          "1"
+        ],
+        [
+          "Chinese Financial Language Understanding Evaluation benchmark",
+          "1"
+        ],
+        [
+          "F1 score",
+          "1"
+        ]
+      ]
+    },
+    "authors with most papers on task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 2.6,
+      "rows": [
+        [
+          "Mohammad Heydari",
+          "1"
+        ],
+        [
+          "Mohsen Khazeni",
+          "1"
+        ],
+        [
+          "Dietrich Klakow",
+          "1"
+        ],
+        [
+          "Aravind R. Krishnan",
+          "1"
+        ],
+        [
+          "Mohammad Ali Soltanshahi",
+          "1"
+        ]
+      ]
+    },
+    "papers the corpus cites most": {
+      "params": {},
+      "ms": 4.2,
+      "rows": [
+        [
+          "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+          "True",
+          "36"
+        ],
+        [
+          "Language Models are Few-Shot Learners",
+          "True",
+          "34"
+        ],
+        [
+          "Attention is All you Need",
+          "True",
+          "29"
+        ],
+        [
+          "LLaMA: Open and Efficient Foundation Language Models",
+          "True",
+          "22"
+        ],
+        [
+          "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+          "True",
+          "22"
+        ]
+      ]
+    },
+    "related papers via shared entities": {
+      "params": {
+        "paper_id": "2403.11069"
+      },
+      "ms": 2.4,
+      "rows": [
+        [
+          "On the Feasibility of In-Context Probing for Data Attribution",
+          "1"
+        ],
+        [
+          "Beyond Single-Model Views for Deep Learning: Optimization versus Generalizability of Stochastic Optimization Algorithms",
+          "1"
+        ],
+        [
+          "Space Decomposition for Sentence Embedding",
+          "1"
+        ],
+        [
+          "STRIDE: A Tool-Assisted LLM Agent Framework for Strategic and Interactive Decision-Making",
+          "1"
+        ],
+        [
+          "Joint vs Sequential Speaker-Role Detection and Automatic Speech Recognition for Air-traffic Control",
+          "1"
+        ]
+      ]
+    },
+    "fields of study": {
+      "params": {},
+      "ms": 2.5,
+      "rows": [
+        [
+          "Computer Science",
+          "200"
+        ],
+        [
+          "Mathematics",
+          "29"
+        ],
+        [
+          "Linguistics",
+          "25"
+        ],
+        [
+          "Engineering",
+          "21"
+        ],
+        [
+          "Medicine",
+          "12"
+        ]
+      ]
+    }
+  }
+}

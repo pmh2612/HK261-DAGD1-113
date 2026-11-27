@@ -18,7 +18,17 @@ CONSTRAINTS = {
     "Topic": "key",
     "Method": "key",
     "Dataset": "key",
+    "Task": "key",
+    "Metric": "key",
+    "FieldOfStudy": "name",
 }
+#: (node label, relationship, PaperEntities field). KG v1 (prototype) below; the BT5
+#: graph passes its own, with one default relationship per type (BT3 baseline).
+KINDS_V1 = (
+    ("Method", "USES_METHOD", "methods"),
+    ("Dataset", "USES_DATASET", "datasets"),
+    ("Topic", "HAS_TOPIC", "topics"),
+)
 BATCH = 500
 
 
@@ -55,7 +65,9 @@ def load_papers(driver: Driver, papers: Iterable[Paper]) -> None:
                 "citation_count": p.citation_count,
                 "has_full_text": p.has_full_text,
                 "data_version": p.data_version,
+                "categories": p.categories,
             },
+            "fields": p.fields_of_study,
             "external": p.is_external,
             "venue": p.venue,
             "venue_key": " ".join(p.venue.lower().split()) if p.venue else None,
@@ -79,6 +91,9 @@ def load_papers(driver: Driver, papers: Iterable[Paper]) -> None:
                 MERGE (v:Venue {key: row.venue_key})
                 ON CREATE SET v.name = row.venue
                 MERGE (p)-[:PUBLISHED_IN]->(v))
+            FOREACH (f IN row.fields |
+                MERGE (fs:FieldOfStudy {name: f})
+                MERGE (p)-[:HAS_FIELD]->(fs))
             WITH p, row
             UNWIND row.authors AS au
             MERGE (a:Author {author_id: au.id})
@@ -105,9 +120,12 @@ def load_citations(driver: Driver, refs: dict[str, list[str]]) -> None:
 
 
 def load_entities(
-    driver: Driver, entities: Iterable[PaperEntities], aliases: dict[str, str]
+    driver: Driver,
+    entities: Iterable[PaperEntities],
+    aliases: dict[str, str],
+    kinds: tuple[tuple[str, str, str], ...] = KINDS_V1,
 ) -> None:
-    """Method / Dataset / Topic nodes keyed on the normalized name, linked to papers.
+    """Entity nodes (one label per kind) keyed on the normalized name, linked to papers.
 
     `aliases` maps an acronym key to its long-form key (`acronym_aliases`). The first
     surface form seen becomes the display `name`; the relationship records which
@@ -116,7 +134,8 @@ def load_entities(
     The entity layer is derived data, so it is dropped and rebuilt whole: otherwise a
     change to normalization would leave the old keys behind as orphan nodes.
     """
-    driver.execute_query("MATCH (n:Method|Dataset|Topic) DETACH DELETE n")
+    labels = {label for label, _, _ in kinds} | {label for label, _, _ in KINDS_V1}
+    driver.execute_query(f"MATCH (n:{'|'.join(sorted(labels))}) DETACH DELETE n")
     rows = [
         {
             "paper_id": e.paper_id,
@@ -127,19 +146,11 @@ def load_entities(
             "extractor": e.extractor,
         }
         for e in entities
-        for label, rel, names in (
-            ("Method", "USES_METHOD", e.methods),
-            ("Dataset", "USES_DATASET", e.datasets),
-            ("Topic", "HAS_TOPIC", e.topics),
-        )
-        for name in names
+        for label, rel, attr in kinds
+        for name in getattr(e, attr)
         if (key := normalize_entity(name))
     ]
-    for label, rel in (
-        ("Method", "USES_METHOD"),
-        ("Dataset", "USES_DATASET"),
-        ("Topic", "HAS_TOPIC"),
-    ):
+    for label, rel, _ in kinds:
         part = [r for r in rows if r["label"] == label]
         for batch in _batched(part):
             driver.execute_query(

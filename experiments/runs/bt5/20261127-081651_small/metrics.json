@@ -1,0 +1,350 @@
+{
+  "level": "small",
+  "papers": 2000,
+  "external_papers": 4577,
+  "extractor": "scibert-scierc",
+  "extract_seconds": 128.1,
+  "load_seconds": 3.2,
+  "nodes": {
+    "Author": 26449,
+    "Dataset": 2521,
+    "External": 4577,
+    "FieldOfStudy": 23,
+    "Method": 8591,
+    "Metric": 1239,
+    "Paper": 6577,
+    "Task": 5296,
+    "Venue": 816
+  },
+  "relationships": {
+    "ADDRESSES": 7289,
+    "AUTHORED": 40764,
+    "CITES": 32337,
+    "EVALUATES_ON": 3189,
+    "HAS_FIELD": 10958,
+    "PUBLISHED_IN": 5202,
+    "REPORTS": 2265,
+    "USES": 11680
+  },
+  "bt4_rule_normalization": {
+    "Method": {
+      "surface_forms": 9931,
+      "after_normalize": 8794,
+      "after_aliases": 8591
+    },
+    "Dataset": {
+      "surface_forms": 2754,
+      "after_normalize": 2530,
+      "after_aliases": 2521
+    },
+    "Task": {
+      "surface_forms": 5855,
+      "after_normalize": 5352,
+      "after_aliases": 5296
+    },
+    "Metric": {
+      "surface_forms": 1296,
+      "after_normalize": 1247,
+      "after_aliases": 1239
+    }
+  },
+  "acronym_aliases": 695,
+  "queries": {
+    "most-used datasets": {
+      "params": {},
+      "ms": 5.5,
+      "rows": [
+        [
+          "English",
+          "38"
+        ],
+        [
+          "time series data",
+          "18"
+        ],
+        [
+          "social media",
+          "14"
+        ],
+        [
+          "low-resource languages",
+          "14"
+        ],
+        [
+          "time series",
+          "14"
+        ]
+      ]
+    },
+    "most-used methods": {
+      "params": {},
+      "ms": 10.6,
+      "rows": [
+        [
+          "machine learning",
+          "76"
+        ],
+        [
+          "GPT-4",
+          "63"
+        ],
+        [
+          "Graph Neural Networks (GNNs)",
+          "58"
+        ],
+        [
+          "neural networks",
+          "54"
+        ],
+        [
+          "fine-tuning methods",
+          "51"
+        ]
+      ]
+    },
+    "most-studied tasks": {
+      "params": {},
+      "ms": 5.0,
+      "rows": [
+        [
+          "natural language processing",
+          "105"
+        ],
+        [
+          "inference",
+          "63"
+        ],
+        [
+          "machine learning",
+          "59"
+        ],
+        [
+          "classification task",
+          "43"
+        ],
+        [
+          "learning",
+          "41"
+        ]
+      ]
+    },
+    "datasets used for task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 2.1,
+      "rows": [
+        [
+          "English",
+          "3"
+        ],
+        [
+          "text classification datasets",
+          "3"
+        ],
+        [
+          "ChatGPT",
+          "2"
+        ],
+        [
+          "GLUE dataset",
+          "2"
+        ],
+        [
+          "medical",
+          "2"
+        ]
+      ]
+    },
+    "methods used with dataset Y": {
+      "params": {
+        "dataset": "english"
+      },
+      "ms": 1.7,
+      "rows": [
+        [
+          "multilingual LLMs",
+          "5"
+        ],
+        [
+          "Instruction Tuning (RA-IT)",
+          "3"
+        ],
+        [
+          "FActScore",
+          "2"
+        ],
+        [
+          "open-source LLMs",
+          "2"
+        ],
+        [
+          "bilingual generative safety evaluator",
+          "1"
+        ]
+      ]
+    },
+    "papers on task X evaluated on dataset Y": {
+      "params": {
+        "task": "natural language processing",
+        "dataset": "english"
+      },
+      "ms": 2.0,
+      "rows": [
+        [
+          "From 'Showgirls' to 'Performers': Fine-tuning with Gender-inclusive Language for Bias Reduction in LLMs",
+          "2024"
+        ],
+        [
+          "Few-shot clinical entity recognition in English, French and Spanish: masked language models outperform generative model prompting",
+          "2024"
+        ],
+        [
+          "An Empirical Comparison of Vocabulary Expansion and Initialization Approaches for Language Models",
+          "2024"
+        ]
+      ]
+    },
+    "metrics reported for task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 1.7,
+      "rows": [
+        [
+          "accuracy",
+          "8"
+        ],
+        [
+          "robustness",
+          "5"
+        ],
+        [
+          "efficiency",
+          "4"
+        ],
+        [
+          "F1 score",
+          "3"
+        ],
+        [
+          "classification accuracy",
+          "2"
+        ]
+      ]
+    },
+    "authors with most papers on task X": {
+      "params": {
+        "task": "natural language processing"
+      },
+      "ms": 1.8,
+      "rows": [
+        [
+          "Zeerak Talat",
+          "2"
+        ],
+        [
+          "Bo Chen",
+          "2"
+        ],
+        [
+          "Tharindu Ranasinghe",
+          "2"
+        ],
+        [
+          "Wei-Nan Zhang",
+          "2"
+        ],
+        [
+          "Manabu Okumura",
+          "2"
+        ]
+      ]
+    },
+    "papers the corpus cites most": {
+      "params": {},
+      "ms": 23.5,
+      "rows": [
+        [
+          "Language Models are Few-Shot Learners",
+          "True",
+          "348"
+        ],
+        [
+          "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+          "True",
+          "344"
+        ],
+        [
+          "Attention is All you Need",
+          "True",
+          "321"
+        ],
+        [
+          "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+          "True",
+          "261"
+        ],
+        [
+          "Training language models to follow instructions with human feedback",
+          "True",
+          "182"
+        ]
+      ]
+    },
+    "related papers via shared entities": {
+      "params": {
+        "paper_id": "2407.04434"
+      },
+      "ms": 2.4,
+      "rows": [
+        [
+          "An Empirical Comparison of Vocabulary Expansion and Initialization Approaches for Language Models",
+          "2"
+        ],
+        [
+          "Few-shot clinical entity recognition in English, French and Spanish: masked language models outperform generative model prompting",
+          "2"
+        ],
+        [
+          "Pointing out the Shortcomings of Relation Extraction Models with Semantically Motivated Adversarials",
+          "1"
+        ],
+        [
+          "In-Context Example Ordering Guided by Label Distributions",
+          "1"
+        ],
+        [
+          "Towards Enhancing Coherence in Extractive Summarization: Dataset and Experiments with LLMs",
+          "1"
+        ]
+      ]
+    },
+    "fields of study": {
+      "params": {},
+      "ms": 3.7,
+      "rows": [
+        [
+          "Computer Science",
+          "2000"
+        ],
+        [
+          "Mathematics",
+          "318"
+        ],
+        [
+          "Linguistics",
+          "266"
+        ],
+        [
+          "Engineering",
+          "217"
+        ],
+        [
+          "Medicine",
+          "157"
+        ]
+      ]
+    }
+  }
+}
