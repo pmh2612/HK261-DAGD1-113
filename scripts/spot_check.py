@@ -5,6 +5,8 @@ sample: draws 100 graded pairs (40 grade 2, 30 grade 1, 30 grade 0, seed 42) int
         out of the file so it cannot sway the person.
 score:  compares the filled-in CSV with the LLM's grades: agreement on "relevant"
         (grade 2, the threshold the qrels use), and weighted kappa on 0/1/2.
+sample-pairs / score-pairs: the same for BT4's entity-name pairs, 25 the LLM called the
+        same and 25 it called different; `human` is 1 (same) or 0 (different).
 
 Run: .venv/bin/python scripts/spot_check.py sample
      .venv/bin/python scripts/spot_check.py score --annotator my
@@ -22,6 +24,8 @@ from paper_search.config import PROJECT_ROOT, settings
 QRELS = PROJECT_ROOT / "data/annotations/retrieval_qrels.jsonl"
 SHEET = PROJECT_ROOT / "data/annotations/spot_check.csv"
 STRATA = {2: 40, 1: 30, 0: 30}
+PAIRS = PROJECT_ROOT / "data/annotations/entity_pairs.jsonl"
+PAIR_SHEET = PROJECT_ROOT / "data/annotations/spot_check_pairs.csv"
 
 
 def grades() -> dict[tuple[str, str], int]:
@@ -80,9 +84,49 @@ def score(annotator: str) -> None:
     print(json.dumps(result, indent=2))
 
 
+def sample_pairs() -> None:
+    """BT4 pairs to check; refuses to overwrite a sheet that has answers."""
+    if PAIR_SHEET.exists() and any(r["human"].strip() for r in csv.DictReader(PAIR_SHEET.open())):
+        raise SystemExit(f"{PAIR_SHEET} already has answers; not overwriting")
+    rows = [json.loads(line) for line in PAIRS.open(encoding="utf-8")]
+    rng = random.Random(42)
+    picked = [
+        r for same in (True, False) for r in rng.sample([r for r in rows if r["same"] == same], 25)
+    ]
+    rng.shuffle(picked)
+    with PAIR_SHEET.open("w", newline="", encoding="utf-8-sig") as f:
+        w = csv.writer(f)
+        w.writerow(["n", "type", "a", "b", "human"])
+        for n, r in enumerate(picked, 1):
+            w.writerow([n, r["type"], r["a"], r["b"], ""])
+    print(f"wrote {len(picked)} pairs to {PAIR_SHEET}")
+
+
+def score_pairs(annotator: str) -> None:
+    """Agreement between the filled-in pair sheet and the LLM's same / different."""
+    llm_same = {(r["type"], r["a"], r["b"]): r["same"] for r in map(json.loads, PAIRS.open())}
+    rows = [r for r in csv.DictReader(PAIR_SHEET.open(encoding="utf-8-sig")) if r["human"].strip()]
+    human = [int(r["human"]) for r in rows]
+    llm = [int(llm_same[r["type"], r["a"], r["b"]]) for r in rows]
+    hit = sum(a and b for a, b in zip(human, llm, strict=True))
+    result = {
+        "annotator": annotator,
+        "pairs": len(rows),
+        "kappa": round(cohen_kappa_score(human, llm), 3),
+        "llm_precision": round(hit / max(sum(llm), 1), 3),  # LLM says same, person agrees
+        "llm_recall": round(hit / max(sum(human), 1), 3),  # person says same, LLM agrees
+    }
+    out = PROJECT_ROOT / f"experiments/runs/bt4/spot_check_pairs_{annotator}.json"
+    out.write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result, indent=2))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("command", choices=["sample", "score"])
+    parser.add_argument("command", choices=["sample", "score", "sample-pairs", "score-pairs"])
     parser.add_argument("--annotator", default="my")
     args = parser.parse_args()
-    sample() if args.command == "sample" else score(args.annotator)
+    if args.command.startswith("sample"):
+        (sample if args.command == "sample" else sample_pairs)()
+    else:
+        (score if args.command == "score" else score_pairs)(args.annotator)
