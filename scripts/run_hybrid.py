@@ -13,6 +13,7 @@ Run: .venv/bin/python scripts/run_hybrid.py --dataset scifact --config configs/b
 
 import argparse
 import json
+import random
 import time
 from datetime import datetime
 from pathlib import Path
@@ -40,6 +41,38 @@ def to_run(scores: np.ndarray, docs: list[dict], qids: list[str]) -> dict[str, l
     """Score matrix -> {qid: top-DEPTH paper_ids}."""
     top = np.argsort(-scores, axis=1, kind="stable")[:, :DEPTH]
     return {q: [docs[i]["paper_id"] for i in row] for q, row in zip(qids, top, strict=True)}
+
+
+def cv_linear(
+    sparse: np.ndarray,
+    dense: np.ndarray,
+    docs: list[dict],
+    qids: list[str],
+    qrels: dict,
+    alphas: list[float],
+    folds: int,
+) -> tuple[np.ndarray, dict]:
+    """Linear fusion with alpha chosen by k-fold cross-validation over the queries.
+
+    For a corpus with no train split: each fold's queries are scored with the alpha
+    that is best on the other folds, so no query is scored with an alpha tuned on it.
+    """
+    mixes = {a: hybrid.linear(sparse, dense, a) for a in alphas}
+    judged = {q for q in qids if any(g > 0 for g in qrels.get(q, {}).values())}
+    ndcg = {
+        a: {q: ndcg_at_k(r, qrels[q], 10) for q, r in to_run(m, docs, qids).items() if q in judged}
+        for a, m in mixes.items()
+    }
+    order = random.Random(42).sample(range(len(qids)), len(qids))
+    out, chosen = np.zeros_like(sparse, dtype=float), []
+    for k in range(folds):
+        held = order[k::folds]
+        rest = {qids[i] for i in order if i not in held} & set(ndcg[alphas[0]])
+        best = max(alphas, key=lambda a: (np.mean([ndcg[a][q] for q in rest]), a))
+        out[held] = mixes[best][held]
+        chosen.append(best)
+    curve = {a: round(float(np.mean(list(v.values()))), 4) for a, v in ndcg.items()}
+    return out, {"alpha_per_fold": chosen, "all_query_curve": curve}
 
 
 def main() -> None:
@@ -95,6 +128,11 @@ def main() -> None:
                     "train_grid": {a: s for s, a in grid},
                 }
             scores = hybrid.linear(test[parts[0]], test[parts[1]], alpha)
+        elif kind == "linear_cv":
+            parts = [system["sparse"], system["dense"]]
+            scores, extra = cv_linear(
+                test[parts[0]], test[parts[1]], docs, qids, qrels, cfg["alphas"], system["folds"]
+            )
         elif kind == "rerank":
             base = systems[system["base"]]
             parts = base["parts"]

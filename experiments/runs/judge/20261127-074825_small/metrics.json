@@ -1,0 +1,14 @@
+{
+  "dataset": "small",
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "depth": 10,
+  "queries": 50,
+  "pairs": 1892,
+  "grade_counts": {
+    "0": 522,
+    "1": 690,
+    "2": 680
+  },
+  "seconds_per_pair": 1.755,
+  "qrels": "data/annotations/retrieval_qrels.jsonl"
+}

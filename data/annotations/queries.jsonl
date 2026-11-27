@@ -28,3 +28,23 @@
 {"qid": "q28", "query": "multimodal large language models for vision-language tasks", "type": "topic"}
 {"qid": "q29", "query": "dense retrieval models for passage ranking", "type": "method"}
 {"qid": "q30", "query": "jailbreak attacks and safety of large language models", "type": "topic"}
+{"qid": "q31", "query": "using large language models to rerank search results without training", "type": "method", "specific": true}
+{"qid": "q32", "query": "reducing key-value cache memory during transformer decoding", "type": "method", "specific": true}
+{"qid": "q33", "query": "defending large language models against jailbreak prompts", "type": "topic", "specific": true}
+{"qid": "q34", "query": "recovering the original text from its embedding vector", "type": "topic", "specific": true}
+{"qid": "q35", "query": "federated learning robust to malicious or Byzantine clients", "type": "topic", "specific": true}
+{"qid": "q36", "query": "combining differential privacy with federated learning", "type": "topic", "specific": true}
+{"qid": "q37", "query": "grammatical error correction for learners of English", "type": "task", "specific": true}
+{"qid": "q38", "query": "automated essay scoring with large language models", "type": "task", "specific": true}
+{"qid": "q39", "query": "answering biomedical questions with large language models", "type": "task", "specific": true}
+{"qid": "q40", "query": "multi-vector late-interaction retrieval for multilingual search", "type": "method", "specific": true}
+{"qid": "q41", "query": "systems submitted to SemEval-2024 shared tasks", "type": "dataset", "specific": true}
+{"qid": "q42", "query": "contextual bandits with general function approximation", "type": "method", "specific": true}
+{"qid": "q43", "query": "Kolmogorov-Arnold networks as an alternative to multilayer perceptrons", "type": "method", "specific": true}
+{"qid": "q44", "query": "machine-learned interatomic potentials for molecular dynamics simulation", "type": "method", "specific": true}
+{"qid": "q45", "query": "agents that operate smartphone or web interfaces using multimodal LLMs", "type": "task", "specific": true}
+{"qid": "q46", "query": "choosing which examples to use for instruction fine-tuning", "type": "method", "specific": true}
+{"qid": "q47", "query": "matching resumes to job postings", "type": "task", "specific": true}
+{"qid": "q48", "query": "explainable recommendation", "type": "task", "specific": true}
+{"qid": "q49", "query": "fairness of machine learning models in healthcare", "type": "topic", "specific": true}
+{"qid": "q50", "query": "learning when to defer a prediction to a human expert", "type": "method", "specific": true}

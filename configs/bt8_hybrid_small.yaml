@@ -1,6 +1,7 @@
 # BT8 on our corpus (small, 2,000 papers): the SciFact winners plus MiniLM for pool
 # diversity (decision 4, 2026-11-06). No train split here, so alpha is fixed at the
-# values tuned on SciFact train (0.9 bge-base, 0.8 bge-small). Rerank dropped in BT8.
+# values tuned on SciFact train (0.9 bge-base, 0.8 bge-small); linear_cv instead picks
+# alpha by 5-fold cross-validation over our queries. Rerank dropped in BT8.
 task: bt8
 components:
   bm25: {kind: bm25, field: title2_abstract, preprocess: stop_stem, k1: 1.5, b: 0.75}
@@ -13,7 +14,7 @@ components:
     id: BAAI/bge-small-en-v1.5
     query_prefix: "Represent this sentence for searching relevant passages: "
   minilm: {kind: dense, id: sentence-transformers/all-MiniLM-L6-v2}
-alphas: [0.9]
+alphas: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]  # linear_cv grid
 systems:
   - {name: bm25, kind: single, part: bm25}
   - {name: bge-base, kind: single, part: bge-base}
@@ -23,3 +24,5 @@ systems:
   - {name: rrf_bm25+bge-small, kind: rrf, parts: [bm25, bge-small], k: 60}
   - {name: linear_bm25+bge-base, kind: linear, sparse: bm25, dense: bge-base, alpha: 0.9}
   - {name: linear_bm25+bge-small, kind: linear, sparse: bm25, dense: bge-small, alpha: 0.8}
+  - {name: linear-cv_bm25+bge-base, kind: linear_cv, sparse: bm25, dense: bge-base, folds: 5}
+  - {name: linear-cv_bm25+bge-small, kind: linear_cv, sparse: bm25, dense: bge-small, folds: 5}
