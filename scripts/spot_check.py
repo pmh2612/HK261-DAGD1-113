@@ -5,8 +5,10 @@ sample: draws 100 graded pairs (40 grade 2, 30 grade 1, 30 grade 0, seed 42) int
         out of the file so it cannot sway the person.
 score:  compares the filled-in CSV with the LLM's grades: agreement on "relevant"
         (grade 2, the threshold the qrels use), and weighted kappa on 0/1/2.
-sample-pairs / score-pairs: the same for BT4's entity-name pairs, 25 the LLM called the
-        same and 25 it called different; `human` is 1 (same) or 0 (different).
+sample-pairs / score-pairs: BT4's entity-name pairs, 25 the LLM called the same and 25
+        different; `human` is 1 (same) or 0 (different).
+sample-roles / score-roles: BT3's method roles, 30 the LLM called proposed by the paper
+        and 30 existing; `human` is 1 (proposed) or 0 (existing).
 
 Run: .venv/bin/python scripts/spot_check.py sample
      .venv/bin/python scripts/spot_check.py score --annotator my
@@ -84,49 +86,96 @@ def score(annotator: str) -> None:
     print(json.dumps(result, indent=2))
 
 
-def sample_pairs() -> None:
-    """BT4 pairs to check; refuses to overwrite a sheet that has answers."""
-    if PAIR_SHEET.exists() and any(r["human"].strip() for r in csv.DictReader(PAIR_SHEET.open())):
-        raise SystemExit(f"{PAIR_SHEET} already has answers; not overwriting")
-    rows = [json.loads(line) for line in PAIRS.open(encoding="utf-8")]
+#: Yes/no labels: BT4 name pairs (same entity?) and BT3 method roles (proposed?).
+#: `n` of each LLM answer are drawn; `keys` identify a row; `context` adds paper text.
+BINARY = {
+    "pairs": {
+        "source": PAIRS,
+        "sheet": PAIR_SHEET,
+        "label": "same",
+        "n": 25,
+        "keys": ("type", "a", "b"),
+        "context": False,
+        "out": "bt4/spot_check_pairs",
+    },
+    "roles": {
+        "source": PROJECT_ROOT / "data/annotations/method_roles.jsonl",
+        "sheet": PROJECT_ROOT / "data/annotations/spot_check_roles.csv",
+        "label": "proposes",
+        "n": 30,
+        "keys": ("paper_id", "method"),
+        "context": True,
+        "out": "bt3/spot_check_roles",
+    },
+}
+
+
+def sample_binary(kind: str) -> None:
+    """A yes/no sheet to fill in; refuses to overwrite one that has answers."""
+    spec = BINARY[kind]
+    sheet = spec["sheet"]
+    if sheet.exists() and any(r["human"].strip() for r in csv.DictReader(sheet.open())):
+        raise SystemExit(f"{sheet} already has answers; not overwriting")
+    rows = [json.loads(line) for line in spec["source"].open(encoding="utf-8")]
     rng = random.Random(42)
     picked = [
-        r for same in (True, False) for r in rng.sample([r for r in rows if r["same"] == same], 25)
+        r
+        for yes in (True, False)
+        for r in rng.sample([r for r in rows if r[spec["label"]] == yes], spec["n"])
     ]
     rng.shuffle(picked)
-    with PAIR_SHEET.open("w", newline="", encoding="utf-8-sig") as f:
+    papers = {}
+    if spec["context"]:
+        papers = {
+            p["paper_id"]: p
+            for p in map(json.loads, (settings.processed_dir / "papers_small.jsonl").open())
+        }
+    extra = ["title", "abstract"] if spec["context"] else []
+    with sheet.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
-        w.writerow(["n", "type", "a", "b", "human"])
+        w.writerow(["n", *spec["keys"], *extra, "human"])
         for n, r in enumerate(picked, 1):
-            w.writerow([n, r["type"], r["a"], r["b"], ""])
-    print(f"wrote {len(picked)} pairs to {PAIR_SHEET}")
+            ctx = [papers[r["paper_id"]][k] for k in extra]
+            w.writerow([n, *(r[k] for k in spec["keys"]), *ctx, ""])
+    print(f"wrote {len(picked)} rows to {sheet}")
 
 
-def score_pairs(annotator: str) -> None:
-    """Agreement between the filled-in pair sheet and the LLM's same / different."""
-    llm_same = {(r["type"], r["a"], r["b"]): r["same"] for r in map(json.loads, PAIRS.open())}
-    rows = [r for r in csv.DictReader(PAIR_SHEET.open(encoding="utf-8-sig")) if r["human"].strip()]
+def score_binary(kind: str, annotator: str) -> None:
+    """Agreement between a filled-in yes/no sheet (1/0) and the LLM's answers."""
+    spec = BINARY[kind]
+    keys = spec["keys"]
+    llm_yes = {
+        tuple(r[k] for k in keys): r[spec["label"]]
+        for r in map(json.loads, spec["source"].open(encoding="utf-8"))
+    }
+    rows = [
+        r for r in csv.DictReader(spec["sheet"].open(encoding="utf-8-sig")) if r["human"].strip()
+    ]
     human = [int(r["human"]) for r in rows]
-    llm = [int(llm_same[r["type"], r["a"], r["b"]]) for r in rows]
+    llm = [int(llm_yes[tuple(r[k] for k in keys)]) for r in rows]
     hit = sum(a and b for a, b in zip(human, llm, strict=True))
     result = {
         "annotator": annotator,
-        "pairs": len(rows),
+        "rows": len(rows),
         "kappa": round(cohen_kappa_score(human, llm), 3),
-        "llm_precision": round(hit / max(sum(llm), 1), 3),  # LLM says same, person agrees
-        "llm_recall": round(hit / max(sum(human), 1), 3),  # person says same, LLM agrees
+        "llm_precision": round(hit / max(sum(llm), 1), 3),  # LLM says yes, person agrees
+        "llm_recall": round(hit / max(sum(human), 1), 3),  # person says yes, LLM agrees
     }
-    out = PROJECT_ROOT / f"experiments/runs/bt4/spot_check_pairs_{annotator}.json"
+    out = PROJECT_ROOT / f"experiments/runs/{spec['out']}_{annotator}.json"
     out.write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("command", choices=["sample", "score", "sample-pairs", "score-pairs"])
+    kinds = [f"{a}-{k}" for k in BINARY for a in ("sample", "score")]
+    parser.add_argument("command", choices=["sample", "score", *kinds])
     parser.add_argument("--annotator", default="my")
     args = parser.parse_args()
-    if args.command.startswith("sample"):
-        (sample if args.command == "sample" else sample_pairs)()
+    action, _, kind = args.command.partition("-")
+    if not kind:
+        sample() if action == "sample" else score(args.annotator)
+    elif action == "sample":
+        sample_binary(kind)
     else:
-        (score if args.command == "score" else score_pairs)(args.annotator)
+        score_binary(kind, args.annotator)
