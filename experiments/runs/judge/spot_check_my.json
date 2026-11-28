@@ -1,0 +1,25 @@
+{
+  "annotator": "my",
+  "pairs": 100,
+  "relevant_kappa": 0.48,
+  "llm_precision": 0.475,
+  "llm_recall": 0.905,
+  "weighted_kappa_012": 0.408,
+  "confusion_human_rows_llm_cols": [
+    [
+      24,
+      16,
+      11
+    ],
+    [
+      6,
+      12,
+      10
+    ],
+    [
+      0,
+      2,
+      19
+    ]
+  ]
+}
