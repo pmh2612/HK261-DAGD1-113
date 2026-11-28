@@ -59,3 +59,6 @@ htmlcov/
 # --- OS ---
 .DS_Store
 Thumbs.db
+
+# Top-100 rankings per system: large, regenerable, read by scripts/llm_judge.py
+experiments/runs/**/run.json

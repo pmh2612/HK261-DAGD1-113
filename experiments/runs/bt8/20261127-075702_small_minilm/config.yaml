@@ -1,0 +1,9 @@
+dataset: small
+system:
+  name: minilm
+  kind: single
+  part: minilm
+components:
+  minilm:
+    kind: dense
+    id: sentence-transformers/all-MiniLM-L6-v2

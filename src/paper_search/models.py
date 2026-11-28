@@ -78,6 +78,8 @@ class PaperEntities:
     methods: list[str] = field(default_factory=list)
     datasets: list[str] = field(default_factory=list)
     topics: list[str] = field(default_factory=list)
+    tasks: list[str] = field(default_factory=list)  # SciERC types (BT2): Task, Metric
+    metrics: list[str] = field(default_factory=list)
     extractor: str = ""  # which model produced these - part of the graph's identity
 
 
@@ -91,5 +93,7 @@ def write_records(records, path: Path) -> None:
 
 def read_records(path: Path, cls: type) -> list:
     """Parquet -> instances of the dataclass `cls`, with plain Python values."""
-    names = [f.name for f in fields(cls)]
+    # Columns the file has: fields added later (with defaults) are absent from old files.
+    have = set(pq.read_schema(path).names)
+    names = [f.name for f in fields(cls) if f.name in have]
     return [cls(**row) for row in pq.read_table(path, columns=names).to_pylist()]

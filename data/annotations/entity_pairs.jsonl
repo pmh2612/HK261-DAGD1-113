@@ -1,0 +1,400 @@
+{"type": "Method", "a": "detection methods", "b": "ERC methods", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "QA datasets", "b": "question-answering (QA) datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "AI techniques", "b": "Artificial Intelligence (AI) techniques", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "FL", "b": "federated learning (FL) methods", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "output generation", "b": "robust generalization", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "realworld public datasets", "b": "public rating datasets", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "KD", "b": "knowledge distillation (KD) approach", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "quantifying uncertainty", "b": "Enhancing generalization and uncertainty quantification", "found_by": ["embedding"], "same": true, "p_yes": 0.9993, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Supervised approaches", "b": "classification approach", "found_by": ["embedding"], "same": false, "p_yes": 0.0759, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NAS methods", "b": "Neural Architecture Search (NAS) methods", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "macro-F1", "b": "Macro", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9959, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "feature representations", "b": "causal representations", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Language model-based", "b": "Arabic Language Models", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "test accuracy", "b": "detection accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.2227, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "fine-tuning pre-trained models", "b": "gradient-based training algorithms", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "in-distribution datasets", "b": "ID", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "image representations", "b": "molecular representation", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "traffic incident detection", "b": "analyzing traffic flow", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "CDL", "b": "Continual Dynamics Learning (CDL)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "RE", "b": "relation extraction", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "recurrent neural network (RNN) models", "b": "convolutional and recurrent Long Short-Term Memory layers", "found_by": ["embedding"], "same": false, "p_yes": 0.0953, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "limited parallel data", "b": "noisy and limited data", "found_by": ["embedding"], "same": true, "p_yes": 0.8176, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "embeddings", "b": "embedding models", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.5, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "inference engine", "b": "property inference techniques", "found_by": ["embedding"], "same": false, "p_yes": 0.023, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "IBS", "b": "integral Brier scores", "found_by": ["acronym"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "content hallucination", "b": "hallucination problems", "found_by": ["embedding"], "same": true, "p_yes": 0.9859, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "3D point cloud generation", "b": "generating Python code", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Detection of words", "b": "keyword extraction", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "machine learning techniques", "b": "ML methods", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "real-world dataset", "b": "image datasets", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "memory efficiency", "b": "task performance", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "reward modeling", "b": "RM", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "relation extraction", "b": "biomedical relation extraction", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "PEFT", "b": "Parameter-Efficient Fine-Tuning (PEFT) techniques", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "image attention mechanism", "b": "hard or sparse attention mechanisms", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0041, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "information extraction tasks", "b": "real-world classification tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "WER", "b": "word error rate (WER)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "nonlinear models", "b": "monolingual models", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "recommender systems", "b": "recommendation stages", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DRL algorithms", "b": "search algorithms", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "NLP(natural language processsing)", "b": "Natural Language Processing techniques", "found_by": ["fuzzy", "embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "natural language processing tasks", "b": "NLP(natural language processsing)", "found_by": ["fuzzy", "embedding", "acronym"], "same": true, "p_yes": 0.9993, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "QA", "b": "question-answering (QA) task", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "hybrid architecture", "b": "Griffin architecture", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "images", "b": "satellite images", "found_by": ["embedding"], "same": false, "p_yes": 0.011, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "sense-aware distance metric", "b": "reference-free metrics", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "machine translation", "b": "MT", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "task generalization", "b": "deep-learning tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "active learning", "b": "learning agents", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NLP techniques", "b": "Natural Language Processing (NLP) methods", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "SSL", "b": "self-supervised learning methods", "found_by": ["acronym"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "data augmentation technique", "b": "synthetic data augmentation", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.5, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DNN", "b": "deep neural network", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "question answering (QA)", "b": "QA tasks", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 0.9999, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Continual Reinforcement Learning", "b": "Continual graph learning (CGL)", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "natural language processing (NLP) tasks", "b": "question-answering tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.1824, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NLP", "b": "natural language processing techniques", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "supervised learning approaches", "b": "embedding techniques", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Natural Language Inference (NLI) models", "b": "general-purpose large language models (LLMs)", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "CSC", "b": "Chinese Spell Checking (CSC)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "decision support", "b": "informed decisions", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "zero-shot framework", "b": "zero-shot transfer learning", "found_by": ["embedding"], "same": false, "p_yes": 0.3775, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "text representations", "b": "self-contained representations", "found_by": ["fuzzy"], "same": true, "p_yes": 0.5622, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "deep learning methodologies", "b": "Deep Learning (DL) software testing methodologies", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "GD", "b": "gradient-descent approach", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "machine learning applications", "b": "zero-shot learning applications", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "QA task", "b": "question answering task", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Medical QA dataset", "b": "medical image database", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "automatic speech recognition", "b": "ASR", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "EV charging", "b": "change", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "UE methods", "b": "uncertainty estimation", "found_by": ["acronym"], "same": true, "p_yes": 0.5622, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "fine-tuning models", "b": "FiiNet model", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthesized", "b": "synthesized audio", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0019, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "in-distribution", "b": "ID", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "domain generalization", "b": "DG", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "imbalanced datasets", "b": "multi-table datasets", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "LLM-based prediction", "b": "automated predictions", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.7311, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "stochastic interpolants", "b": "stochastic programs", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "response quality", "b": "response efficiency", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "high-dimensional MuJoCo tasks", "b": "large-scale tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "machine learning techniques", "b": "ML", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "input representations", "b": "latent space representations", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0015, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "KD", "b": "knowledge distillation approaches", "found_by": ["acronym"], "same": false, "p_yes": 0.0015, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "sequence modeling", "b": "cross-domain sequential models", "found_by": ["embedding"], "same": false, "p_yes": 0.3208, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "historical datasets", "b": "large-scale dataset", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "DEAP dataset", "b": "medical datasets", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "NLP tasks", "b": "E2E NLG", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Cross-lingual Encoder", "b": "cross-lingual embeddings", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "diffusion model", "b": "model editing", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "cultivations", "b": "consultations", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Foundation models (FMs)", "b": "FM methods", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "computational time", "b": "computation and", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "traffic classification", "b": "Memory Classification", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural network approaches", "b": "adaptive neural networks", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.8176, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Multimodal Large Language Model (MLLM)", "b": "monolingual and multilingual transformer models", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "high-performance computing", "b": "memory-intensive tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "RL tasks", "b": "reinforcement learning tasks", "found_by": ["acronym"], "same": true, "p_yes": 0.9993, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "CSC task", "b": "Chinese Spell Checking (CSC)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "multiple-choice tasks", "b": "optimization tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "point predictions", "b": "personalized prediction", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "policy model", "b": "policy models", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "multi-modal language model baseline", "b": "continuous-valued token based language modeling approach", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "unsupervised FL", "b": "unsupervised object discovery", "found_by": ["embedding"], "same": false, "p_yes": 0.0759, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "reliability/confidence quality measures", "b": "system reliability", "found_by": ["embedding"], "same": false, "p_yes": 0.0009, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Nietzsche dataset", "b": "NIOSH database", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "QA dataset", "b": "question-answering (QA) datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NLP", "b": "natural language processing technique", "found_by": ["acronym"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "deep learning optimization", "b": "few-shot fine-tuning of large neural networks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "false-positive rate", "b": "false-negative rate", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "pre-trained Large Language Models", "b": "NLP model", "found_by": ["embedding"], "same": false, "p_yes": 0.023, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "latency prediction tasks", "b": "patent predictions", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Retrieval-Augmented Generation (RAG)", "b": "RAG technique", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "processes", "b": "industrial processes", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "FL", "b": "federated learning", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "large models (LMs)", "b": "models} (LMs)", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "QA datasets", "b": "question answering datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "computational time", "b": "computational resource", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0015, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "training", "b": "tracking", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DPO", "b": "Direct Preference Optimization (DPO)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "unsupervised and supervised Machine Learning approaches", "b": "parameter learning approach", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "support vector machine (SVM)", "b": "SVM", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "multi-label classifier", "b": "Semi-supervised learning", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic and real-world benchmark datasets", "b": "expert-annotated benchmarks", "found_by": ["embedding"], "same": false, "p_yes": 0.0032, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "strategic decision-making", "b": "decision-making tasks", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9241, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "medical texts", "b": "literary text", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Concatenation-based approaches", "b": "centroid-based approach", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "MT", "b": "machine translation (MT)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "multi-label classification", "b": "token classification", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "conversational datasets", "b": "conversation and survey response data", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "temporal attention mechanism", "b": "multi-factor attention mechanism", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "moral decision-making", "b": "ML decision-making", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "RL-based breeding algorithms", "b": "heuristic-based algorithms", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "explanation measures", "b": "explanation", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9988, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "multi-modal retrieval", "b": "Knowledge Retrieval", "found_by": ["embedding"], "same": false, "p_yes": 0.0002, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "real-world dataset", "b": "artificial datasets", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "task-specific applications", "b": "PDE applications", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "QA dataset", "b": "question answering datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 0.9948, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "serving efficiency", "b": "label efficiency", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "QA datasets", "b": "Question Answering (QA) datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "multi-task learning", "b": "MTL", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "representation", "b": "event representation", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0293, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "ML model", "b": "LLaMA model", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "automatic speech recognition (ASR)", "b": "ASR", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "question answering", "b": "QA tasks", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "inter-rater reliability", "b": "Cohen Kappa inter-rater reliability", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "population accuracy", "b": "global accuracy", "found_by": ["embedding"], "same": false, "p_yes": 0.0003, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "recommendability identification", "b": "graph-based recommendations", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "natural language inference (NLI) model", "b": "generative large language model (LLM)", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "phonemic representations", "b": "graph representations", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "reinforcement learning", "b": "RL", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "WER", "b": "word error rate", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "large language", "b": "pretrained large language model", "found_by": ["embedding"], "same": false, "p_yes": 0.0015, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "parallel document-level data", "b": "document-level translation datasets", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural language models", "b": "(large) language models", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Bailicai approach", "b": "probabilistic approach", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "QA task", "b": "question-answering (QA) tasks", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "sample efficiency", "b": "training data efficiency", "found_by": ["embedding"], "same": true, "p_yes": 0.7773, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "local models", "b": "continual models", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic datasets", "b": "dataset", "found_by": ["embedding"], "same": true, "p_yes": 0.9707, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "SD", "b": "self-distillation (SD)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "acoustic dataset", "b": "multi-speaker conversation dataset", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "EHR datasets", "b": "electronic health record", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "predicting text", "b": "ST prediction", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0052, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Bayesian framework", "b": "Bailicai framework", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "long-horizon time-series forecasting domain", "b": "multi-step forecasting", "found_by": ["embedding"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural architecture", "b": "temporal architecture", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DRL methods", "b": "Deep Reinforcement Learning (Deep RL)", "found_by": ["acronym"], "same": true, "p_yes": 0.9981, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "LLM applications", "b": "RNN applications", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "generation benchmarks", "b": "graph benchmarks", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "probabilistic graphical models (PGMs)", "b": "Supervised models", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "evaluation methods", "b": "model evaluation", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.3775, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural network", "b": "NN", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "deep learning systems", "b": "deep learning MT systems", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0009, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "sentiment prediction", "b": "Financial sentiment analysis", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Bayesian approximations", "b": "Mixture model based methods", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "in-context learning", "b": "ICL approaches", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "learning preference models", "b": "learning model", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9968, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Retrieval-Augmented Generation (RAG)", "b": "Explorative Search & Retrieval", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "facilitation of empathetic responses", "b": "empathetic responses", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "carbon efficiency", "b": "operational efficiency", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "deep models", "b": "compressed models", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "FPR", "b": "False Positive Rate (FPR)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "adaptive attention mechanism", "b": "neural attention", "found_by": ["embedding"], "same": false, "p_yes": 0.0041, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "automatic evaluation of natural language generation (NLG) systems", "b": "Automatic Question Generation in education", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "rate-independent Fourier neural operator", "b": "time and frequency domain representations", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Partial Differential Equations (PDEs)", "b": "Parabolic partial differential equations (PDEs", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "transformer-based Large Language Models (LLMs)", "b": "generative language technology", "found_by": ["embedding"], "same": true, "p_yes": 0.7773, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "machine learning (ML)", "b": "ML approaches", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "link prediction", "b": "answer prediction", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "interventional data", "b": "relational data", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "quasi-Newton methods", "b": "Hessian-free methods", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "out-of-distribution dataset", "b": "OOD datasets", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "generalization challenge", "b": "zero and few-shot task generalization", "found_by": ["embedding"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "detecting potential misuse", "b": "the detection of harmful content", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "model-agnostic framework", "b": "sequential and non-sequential models", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "batch inference", "b": "inference task", "found_by": ["embedding"], "same": true, "p_yes": 0.7311, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "threshold-agnostic metrics", "b": "unsupervised learning metrics", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Multi-modal large language models (LLMs)", "b": "byte-based language model", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "in-context learning", "b": "ICL", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "ML approaches", "b": "Machine Learning (PEML", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "support vector machine", "b": "SVM", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Transformer framework", "b": "Transformer accelerators", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "calibration technique", "b": "CI techniques", "found_by": ["fuzzy"], "same": false, "p_yes": 0.1824, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Question Answering (QA) datasets", "b": "QA dataset", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "RMSE", "b": "root-mean-square error (RMSE)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "natural language processing (NLP) tasks", "b": "natural language understanding (NLU)", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.2689, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "EHR datasets", "b": "electronic health record (EHR) datasets", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "second-order optimization", "b": "second-order optimizers", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.852, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "low-bias", "b": "selection bias", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "document classification tasks", "b": "information retrieval task", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "memory and time efficiency", "b": "compute and memory efficiency", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0474, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "DIL benchmarks", "b": "MMMU benchmark", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "healthcare applications", "b": "PDE applications", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "spatial encoding method", "b": "generative technique-based spatial-temporal methods", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "large-scale datasets", "b": "large-scale Chinese dataset", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0067, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "instruction tuning", "b": "multilingual instruction tuning", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0474, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "fine-tuning datasets", "b": "fine-tuning dataset", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9399, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "matrix decompositions", "b": "Hodge decomposition", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0002, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "graph property prediction tasks", "b": "chemical property prediction", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "false-positive rate", "b": "FPR", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "personalized recommendations for insurance products", "b": "personalized recommendations", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Short Message Service (SMS)", "b": "SMS", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NLP techniques", "b": "natural language processing", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "model accuracy", "b": "population accuracy", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural architecture", "b": "neural IR models", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "time series analysis", "b": "sleep analysis", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "node classification task", "b": "masked image classification", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "continuous optimization", "b": "first-order optimizers", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "human-labeled data", "b": "human-edited CAD datasets", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "FPR", "b": "false positive rate", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "communication efficiency", "b": "communication", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9914, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "generation quality", "b": "interpretation quality", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "PFM)", "b": "Piezoresponse Force Microscopy", "found_by": ["acronym"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "health data streams", "b": "medical data sets", "found_by": ["embedding"], "same": false, "p_yes": 0.0474, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "translation accuracy", "b": "response accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0006, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "tool augmentation techniques", "b": "augmentation technique", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Tool-augmented large language models (LLMs)", "b": "Large language models (LMs)", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Keyphrase generation", "b": "keyword extraction", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "accuracy rate", "b": "balanced accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "data science", "b": "climate science", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "regression problem", "b": "reasoning problems", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "ICL", "b": "in-context learning methods", "found_by": ["acronym"], "same": false, "p_yes": 0.5, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "factual accuracy", "b": "local accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "neural network architecture", "b": "fine-tuning neural networks", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "natural language processing (NLP) tasks", "b": "NLP task", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "NLP", "b": "natural-language processing tasks", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "information extraction (IE)", "b": "event knowledge extraction", "found_by": ["embedding"], "same": false, "p_yes": 0.5, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "accuracy", "b": "task accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0067, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "knowledge editing", "b": "KE", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "UHS", "b": "Underground Hydrogen Storage (UHS)", "found_by": ["acronym"], "same": true, "p_yes": 0.9627, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "attention-copy mechanism", "b": "channel attention mechanisms", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "open datasets", "b": "food dataset", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "drug development", "b": "robust model development", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "OOD datasets", "b": "out-of-distribution", "found_by": ["acronym"], "same": true, "p_yes": 0.9999, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "federated models", "b": "code-based models", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "large-scale language model", "b": "Mixture-of-Experts (MoE) language model", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Arabic benchmarks", "b": "Arabic AES benchmark dataset", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.852, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CNNs", "b": "convolutional neural networks (CNN)", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "deep learning models", "b": "graph convolutional networks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "human activity recognition", "b": "HAR tasks", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Reduced-order modeling (ROM)", "b": "ROM", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "collaborative model development", "b": "collaborative refinement", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0006, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "in-context learning", "b": "contextual inverse optimization setting", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "in-distribution dataset", "b": "ID", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CRC method", "b": "Conformal risk control (CRC)", "found_by": ["embedding", "acronym"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Discrete data", "b": "dispreferred data", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0009, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "NLP", "b": "natural language processing tasks", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Proximal Policy Optimization (PPO)", "b": "proximal policy optimization (PPO) based RLHF", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.011, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "image classification", "b": "classification settings", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "GSL methods", "b": "graph structure learning", "found_by": ["acronym"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "transformer model", "b": "multilingual and English transformer models", "found_by": ["embedding"], "same": true, "p_yes": 0.989, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "MAE", "b": "mean absolute error", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "MORL", "b": "MoRA", "found_by": ["fuzzy"], "same": true, "p_yes": 0.9526, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "cross-lingual embeddings", "b": "natural language representations", "found_by": ["embedding"], "same": false, "p_yes": 0.148, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "recommendation strategies", "b": "recommendation models (CRMs)", "found_by": ["embedding"], "same": true, "p_yes": 0.8176, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "time series anomaly detection", "b": "TSAD tasks", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DRL approaches", "b": "Deep Reinforcement Learning (DRL)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "RAG techniques", "b": "Retrieval-Augmented Generation (RAG) approach", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "e-commerce", "b": "e-commerce sites", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9707, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "synthetic data generation", "b": "generating high-quality synthetic data", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "dataset-specific tuning", "b": "Parameter-Efficient Fine-Tuning (PEFT) techniques", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "vision-language models", "b": "vision-language models (VLMs)", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "FL aggregation approaches", "b": "aggregation procedure", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "image classification", "b": "time series classification", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "KBVQA", "b": "Knowledge-Based Visual Question Answering (KBVQA)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "SVGD", "b": "Stein Variational Gradient Descent (SVGD)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Text data augmentation", "b": "identifying machine-generated text", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "conversational exchange", "b": "naturally occurring conversations", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "summarization", "b": "extractive summarization", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0474, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "large-scale datasets", "b": "online dataset", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "CDSR", "b": "Cross-domain sequential recommendation (CDSR)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "adjacency recall (AR)", "b": "AR", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "NLP approaches", "b": "RNN-based approaches", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "pipeline framework", "b": "AI-driven pipeline", "found_by": ["embedding"], "same": false, "p_yes": 0.0019, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "sequence labelling task", "b": "sequence tagging", "found_by": ["embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "AES", "b": "Automated Essay Scoring (AES)", "found_by": ["acronym"], "same": false, "p_yes": 0.2227, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "pretraining datasets", "b": "reasoning datasets", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "multi-expert models", "b": "expert language models", "found_by": ["embedding"], "same": false, "p_yes": 0.0015, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "long context understanding and retrieval-augmented generation (RAG) capabilities", "b": "Retrieval-In-Context", "found_by": ["embedding"], "same": true, "p_yes": 0.9526, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "memory-based continual learning", "b": "Cross-Domain Continual Learning (CDCL)", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "human-written and LLM-generated corpora", "b": "document-level corpora", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "single-hop and multi-hop benchmarks", "b": "minimax DCD benchmark suite", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "RMSE", "b": "root-mean-square error", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "generalization rates", "b": "generalization bound", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0004, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "QA task", "b": "question-answering (QA) task", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "PEFT techniques", "b": "parameter-efficient fine-tuning (PEFT) technique", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "task-specific data", "b": "sector-specific data", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0015, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic and real-world datasets", "b": "synthetically generated sample documents", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "external knowledge databases", "b": "external corpus data", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "machine learning-based framework", "b": "sample-efficient learning", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "recommendation task", "b": "recommendation service", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0759, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "meta-models", "b": "high-level model", "found_by": ["embedding"], "same": false, "p_yes": 0.011, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "stochastic gradient descent methods", "b": "SGD method", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "subset selection", "b": "token selection", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "clinical documentation", "b": "clinical documentation challenges", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0293, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "complexity", "b": "added time complexity", "found_by": ["embedding"], "same": false, "p_yes": 0.023, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "MCC", "b": "Matthews Correlation Coefficient (MCC)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "extraction accuracy", "b": "detection accuracy", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.977, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Recommender systems (RSs)", "b": "RS", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Retrieval Augmented Generation (RAG)", "b": "RAG task", "found_by": ["acronym"], "same": true, "p_yes": 0.9991, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "QA", "b": "question answering (QA)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "large language models", "b": "LLMs-based translation models", "found_by": ["embedding"], "same": false, "p_yes": 0.0041, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Natural Language Processing techniques", "b": "NLP task", "found_by": ["acronym"], "same": true, "p_yes": 0.9993, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "deep learning architectures", "b": "deep learning based architectures", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "non-linear model", "b": "generalized linear model", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "ESC", "b": "Extremum-Seeking Control (ESC)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Causal Question Answering (CQA)", "b": "question-answering (QA) task", "found_by": ["embedding"], "same": true, "p_yes": 0.982, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "in-distribution datasets", "b": "out-of-distribution data", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "F-1 scores", "b": "FID score", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "document retrieval", "b": "Retrieval-In-Context", "found_by": ["embedding"], "same": false, "p_yes": 0.011, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "detection of phishing emails", "b": "detecting such emails", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "offline dataset", "b": "domain datasets", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "data", "b": "natural data", "found_by": ["embedding"], "same": false, "p_yes": 0.0025, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "high-dimensional data", "b": "large-scale annotated data", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "OGC", "b": "Overcooked Generalisation Challenge", "found_by": ["acronym"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "SR tasks", "b": "Semantic Retrieval (SR)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "memory efficiency", "b": "memory utilization", "found_by": ["embedding"], "same": false, "p_yes": 0.2689, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "average accuracy", "b": "answer accuracy", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0003, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "MHPFL methods", "b": "model-heterogeneous personalized Federated learning approach", "found_by": ["acronym"], "same": true, "p_yes": 0.7773, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "pattern recognition", "b": "phoneme recognition", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "reliability measures", "b": "reliability metrics", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "variational auto-encoders", "b": "deep learning autoencoder (AE)", "found_by": ["embedding"], "same": true, "p_yes": 0.9933, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "spectral analysis", "b": "local analysis", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "attention mechanisms", "b": "image attention mechanism", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.1824, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic and real-world datasets", "b": "real-world data sets", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "localization", "b": "lesion localization", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.011, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "classification accuracy", "b": "classification", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0012, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "RAG", "b": "Retrieval Augmented Generation (RAG)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "word-level tasks", "b": "large-scale tasks", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "scalability", "b": "separability", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "precision", "b": "answer accuracy", "found_by": ["embedding"], "same": false, "p_yes": 0.0007, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "hidden representations", "b": "continuous representations", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0006, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "MARL)", "b": "Multi-Agent Reinforcement Learning", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic and real-world datasets", "b": "synthetic Pink Elephants dataset", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "Search", "b": "web search", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.2227, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CRC", "b": "Conformal risk control (CRC)", "found_by": ["acronym"], "same": false, "p_yes": 0.023, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "DST task", "b": "Dialogue state tracking (DST)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "reliability measures", "b": "readability metrics", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CoT", "b": "chain-of-thought approach", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "analysis techniques", "b": "analyze tool", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Small Language Models (SLMs)", "b": "language model pretraining", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "LLM benchmarks", "b": "multilingual benchmarks", "found_by": ["fuzzy", "embedding"], "same": true, "p_yes": 0.6225, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "AI", "b": "Artificial Intelligence (AI)", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "DFL", "b": "Decentralized Federated Learning (DFL)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "decoder-only language models", "b": "generative large language models", "found_by": ["embedding"], "same": false, "p_yes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "automatic speech recognition (ASR)", "b": "ASR tasks", "found_by": ["acronym"], "same": true, "p_yes": 0.6225, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "AI techniques", "b": "Artificial Intelligence approach", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 0.989, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "AitZ dataset", "b": "Android-In-The-Zoo (AitZ)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "machine learning (ML) techniques", "b": "ML methods", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "MSE", "b": "mean-squared error (MSE", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "retrieval components", "b": "principal component", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "pre-trained encoders", "b": "input representations", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "generalization power", "b": "generalization bound", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "Reading", "b": "grading", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "CSW languages", "b": "and language", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic dataset", "b": "Nietzsche dataset", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CILP", "b": "contextual inverse linear programming (CILP)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "stochastic gradient descent", "b": "SGD method", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "URS dataset", "b": "User Reported Scenarios (URS) dataset", "found_by": ["embedding", "acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "CFASL", "b": "Composite Factor-Aligned Symmetry Learning (CFASL)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "iterative optimization processes", "b": "optimisation and decomposition techniques", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "Llama-3", "b": "Llama-VITS", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "SPIN method", "b": "PRL methods", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Metric", "a": "top-1 retrieval accuracy", "b": "nearest-neighbor search accuracy", "found_by": ["embedding"], "same": false, "p_yes": 0.3208, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "conversational recommendations", "b": "movie recommendation", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0003, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "user texts", "b": "human and LLM-generated text", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "imbalanced classification", "b": "token classification", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "natural languages", "b": "Sinhala language", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0002, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "federated learning paradigm", "b": "Model-heterogeneous personalized federated learning (MHPFL)", "found_by": ["embedding"], "same": true, "p_yes": 0.9399, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "VTP", "b": "vessel trajectory prediction (VTP)", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "parameter-efficient fine-tuning methods", "b": "PEFT method", "found_by": ["acronym"], "same": true, "p_yes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Task", "a": "TAI", "b": "trustworthy artificial intelligence (TAI)", "found_by": ["acronym"], "same": true, "p_yes": 0.989, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "sampling methods", "b": "sampling model", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0041, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "out-of-distribution (OOD) data", "b": "OOD benchmarks", "found_by": ["embedding"], "same": false, "p_yes": 0.148, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "self-supervised learning", "b": "supervised learning approach", "found_by": ["fuzzy", "embedding"], "same": false, "p_yes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "multi-label datasets", "b": "multiomic data", "found_by": ["embedding"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "GCL", "b": "graph contrastive learning", "found_by": ["acronym"], "same": false, "p_yes": 0.0019, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "GNN architectures", "b": "LLM architectures", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Method", "a": "LISA", "b": "Layerwise Importance Sampled AdamW (LISA)", "found_by": ["acronym"], "same": true, "p_yes": 0.9988, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"type": "Dataset", "a": "synthetic Pink Elephants dataset", "b": "semi-synthetic dataset", "found_by": ["fuzzy"], "same": false, "p_yes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}

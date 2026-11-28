@@ -1,0 +1,300 @@
+{"paper_id": "2405.18894", "method": "memristive devices", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18894", "method": "memristors", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.02518", "method": "Latent Graph Diffusion (LGD)", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.02518", "method": "generative model", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.04914", "method": "representations", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.04914", "method": "Dual Disentangled Variational AutoEncoder (DualVAE)", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09200", "method": "linear classifiers", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09200", "method": "self-supervised models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.03020", "method": "SplAgger", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.03020", "method": "permutation invariant aggregation", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.18169", "method": "Multimodal Large Language Model (MLLM)", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.18169", "method": "MIKO", "proposes": true, "p_proposes": 0.9988, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15610", "method": "selective vision-language system", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15610", "method": "Selective prediction", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.05835", "method": "search algorithm", "proposes": false, "p_proposes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.05835", "method": "distribution-specific estimator", "proposes": false, "p_proposes": 0.0067, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.08740", "method": "Explainable property-based systems", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.08740", "method": "machine learning methods", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.01515", "method": "Accelerating", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.01515", "method": "SGDm", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.01873", "method": "prompt ensembling technique", "proposes": true, "p_proposes": 0.8808, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.01873", "method": "random smoothing", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09136", "method": "tree-searching", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09136", "method": "tree-of-thought (ToT) method", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.08734", "method": "ablation methodologies", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.08734", "method": "ablation methodology", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.07749", "method": "dimensionality reduction methods", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.07749", "method": "DBSCAN", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.17342", "method": "latent space representations", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.17342", "method": "Variational AutoEncoder architecture", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13984", "method": "Scientific language models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13984", "method": "alignment fine-tuning", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07826", "method": "CNN-based solutions", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07826", "method": "Potential-Based Reward Shaping (PBRS)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05912", "method": "BERT mixture of experts classifier", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05912", "method": "GPT 3.5", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05433", "method": "Metric-specific AttentionPooling", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05433", "method": "BERT-related techniques", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.00474", "method": "instruction tuning", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.00474", "method": "AdaLoRA", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15183", "method": "GSL methods", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15183", "method": "Graph Neural Networks (GNNs)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.16288", "method": "PerLTQA", "proposes": false, "p_proposes": 0.0006, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.16288", "method": "ChatGPT", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.01590", "method": "Arabic Language Models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.01590", "method": "Arabic language models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.14863", "method": "model representation", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05145", "method": "word embeddings", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.05145", "method": "one hot encoding", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.10263", "method": "iterative algorithm", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.13228", "method": "DPO-Positive (DPOP)", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.13228", "method": "DPO loss", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.06561", "method": "multi-model collaboration", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.06561", "method": "brainstorming", "proposes": false, "p_proposes": 0.0601, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.20267", "method": "LLM-powered agents", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.20267", "method": "Auto-Arena", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04766", "method": "Queuing systems", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04766", "method": "reinforcement learning algorithm", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21043", "method": "CP-Prompt", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21043", "method": "intra-domain knowledge extraction", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07172", "method": "first-order method", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07172", "method": "fixed-point method", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15238", "method": "functional", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15238", "method": "natural language inference (NLI) model", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.12195", "method": "OpenBezoar", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.12195", "method": "Claude 2.1", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13915", "method": "tokenization approach", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13915", "method": "SSSMs", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.03938", "method": "diffusion models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.03938", "method": "diffusion process", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.16168", "method": "pre-activation normalization", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.16168", "method": "Causal Relation Network (CausalRN)", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.04466", "method": "logistic regression model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.04466", "method": "OpenAI's GPT-4", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.01124", "method": "Tree-based models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.01124", "method": "TreeSHAP explainability method", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.10513", "method": "autoregressive decoding", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.10513", "method": "similarity-constrained optimization scheme", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15708", "method": "random search", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15708", "method": "IO methods", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.08666", "method": "text-to-SQL parsers", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.08666", "method": "data augmentation", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07839", "method": "RecurrentGemma", "proposes": false, "p_proposes": 0.0953, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.07839", "method": "open language models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.14859", "method": "instruction-tuned LMs", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.14859", "method": "instruction-tuning", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.18655", "method": "neural network", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.18655", "method": "importance sampling", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.07896", "method": "Llama-2-13B-Chat", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.07896", "method": "GPT-4", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14963", "method": "Mirror", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14963", "method": "Multiple-perspective self-reflection method", "proposes": true, "p_proposes": 0.9994, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.10886", "method": "Xl-OpSumm", "proposes": true, "p_proposes": 0.9991, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.10886", "method": "GPT-4", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.14312", "method": "verification", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.14312", "method": "evolution strategies", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21066", "method": "backbone models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21066", "method": "L-adapters", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.00084", "method": "KD", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.00084", "method": "pruned networks", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.01339", "method": "cutting-edge language model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.01339", "method": "speech synthesis pipeline", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.01008", "method": "Recommender Systems (RS)", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.01008", "method": "recommendations methods", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.18506", "method": "Transformer architecture", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.18506", "method": "package", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.01149", "method": "hate speech detection systems", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.01149", "method": "keyword-search approach", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.15615", "method": "NaturalTurn", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.15615", "method": "turn models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.15135", "method": "neural networks", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.15135", "method": "SentryCam's visualizations", "proposes": true, "p_proposes": 0.9997, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01364", "method": "code-switching approach", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01364", "method": "code-switched continual pre-training", "proposes": false, "p_proposes": 0.3208, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15766", "method": "knowledge distillation", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15766", "method": "Continual Learning (CL) approach", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.07844", "method": "Stochastic approximation", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.07844", "method": "stochastic approximation algorithm", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.07770", "method": "MSE-only models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.07770", "method": "DualBind", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13919", "method": "WritingPath", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13919", "method": "creation platforms", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06346", "method": "research design", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06346", "method": "mining techniques", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.04315", "method": "EXPERTQA", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.04315", "method": "training framework", "proposes": false, "p_proposes": 0.0293, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.12287", "method": "FL frameworks", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.12287", "method": "machine learning approaches", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.15499", "method": "geometric definition of", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.08553", "method": "Multi-Head Attention (MHA)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.08553", "method": "Pythia-12B", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.06260", "method": "task-specific representations", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.06260", "method": "HuBERT", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.17947", "method": "tagging", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.17796", "method": "reward-free reinforcement", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.17796", "method": "contextual bandits", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.16731", "method": "neural network", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.16731", "method": "random noise training with feedback alignment", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.07320", "method": "temporal Importance Sampling", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.07320", "method": "simulated testing", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.03310", "method": "CoT strategy", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.03310", "method": "scratchpad and Chain-of-Thought (CoT) techniques", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.12387", "method": "recommendation", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.12387", "method": "transductive weighted conformal prediction", "proposes": true, "p_proposes": 0.7773, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.12566", "method": "fact-checking model", "proposes": false, "p_proposes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.12566", "method": "GenAudit", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04981", "method": "robust ERM", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04981", "method": "empirical risk", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.13178", "method": "AgentBoard", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.13178", "method": "general-purpose agents", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.08088", "method": "document-level translation approach", "proposes": false, "p_proposes": 0.0373, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.08088", "method": "translation", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.00144", "method": "Query2CAD", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.00144", "method": "GPT-4 Turbo", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15991", "method": "model cascade methods", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15991", "method": "confidence calibration model cascade ($C^3$) method", "proposes": true, "p_proposes": 1.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.11676", "method": "Physical-informed neural networks (PINN)", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.11676", "method": "score-fPINN", "proposes": true, "p_proposes": 0.977, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.05338", "method": "prompting paradigm", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.05338", "method": "fine-tuned models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.15626", "method": "encoder", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.15626", "method": "hierarchical policy", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.02136", "method": "feature attribution methods", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.02136", "method": "n-gram statistics", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20496", "method": "single-level sparsity techniques", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20496", "method": "assignment", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.03964", "method": "one-time knowledge representation", "proposes": false, "p_proposes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.03964", "method": "policy learning", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.17468", "method": "WildHallucinations", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.17468", "method": "retrieval component", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.17802", "method": "framework", "proposes": false, "p_proposes": 0.3208, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.17802", "method": "sequence enhancement", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13218", "method": "ML system", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13218", "method": "thermodynamic systems", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18296", "method": "classifier", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18296", "method": "teacher-student", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.18937", "method": "Federated graph learning", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.18937", "method": "global model", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.19346", "method": "UMP", "proposes": false, "p_proposes": 0.2227, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.19346", "method": "GPT-4o", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.09629", "method": "Federated Learning (FL)", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.09629", "method": "Reinforcement Learning", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.00013", "method": "pipeline", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.00013", "method": "deep NN", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.17811", "method": "BERT language models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.17811", "method": "model compression", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14334", "method": "retrievers", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.01130", "method": "LAVA algorithm", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.01130", "method": "entropic regularization", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01983", "method": "language and speech technology", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04860", "method": "stochastic block models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.04860", "method": "multi-view graph clustering", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.02657", "method": "global-to-local architecture", "proposes": false, "p_proposes": 0.0474, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.02657", "method": "hierarchical global-to-local modeling", "proposes": true, "p_proposes": 0.9994, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.20085", "method": "decoder", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.20085", "method": "hard inference", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.13905", "method": "change-point detection", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.13905", "method": "unsupervised models of semantic change", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.15988", "method": "Transductive Confidence Machine Nearest Neighbours (TCMNN) algorithm", "proposes": false, "p_proposes": 0.0002, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.15988", "method": "Transductive Confidence Machine", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18276", "method": "recommenders", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18276", "method": "relevance-", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.10588", "method": "conceptual model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.10588", "method": "multilingual language models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06034", "method": "automatic system", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06034", "method": "Prediction-powered inference (PPI)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.07726", "method": "action selection and learning mechanisms", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.07726", "method": "active inference", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21314", "method": "generative model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21314", "method": "SOAD", "proposes": true, "p_proposes": 0.9994, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.09730", "method": "network-parameterized", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.09730", "method": "automatic differentiation (AutoDiff) techniques", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.14442", "method": "stochastic approximation", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.14442", "method": "ordinary differential equation (ODE) arguments", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.01270", "method": "Gaussian mixture models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.01270", "method": "non-deep model", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.02360", "method": "Wasserstein-based layer selection method", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.02360", "method": "federated learning framework", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18952", "method": "evaluator model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.18952", "method": "GPT-4", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.03150", "method": "SMM", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.03150", "method": "Visual reprogramming (VR)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.09638", "method": "Hierarchical Masked Attention", "proposes": true, "p_proposes": 0.9968, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.09638", "method": "attention mechanisms", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15215", "method": "LLaMA", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.15215", "method": "recommendation systems", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.02893", "method": "deep learning-based KT models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.02893", "method": "Language model-based", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.11838", "method": "Guide-Align", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.11838", "method": "lightweight", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.00699", "method": "model-based offline RL method", "proposes": false, "p_proposes": 0.0052, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.00699", "method": "model-free approaches", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.11206", "method": "Retraining", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.11206", "method": "label DP training", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.12009", "method": "FinTruthQA", "proposes": true, "p_proposes": 0.9975, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.12009", "method": "pre-trained language models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.10155", "method": "knowledge and graph generation methodologies", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.10155", "method": "graph learning strategy", "proposes": true, "p_proposes": 0.9707, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.16065", "method": "bilingual Arabic-Hebrew language model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.17305", "method": "RA-IT approach", "proposes": true, "p_proposes": 0.9627, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.17305", "method": "Instruction Tuning (RA-IT)", "proposes": false, "p_proposes": 0.0001, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20684", "method": "graph contrastive learning (GCL)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20684", "method": "graph learning-driven models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15480", "method": "logit arithmetic", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.15480", "method": "dynamic logit fusion approach", "proposes": true, "p_proposes": 0.9948, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.09674", "method": "ChatGPT", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.09674", "method": "analysis", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.04265", "method": "optimization strategy", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.04265", "method": "MF", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.02042", "method": "DNN", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.02042", "method": "constraint acquisition methods", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.12143", "method": "Transformers-based models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2401.12143", "method": "hidden representations", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14547", "method": "regression models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14547", "method": "OmniPred", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.10852", "method": "least square", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.10852", "method": "SV", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.05327", "method": "Supervised approaches", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.05327", "method": "generative large models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.06578", "method": "SVM", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.06578", "method": "NaÃ¯ve Bayes classifier + BERT model", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.09560", "method": "density", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.09560", "method": "self-consistency training", "proposes": true, "p_proposes": 0.9994, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14701", "method": "distributed representations", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.14701", "method": "Inventory", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.20859", "method": "system and simulated evaluator", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.00985", "method": "deep neural networks (DNNs)", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.00985", "method": "propagation", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.03411", "method": "GPT-4V.", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.03411", "method": "open-source models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.07140", "method": "cardinality-aware algorithms", "proposes": true, "p_proposes": 0.9933, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.07140", "method": "surrogate loss functions", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.19660", "method": "cognitive models", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.19660", "method": "patient simulation framework", "proposes": true, "p_proposes": 0.8808, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13906", "method": "reinforcement learning", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.13906", "method": "zero-shot large language models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.06289", "method": "MIAs", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.06289", "method": "Federated Learning (FL)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01642", "method": "Random Forests", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01642", "method": "machine learning models", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21282", "method": "large-scale distributed training", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.21282", "method": "FedTrimmedAvg", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.18419", "method": "health plan cost-control process", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2402.18419", "method": "prompting technique", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09643", "method": "adaptive input selection strategy", "proposes": true, "p_proposes": 0.9999, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09643", "method": "recurrent neural networks", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20114", "method": "hybrid systems", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.20114", "method": "large-scale Vision-Language Pretraining (VLP)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06674", "method": "GPT-4", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.06674", "method": "Llama2-7B", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01216", "method": "CP method", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2403.01216", "method": "Conformal Prediction (CP)", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09827", "method": "Hierarchically Pruned Attention (HiP)", "proposes": true, "p_proposes": 1.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2406.09827", "method": "linear and sparse attention mechanisms", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13292", "method": "SentenceBERT", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2405.13292", "method": "PhoBERT model", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.08684", "method": "artificial intelligence (AI", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2404.08684", "method": "ChatGPT", "proposes": false, "p_proposes": 0.0, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.09434", "method": "AI", "proposes": false, "p_proposes": 0.0, "split": "dev", "source": "Qwen/Qwen3-4B-Instruct-2507"}
+{"paper_id": "2407.09434", "method": "GridFM", "proposes": true, "p_proposes": 0.9993, "split": "test", "source": "Qwen/Qwen3-4B-Instruct-2507"}

@@ -1,0 +1,7 @@
+{
+  "annotator": "my",
+  "rows": 50,
+  "kappa": 0.68,
+  "llm_precision": 0.76,
+  "llm_recall": 0.905
+}

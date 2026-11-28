@@ -1,0 +1,276 @@
+{
+  "level": "small",
+  "labeller": "Qwen/Qwen3-4B-Instruct-2507",
+  "pairs": 400,
+  "same": 166,
+  "pairs_by_type": {
+    "Method": 160,
+    "Dataset": 70,
+    "Task": 120,
+    "Metric": 50
+  },
+  "methods": {
+    "rule": {
+      "threshold": null,
+      "dev": {
+        "precision": 0.892,
+        "recall": 0.659,
+        "f1": 0.758
+      },
+      "test": {
+        "precision": 0.934,
+        "recall": 0.731,
+        "f1": 0.82
+      },
+      "test_without_acronym_pairs": {
+        "precision": 1.0,
+        "recall": 0.045,
+        "f1": 0.087
+      },
+      "test_by_type": {
+        "Method": {
+          "precision": 0.875,
+          "recall": 0.7,
+          "f1": 0.778
+        },
+        "Task": {
+          "precision": 0.947,
+          "recall": 0.692,
+          "f1": 0.8
+        },
+        "Dataset": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "Metric": {
+          "precision": 1.0,
+          "recall": 0.857,
+          "f1": 0.923
+        }
+      }
+    },
+    "fuzzy": {
+      "threshold": 70,
+      "dev": {
+        "precision": 0.263,
+        "recall": 0.239,
+        "f1": 0.25
+      },
+      "test": {
+        "precision": 0.162,
+        "recall": 0.154,
+        "f1": 0.158
+      },
+      "test_without_acronym_pairs": {
+        "precision": 0.151,
+        "recall": 0.5,
+        "f1": 0.232
+      },
+      "test_by_type": {
+        "Method": {
+          "precision": 0.226,
+          "recall": 0.233,
+          "f1": 0.23
+        },
+        "Task": {
+          "precision": 0.15,
+          "recall": 0.115,
+          "f1": 0.13
+        },
+        "Dataset": {
+          "precision": 0.071,
+          "recall": 0.067,
+          "f1": 0.069
+        },
+        "Metric": {
+          "precision": 0.111,
+          "recall": 0.143,
+          "f1": 0.125
+        }
+      }
+    },
+    "embedding": {
+      "threshold": 0.82,
+      "dev": {
+        "precision": 0.482,
+        "recall": 0.455,
+        "f1": 0.468
+      },
+      "test": {
+        "precision": 0.408,
+        "recall": 0.372,
+        "f1": 0.389
+      },
+      "test_without_acronym_pairs": {
+        "precision": 0.288,
+        "recall": 0.773,
+        "f1": 0.42
+      },
+      "test_by_type": {
+        "Method": {
+          "precision": 0.353,
+          "recall": 0.4,
+          "f1": 0.375
+        },
+        "Task": {
+          "precision": 0.444,
+          "recall": 0.308,
+          "f1": 0.364
+        },
+        "Dataset": {
+          "precision": 0.545,
+          "recall": 0.4,
+          "f1": 0.462
+        },
+        "Metric": {
+          "precision": 0.375,
+          "recall": 0.429,
+          "f1": 0.4
+        }
+      }
+    },
+    "rule_or_embedding": {
+      "threshold": 0.88,
+      "dev": {
+        "precision": 0.8,
+        "recall": 0.773,
+        "f1": 0.786
+      },
+      "test": {
+        "precision": 0.887,
+        "recall": 0.808,
+        "f1": 0.846
+      },
+      "test_without_acronym_pairs": {
+        "precision": 0.636,
+        "recall": 0.318,
+        "f1": 0.424
+      },
+      "test_by_type": {
+        "Method": {
+          "precision": 0.781,
+          "recall": 0.833,
+          "f1": 0.806
+        },
+        "Task": {
+          "precision": 0.952,
+          "recall": 0.769,
+          "f1": 0.851
+        },
+        "Dataset": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "Metric": {
+          "precision": 1.0,
+          "recall": 0.857,
+          "f1": 0.923
+        }
+      }
+    },
+    "rule_or_fuzzy": {
+      "threshold": 95,
+      "dev": {
+        "precision": 0.894,
+        "recall": 0.67,
+        "f1": 0.766
+      },
+      "test": {
+        "precision": 0.934,
+        "recall": 0.731,
+        "f1": 0.82
+      },
+      "test_without_acronym_pairs": {
+        "precision": 1.0,
+        "recall": 0.045,
+        "f1": 0.087
+      },
+      "test_by_type": {
+        "Method": {
+          "precision": 0.875,
+          "recall": 0.7,
+          "f1": 0.778
+        },
+        "Task": {
+          "precision": 0.947,
+          "recall": 0.692,
+          "f1": 0.8
+        },
+        "Dataset": {
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.889
+        },
+        "Metric": {
+          "precision": 1.0,
+          "recall": 0.857,
+          "f1": 0.923
+        }
+      }
+    }
+  },
+  "nodes_after": {
+    "Method": {
+      "names": 9614,
+      "rule": {
+        "nodes": 8591,
+        "largest": 14
+      },
+      "fuzzy@70": {
+        "nodes": 2417,
+        "largest": 6664
+      },
+      "embedding@0.82": {
+        "nodes": 1884,
+        "largest": 7293
+      }
+    },
+    "Dataset": {
+      "names": 2718,
+      "rule": {
+        "nodes": 2521,
+        "largest": 5
+      },
+      "fuzzy@70": {
+        "nodes": 1010,
+        "largest": 1502
+      },
+      "embedding@0.82": {
+        "nodes": 834,
+        "largest": 1738
+      }
+    },
+    "Task": {
+      "names": 5699,
+      "rule": {
+        "nodes": 5296,
+        "largest": 12
+      },
+      "fuzzy@70": {
+        "nodes": 1542,
+        "largest": 3831
+      },
+      "embedding@0.82": {
+        "nodes": 1119,
+        "largest": 4289
+      }
+    },
+    "Metric": {
+      "names": 1276,
+      "rule": {
+        "nodes": 1239,
+        "largest": 4
+      },
+      "fuzzy@70": {
+        "nodes": 471,
+        "largest": 660
+      },
+      "embedding@0.82": {
+        "nodes": 423,
+        "largest": 718
+      }
+    }
+  }
+}
